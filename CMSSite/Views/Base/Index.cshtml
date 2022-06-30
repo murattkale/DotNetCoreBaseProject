@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "_Layout";
+    var MetaDescription = (ViewBag.MetaDescription == null || ViewBag.MetaDescription == "") ? "" : ViewBag.MetaDescription;
+    var Slider = ViewBag.Slider as List<ContentPage>;
+    var MainPage = ViewBag.MainPage as List<ContentPage>;
+}
+
+<div class="main-content">
+    <!-- start section -->
+    <section class="p-0">
+        <div class="container-fluid position-relative">
+            <div class="row">
+                <div class="swiper-container white-move mobileoff-fullscreen-top-space md-h-600px sm-h-500px"
+                     data-slider-options='{ "slidesPerView": 1, "loop": true, "pagination": { "el": ".swiper-pagination", "clickable": true }, "navigation": { "nextEl": ".swiper-button-next-nav", "prevEl": ".swiper-button-previous-nav" }, "autoplay": { "delay": 4500, "disableOnInteraction": false }, "keyboard": { "enabled": true, "onlyInViewport": true }, "effect": "slide" }'>
+                    <div class="swiper-wrapper">
+
+                        @foreach (var item in Slider)
+                        {
+                            var target = item.ExternalLink != null && item.ExternalLink.Contains("http") ? "target='_blank'" : "";
+                            <!-- start slider item -->
+                            <div class="swiper-slide cover-background" style="background-image:url('@Html.Raw(item.BannerImage?.Link?.SetImage())');">
+                                <div class="opacity-extra-medium bg-gradient-dark-slate-blue"></div>
+                                <div class="container h-100">
+                                    <div class="row h-100">
+                                        <div class="col-12 col-xl-6 col-lg-7 col-sm-8 h-100 d-flex justify-content-center flex-column">
+                                            @Html.Raw(item.Description)
+                                            @*<p class="alt-font text-extra-medium text-white opacity-7 font-weight-300 margin-40px-bottom xs-margin-20px-bottom">Lorem Ipsum Dolor Sit Amet</p>
+                                                <h1 class="alt-font  text-uppercase text-shadow-medium font-weight-600 text-white margin-55px-bottom w-90 md-w-100 md-no-text-shadow xs-margin-35px-bottom">Queens of the Aegean</h1>*@
+                                            @if (!string.IsNullOrEmpty(item.ExternalLink))
+                                            {
+                                                <div class="d-inline-block">
+                                                    <a @target href="/@item.ExternalLink" class="btn btn-fancy btn-medium btn-gradient-queens margin-30px-right xs-margin-15px-bottom">
+                                                        @item.ButtonText
+                                                    </a>
+                                                </div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end slider item -->
+                        }
+
+
+                    </div>
+                    <!-- start slider pagination -->
+                    <div class="swiper-pagination swiper-light-pagination"></div>
+                    <!-- end slider pagination -->
+                    <!-- start slider navigation -->
+                    <!-- <div class="swiper-button-next-nav swiper-button-next rounded-circle slider-navigation-style-07"><i class="feather icon-feather-arrow-right"></i></div>
+                    <div class="swiper-button-previous-nav swiper-button-prev rounded-circle slider-navigation-style-07"><i class="feather icon-feather-arrow-left"></i></div>  -->
+                    <!-- end slider navigation -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end section -->
+
+
+    @foreach (var item in MainPage)
+    {
+        @Html.Raw(item.Description)
+
+        @Html.Raw(item.ContentShort)
+
+        @Html.Raw(item.ContentData)
+    }
+
+
+
+</div>

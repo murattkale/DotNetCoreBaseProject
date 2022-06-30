@@ -1,0 +1,175 @@
+﻿@{
+    Layout = "_Layout";
+    var content = ViewBag.content as ContentPage;
+}
+
+<!-- start page title -->
+<section class="half-section bg-gradient-light-orange-light-pink" style="background-image: linear-gradient(to right top,#3e9cb1,#388e7e,#64bf95,#13e48d,#97af9a);">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-end extra-small-screen align-items-end">
+            <div class="w-100 w-md-50 page-title-extra-small">
+                <h1 class="alt-font text-extra-dark-gray position-relative padding-90px-left padding-15px-right sm-padding-55px-left mb-md-0 sm-margin-20px-bottom"><span class="page-title-separator-line bg-black w-70px sm-w-40px"></span>Bize Ulaşın</h1>
+            </div>
+            <div class="w-100 w-md-50">
+                <h4 class="alt-font font-weight-500 text-extra-dark-gray mb-0">Aydın Grup İletişim</h4>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end page title -->
+<!-- start section -->
+<section>
+    <div class="container">
+        <div class="row align-items-end">
+            <div class="col-12 col-lg-6 col-md-4 sm-margin-30px-bottom">
+                <h5 class="alt-font w-50 text-extra-dark-gray font-weight-500 mb-0 lg-w-65 md-w-100">Genel Merkez ve Yerleşkeler</h5>
+            </div>
+            <div class="col-12 col-lg-6 col-md-8">
+                <div class="row">
+                    <div class="col-12 col-sm-6 xs-margin-30px-bottom">
+                        <span class="alt-font d-block text-extra-dark-gray font-weight-500 margin-10px-bottom">Burhaniye Yerleşkesi:</span>
+                        <p class="w-80 margin-5px-bottom lg-w-90">Burhaniye Mah. Nagehan Sk. No:4 Üsküdar, İstanbul</p>
+                        <span class="d-block margin-10px-bottom">Tel: +90 850 822 99 00</span>
+                        <a href="https://www.google.com/maps/place/A101+Yeni+Ma%C4%9Fazac%C4%B1l%C4%B1k+Genel+M%C3%BCd%C3%BCrl%C3%BCk/@("@41.0303884,29.0468817,15z")/data=!4m5!3m4!1s0x0:0xfae49f3559f43836!8m2!3d41.0303884!4d29.0468817?shorturl=1" target="_blank" class="text-uppercase text-small text-extra-dark-gray font-weight-500 text-decoration-line-bottom">Haritada Göster</a>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <span class="alt-font d-block text-extra-dark-gray font-weight-500 margin-10px-bottom">Ümraniye Yerleşkesi</span>
+                        <p class="w-80 margin-5px-bottom lg-w-90">Saray Mah. Naya Sk. No:3 Ümraniye, İstanbul</p>
+                        <span class="d-block margin-10px-bottom">Tel: +90 216 631 64 64</span>
+                        <a href="https://www.google.com/maps?ll=41.026766,29.114664&z=17&t=m&hl=tr&gl=TR&mapclient=embed&cid=4255982407114553793" target="_blank" class="text-uppercase text-small text-extra-dark-gray font-weight-500 text-decoration-line-bottom">Haritada Göster</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end section -->
+
+
+<section class="half-section fix-background overlap-height" style="background-image: url('/images/contact.jpeg'); height: 250px;">
+    <div class="opacity-light bg-olivine-green"></div>
+    <div class="container">
+
+    </div>
+</section>
+
+<section class="bg-light-gray overflow-visible pt-md-0">
+    <div class="container">
+        <div class="z-index-6 position-relative overlap-section-three-fourth bg-white box-shadow-large padding-8-rem-all md-padding-5-rem-all xs-padding-4-rem-tb xs-padding-2-rem-lr wow animate__fadeIn" data-wow-delay="0.4s" style="margin-top: -123.333px; visibility: visible; animation-delay: 0.4s; animation-name: fadeIn;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-xl-8 col-lg-8 text-center margin-4-half-rem-bottom md-margin-3-rem-bottom">
+                    <span class="alt-font letter-spacing-minus-1-half text-extra-medium d-block margin-5px-bottom">Formu doldurup bize ulaşabilirsiniz.</span>
+                    <h4 class="alt-font font-weight-600 text-extra-dark-gray">Görüş ve Önerilerinizi Bizimle Paylaşabilirsiniz.</h4>
+                </div>
+                <div class="col-12">
+                    <!-- start contact form -->
+
+               
+          
+
+                    <form id="myForm" novalidate="">
+                        <div class="row row-cols-1 row-cols-md-2">
+                            <div class="col margin-4-rem-bottom sm-margin-25px-bottom">
+                                <input class="medium-input bg-white margin-25px-bottom required" type="text" name="name" placeholder="Adınız ve Soyadınız *">
+                                <input class="medium-input bg-white margin-25px-bottom required" type="email" name="email" placeholder="E-Posta Adresiniz *">
+                                <input class="medium-input bg-white mb-0 required" type="tel" name="phone" placeholder="Cep Telefonu Numaranız *">
+                            </div>
+                            <div class="col margin-3-rem-bottom sm-margin-20px-bottom">
+                                <select id="subject" name="subject" placeholder="Şirket">
+                                    <option value="" disabled selected hidden>Bir Şirket Seçiniz</option>
+                                    <option value="English Home">English Home</option>
+                                    <option value="Memorial">Memorial</option>
+                                    <option value="Eve">Eve</option>
+                                    <option value="A101">A101</option>
+                                    <option value="PizzaLazza">PizzaLazza</option>
+                                    <option value="Saloon Burger">Saloon Burger</option>
+                                    <option value="Marie Claire">Marie Claire</option>
+                                </select>
+                                <textarea class="medium-textarea bg-white h-140px" rows="6" name="comment" placeholder="Mesajınız"></textarea>
+                            </div>
+                            <div class="col text-left sm-margin-25px-bottom">
+
+
+                                <input type="checkbox" name="check" id="check" value="1" class="terms-condition d-inline-block align-top w-auto mb-0 margin-5px-top margin-10px-right required">
+                                <label for="terms_condition" class="text-small d-inline-block align-top w-85 md-w-90 xs-w-85">*Kişisel verilere ilişkin beyan ve rıza onay formunu okudum.<br/><a href="/Dokumanlar/Çalışanların Kişisel Verilerinin İşlenmesine İlişkin Şirket Politikası.pdf" target="_blank" class="text-decoration-underline text-extra-dark-gray">KVKK Politikası</a>.</label>
+                                <br/>
+                                <input type="checkbox" name="check2" id="check2" value="1" class="terms-condition d-inline-block align-top w-auto mb-0 margin-5px-top margin-10px-right required">
+                                <label for="terms_condition" class="text-small d-inline-block align-top w-85 md-w-90 xs-w-85">*Talep ve şikayetime ilişkin özel nitelikli kişisel verileri okudum onaylıyorum. <a href="/Dokumanlar/TAH İş Başvurusu Kişisel Veri İzin öncesi Aydınlatma Metni.pdf" target="_blank" class="text-decoration-underline text-extra-dark-gray">KVKK Politikası</a>.</label>
+                             
+                            </div>
+                            <div class="col text-center text-md-right">
+                                <button id="project-contact-us-button" class="btn btn-large btn-gradient-shamrock-green-light-orange submit" type="submit">Gönder</button>
+                            </div>
+
+                        </div>
+                        <div class="form-results" style="display:none" id="successMsg">
+                            <div class=" sm-margin-25px-top col-12 col-md-12 col-lg-12 margin-35px-bottom alert alert-success alert-dismissible fade in show" role="alert">
+                                <button type="button" class="close line-height-unset" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <strong>Başarılı!</strong> Mesajınız gönderilmiştir.
+                            </div>
+
+                        </div>
+                        <div class="form-results" style="display:none" id="errorMsg">
+                            <div class="col-12 col-md-12 col-lg-12 alert alert-danger alert-dismissible fade in show" role="alert">
+                                <button type="button" class="close line-height-unset" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <strong>Hata!</strong> Lütfen zorunlu(*) alanları doldurunuz.
+                            </div>
+                           
+
+                        </div>
+                    </form>
+                    <!-- end contact form -->
+                </div>
+            </div>
+        </div>
+        @*<div class="row justify-content-center wow animate__fadeIn" style="visibility: visible; animation-name: fadeIn;">
+            <div class="col-12 col-lg-10 d-flex flex-row align-items-center justify-content-center text-center margin-7-half-rem-top">
+                <span class="col-auto w-40px h-1px bg-dark-gray opacity-3"></span>
+                <div class="alt-font font-weight-500 text-large text-extra-dark-gray padding-20px-lr">Felsefemiz; Faaliyette bulunduğu sektörlerde müşterilerinin hayatını kolaylaştırmak ve zenginleştirmektir.</div>
+                <span class="col-auto w-40px h-1px bg-dark-gray opacity-3"></span>
+            </div>
+        </div>*@
+    </div>
+</section>
+<script>
+ 
+  
+  
+    $("#project-contact-us-button").click(function (e) {
+        e.preventDefault();
+               
+        var valdata = new FormData($("#myForm")[0]);
+        valdata.append("check", $('#check').prop('checked'));
+        if ($("#myForm .error").length == 0) {
+           $.ajax({
+               method: 'post',
+               processData: false,
+               contentType: false,
+               cache: false,
+               data: valdata,
+               enctype: 'multipart/form-data',
+               url: "/Base/FormSave",
+               success: function (response) {
+                   if (response == "OK") {
+                       $("#successMsg").fadeIn();
+                       $("#errorMsg").hide();
+                       $("#project-contact-us-button").attr("disabled", "disabled");
+                   }
+                   else {
+                       $("#errorMsg").fadeIn();
+                   }
+               }
+           });
+        }
+               
+
+        return false;
+            });
+ 
+ 
+
+</script>

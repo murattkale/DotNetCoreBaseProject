@@ -1,0 +1,11 @@
+﻿@model ContentPage
+@{
+    var url = Context.Request.Path.Value.ToLower();
+}
+    
+<div class="main-content">
+
+    @await Component.InvokeAsync("ContentView", new { _page = Model })
+
+  
+</div>

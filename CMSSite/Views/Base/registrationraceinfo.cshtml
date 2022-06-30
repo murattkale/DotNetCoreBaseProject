@@ -1,0 +1,1412 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<script>
+    var Lang_pleasemesafe = '@Html.Raw("Please Is Mesafe".Trans())';
+    var Lang_nonproduct = '@Html.Raw("Please Product Select".Trans())';
+    var Lang_preOrder = '@Html.Raw("Pre Order".Trans())';
+    var Lang_AtTheExpo = '@Html.Raw("At the Expo".Trans())';
+
+</script>
+
+<!-- end header -->
+<!-- start banner section -->
+@if (SessionRequest.raceUser)
+{
+    <section class="cover-background h-500px sm-h-300px" style="background-image:url('@SessionRequest.config.BaseUrl/images/q/Shop-imaj2.jpg');">
+        <div class="opacity-medium bg-gradient-dark-slate-blue-transparent"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 position-relative extra-small-screen md-h-300px sm-h-250px d-flex flex-column">
+                    <h1 class="alt-font font-weight-600 text-white title-extra-large w-90 mt-auto mb-0 letter-spacing-minus-5px sm-letter-spacing-minus-1-half xs-w-70">@Html.Raw("SHOP".Trans())</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{<section class="cover-background h-500px sm-h-300px" style="background-image: url('@SessionRequest.config.BaseUrl/images/q/routes.jpg');">
+        <div class="opacity-medium bg-gradient-dark-slate-blue-transparent"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 position-relative extra-small-screen md-h-300px sm-h-250px d-flex flex-column">
+
+                    <h1 class="alt-font font-weight-600 text-white title-extra-large w-100 mt-auto mb-0 letter-spacing-minus-5px sm-letter-spacing-minus-1-half xs-w-100">@Html.Raw("REGISTRATION".Trans())</h1>
+
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<!-- end banner section -->
+<!-- start section -->
+<!-- end section -->
+@if (SessionRequest.raceUser)
+{
+    <section class="half-section  wow animate__fadeIn">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-lg-3 row-cols-sm-2 justify-content-center">
+                <!-- start process step item -->
+                <!-- end process step item -->
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03  justify-content-center wow animate__fadeIn" data-wow-delay="0.4s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon d-none d-sm-block">
+                                <span class="process-step-number text-white  font-weight-500">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink"></span>1<span class="process-step-number-afr text-white bg-white box-shadow-small bg-gradient-orange-pink "></span>
+                                </span>
+                            </div>
+                            <div class="process-step-icon d-lg-none">
+                                <span class="process-step-number text-white  font-weight-500">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink"></span>1/3<span class="process-step-number-afr text-white bg-white box-shadow-small bg-gradient-orange-pink "></span>
+                                </span>
+                            </div>
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink letter-spacing-1px  margin-10px-bottom">@Html.Raw("PRODUCTS".Trans())</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03  wow animate__fadeIn d-none d-sm-block" data-wow-delay="0.6s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon">
+                                <span class="process-step-number text-extra-dark-gray font-weight-500">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink "></span>2<span class="process-step-number-afr bg-white box-shadow-small"></span>
+                                </span>
+                            </div>
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink  letter-spacing-1px  margin-10px-bottom">@Html.Raw("PURCHASE".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03  wow animate__fadeIn d-none d-sm-block" data-wow-delay="0.8s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon">
+                                <span class="process-step-number text-extra-dark-gray font-weight-500">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink "></span>3<span class="process-step-number-afr bg-white box-shadow-small"></span>
+                                </span>
+                            </div>
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink  letter-spacing-1px  margin-10px-bottom">@Html.Raw("CONFIRMATION".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+            </div>
+        </div>
+    </section>
+
+
+}
+else
+{
+    <section class="half-section  wow animate__fadeIn">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-lg-4 row-cols-sm-2 justify-content-center">
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03  wow animate__fadeIn d-none d-sm-block" data-wow-delay="0.6s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon">
+                                <a href="/registration">
+                                    <span class="process-step-number text-extra-dark-gray font-weight-500">
+                                        <span class="process-step-number-bfr bg-gradient-orange-pink "></span>1<span class="process-step-number-afr bg-white box-shadow-small"></span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font  d-inline-block font-weight-600 text-gradient-orange-pink letter-spacing-1px  margin-10px-bottom">@Html.Raw("PROFILE INFO".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03  d-flex justify-content-center wow animate__fadeIn" data-wow-delay="0.4s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon d-none d-sm-block">
+                                <span class="process-step-number text-white  font-weight-500">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink"></span>2<span class="process-step-number-afr text-white bg-white box-shadow-small bg-gradient-orange-pink "></span>
+                                </span>
+                            </div>
+                            <div class="process-step-icon d-lg-none">
+                                <span class="process-step-number text-white  font-weight-500">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink"></span>2/4<span class="process-step-number-afr text-white bg-white box-shadow-small bg-gradient-orange-pink "></span>
+                                </span>
+                            </div>
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink letter-spacing-1px  margin-10px-bottom">@Html.Raw("RACE INFO".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03  wow animate__fadeIn d-none d-sm-block" data-wow-delay="0.6s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon">
+                                <span class="process-step-number text-extra-dark-gray font-weight-500">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink "></span>3<span class="process-step-number-afr bg-white box-shadow-small"></span>
+                                </span>
+                            </div>
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink  letter-spacing-1px  margin-10px-bottom">@Html.Raw("PURCHASE".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03  wow animate__fadeIn d-none d-sm-block" data-wow-delay="0.8s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon">
+                                <span class="process-step-number text-extra-dark-gray font-weight-500">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink "></span>4<span class="process-step-number-afr bg-white box-shadow-small"></span>
+                                </span>
+                            </div>
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink  letter-spacing-1px  margin-10px-bottom">@Html.Raw("CONFIRMATION".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+            </div>
+        </div>
+    </section>
+
+}
+
+
+
+<section class="pt-0 wow animate__fadeIn">
+    <div class="container">
+        <form id="frm_register" name="frm_register" class="padding-4-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
+            <div class="row">
+                <div class="col-12 col-lg-8 padding-70px-right lg-padding-40px-right md-padding-15px-right">
+
+                    @if (SessionRequest.raceUser)
+                    {
+
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="alt-font text-large text-extra-dark-gray margin-40px-bottom d-inline-block font-weight-500">@Html.Raw("Products_Pre".Trans())</span>
+                                <span class="alt-font text-medium text-extra-dark-gray margin-20px-bottom d-inline-block font-weight-500">@Html.Raw("ProductsNote_Pre".Trans())</span>
+                                <table id="dt_product_other" class="table cart-products margin-60px-bottom md-margin-40px-bottom sm-no-margin-bottom">
+                                    <thead>
+                                        <tr>
+
+                                            <th scope="col" class="alt-font"></th>
+                                            <th scope="col" class="alt-font">@Html.Raw("Product".Trans())</th>
+                                            <th scope="col" class="alt-font">@Html.Raw("Size".Trans())</th>
+                                            <th scope="col" class="alt-font">@Html.Raw("Quantity".Trans())</th>
+                                            <th scope="col" class="alt-font">@Html.Raw("Total".Trans())</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <span class="alt-font text-large text-extra-dark-gray margin-40px-bottom d-inline-block font-weight-500">@Html.Raw("Race Details".Trans())<br /></span>
+                            <span class="alt-font text-medium text-extra-dark-gray margin-20px-bottom d-inline-block font-weight-500">@Html.Raw("Accomodation Note".Trans()) <a class="modal-popup" style="color:#0d0dab" href="#modal-popup2">@Html.Raw("Click for pricing details".Trans())</a></span>
+
+                            <div id="modal-popup2" class="col-11 col-xl-8 col-lg-8 col-md-8 col-sm-11 position-relative mx-auto bg-white  modal-popup-main padding-3-rem-all border-radius-6px sm-padding-2-half-rem-lr mfp-hide">
+                                <span class="text-extra-dark-gray text-uppercase alt-font text-extra-large font-weight-600 margin-15px-bottom d-block">>@Html.Raw("List of Hotels".Trans())</span>
+                                <p>@Html.Raw("VacationPack_Note".Trans())</p>
+                                <!--div class="col-12 d-none d-sm-block">
+                                    <table class="table cart-products margin-60px-bottom md-margin-40px-bottom sm-no-margin-bottom">
+                                        <thead>
+                                            <tr>
+
+
+                                                <th scope="col" class="alt-font" style="width: 70%;">Hotel</th>
+                                                <th scope="col" class="alt-font" style="width: 15%;">Double Room</th>
+
+                                                <th scope="col" class="alt-font" style="width: 15%;">Single Room</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="product-name" style="width: 70%;">
+                                                    <a class="alt-font font-weight-500 font-extra-medium text-dark-gray" href="https://www.greennaturehotels.com/resort/" target="_blank">Green Nature Resort &amp;Spa 5*</a>
+                                                    <span class="variation">All Inclusive, Bicycle Friendly (Secure Zone),3 Night Package</span>
+                                                </td>
+                                                <td class="product-price" data-title="Double" style="width: 15%;">€348.00</td>
+
+                                                <td class="product-subtotal" data-title="Single" style="width: 15%;">€274.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-name" style="width: 70%;">
+                                                    <a class="alt-font font-weight-500 font-extra-medium text-dark-gray" href="https://www.lunabeachdeluxe.com/" target="_blank">Luna Beach Hotel 4*</a>
+                                                    <span class="variation">All Inclusive, Bicycle Friendly (Secure Zone),3 Night Package</span>
+                                                </td>
+                                                <td class="product-price" data-title="Double" style="width: 15%;">€280.00</td>
+
+                                                <td class="product-subtotal" data-title="Single" style="width: 15%;">€222.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-name" style="width: 70%;">
+                                                    <a class="alt-font font-weight-500 font-extra-medium text-dark-gray" href="https://www.classbeachotel.com/" target="_blank">Class Beach Hotel 3*</a>
+                                                    <span class="variation">All Inclusive, Bicycle Friendly (Secure Zone),3 Night Package</span>
+                                                </td>
+                                                <td class="product-price" data-title="Double" style="width: 15%;">€193.00</td>
+
+                                                <td class="product-subtotal" data-title="Single" style="width: 15%;">€157.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-name" style="width: 70%;">
+                                                    <a class="alt-font font-weight-500 font-extra-medium text-dark-gray" href="http://www.grandyazicihotels.com/tr/club-turban-marmaris" target="_blank">Grand Yazıcı Turban4*</a>
+                                                    <span class="variation">All Inclusive, Bicycle Friendly (Can take to room),3 Night Package</span>
+                                                </td>
+                                                <td class="product-price" data-title="Double" style="width: 15%;">€390.00</td>
+
+                                                <td class="product-subtotal" data-title="Single" style="width: 15%;">€390.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-name" style="width: 70%;">
+                                                    <a class="alt-font font-weight-500 font-extra-medium text-dark-gray" href="http://www.mervehan.com/" target="_blank">Merve Han Akyaka4*</a>
+                                                    <span class="variation">Bed &amp; breakfast,3 Night Package</span>
+                                                </td>
+                                                <td class="product-price" data-title="Double" style="width: 15%;">€160.00</td>
+
+                                                <td class="product-subtotal" data-title="Single" style="width: 15%;">€138.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div-- class="col-12 d-block d-sm-none">
+                                     <div class="margin-bottom-20px">
+                                          <a class="alt-font font-weight-500 font-extra-medium text-dark-gray" href="https://www.greennaturehotels.com/resort/" target="_blank">Green Nature Resort &amp;Spa 5*<br /></a>
+                                          <span class="">All Inclusive, Bicycle Friendly (Secure Zone),3 Night Package<br /></span>
+                                          <span class="">Double Room.: €348.00<br /></span>
+                                          <span class="">Single Room: €274.00</span>
+                                     </div>
+                                     <div class="margin-bottom-20px" >
+                                                    <a class="alt-font font-weight-500 font-extra-medium text-dark-gray" href="https://www.lunabeachdeluxe.com/" target="_blank">Luna Beach Hotel 4*<br /></a>
+                                                    <span class="variation">All Inclusive, Bicycle Friendly (Secure Zone),3 Night Package<br /></span>
+                                          <span class="">Double Room.: €280.00<br /></span>
+                                          <span class="">Single Room: €222.00</span>
+                                     </div>
+                                     <div class="margin-bottom-20px" >
+                                                    <a class="alt-font font-weight-500 font-extra-medium text-dark-gray" href="https://www.classbeachotel.com/" target="_blank">Class Beach Hotel 3*<br /></a>
+                                                    <span class="variation">All Inclusive, Bicycle Friendly (Secure Zone),3 Night Package<br /></span>
+                                          <span class="">Double Room.: €193.00<br /></span>
+                                          <span class="">Single Room: €157.00</span>
+                                     </div>
+                                     <div class="margin-bottom-20px" >
+                                          <a class="alt-font font-weight-500 font-extra-medium text-dark-gray" href="https://www.greennaturehotels.com/resort/" target="_blank">Green Nature Resort &amp;Spa 5*<br /></a>
+                                          <span class="">All Inclusive, Bicycle Friendly (Secure Zone),3 Night Package<br /></span>
+                                          <span class="">Double Room.: €390.00<br /></span>
+                                          <span class="">Single Room: €390.00</span>
+                                     </div>
+                                     <div class="margin-bottom-20px" >
+                                                    <a class="alt-font font-weight-500 font-extra-medium text-dark-gray" href="http://www.mervehan.com/" target="_blank">Merve Han Akyaka4*<br /></a>
+                                                    <span class="variation">Bed &amp; breakfast,3 Night Package<br /></span>
+                                          <span class="">Double Room.: €160.00<br /></span>
+                                          <span class="">Single Room: €138.00</span>
+                                     </div>
+
+                                </div-->
+                                <div class="col-12 d-none d-sm-block">
+                                    <table class="table cart-products margin-60px-bottom md-margin-40px-bottom sm-no-margin-bottom k-table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="alt-font" style="width:70%;">Hotel</th>
+                                                <th scope="col" class="alt-font" style="width:15%;">Double Room</th>
+                                                <th scope="col" class="alt-font" style="width:15%;">Single Room</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="product-name" style="width:70%;">
+                                                    <a class="alt-font font-weight-600 font-extra-medium text-extra-dark-gray"
+                                                       href="http://grandyazicihotels.com/" target="_blank">
+                                                        Grand Yazıcı Club
+                                                        Turban 5*
+                                                    </a> <span class="variation"
+                                                               style="font-style:italic;">
+                                                        All Inclusive, Bicycle Friendly (Secure
+                                                        Zone)
+                                                    </span> <span class="variation font-medium "
+                                                                  style="margin-left:40px;">
+                                                        28 May 2022 - 1 Night Package + 1 Race
+                                                        Registration
+                                                    </span> <span class="variation font-medium "
+                                                                  style="margin-left:40px;">
+                                                        28 - 29 May 2022 - 2 Nights Package + 1 Race
+                                                        Registration
+                                                    </span> <span class="variation font-medium "
+                                                                  style="margin-left:40px;">
+                                                        27 - 29 May 2022 - 3 Nights Package + 1 Race
+                                                        Registration
+                                                    </span>
+                                                </td>
+                                                <td class="product-price" data-title="Double" style="width:15%;">
+                                                    <span>
+                                                        <br />
+                                                    </span> <span>
+                                                        <br />
+                                                    </span> <span>
+                                                        2550.00₺<br />
+                                                    </span><span>
+                                                        3830.00₺<br />
+                                                    </span><span>
+                                                        5320.00₺<br />
+                                                    </span>
+                                                </td>
+                                                <td class="product-subtotal" data-title="Single" style="width:15%;">
+                                                    <span>
+                                                        <br />
+                                                    </span> <span>
+                                                        <br />
+                                                    </span> <span>
+                                                        2210.00₺<br />
+                                                    </span><span>
+                                                        3570.00₺<br />
+                                                    </span><span>
+                                                        4930.00₺<br />
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-name" style="width:70%;">
+                                                    <a class="alt-font font-weight-600 font-extra-medium text-extra-dark-gray"
+                                                       href="https://www.lunabeachdeluxe.com/" target="_blank">
+                                                        Luna Beach Hotel
+                                                        4*
+                                                    </a> <span class="variation" style="font-style:italic;">
+                                                        All Inclusive,
+                                                        Bicycle Friendly (Secure Zone)
+                                                    </span> <span class="variation font-medium "
+                                                                  style="margin-left:40px;">
+                                                        28 May 2022 - 1 Night Package + 1 Race
+                                                        Registration
+                                                    </span><span class="variation font-medium "
+                                                                 style="margin-left:40px;">
+                                                        28 - 29 May 2022 - 2 Nights Package + 1 Race
+                                                        Registration
+                                                    </span><span class="variation font-medium "
+                                                                 style="margin-left:40px;">
+                                                        27 - 29 May 2022 - 3 Nights Package + 1 Race
+                                                        Registration
+                                                    </span>
+                                                </td>
+                                                <td class="product-price" data-title="Double" style="width:15%;">
+                                                    <span>
+                                                        <br />
+                                                    </span> <span>
+                                                        <br />
+                                                    </span> <span>
+                                                        2000.00₺<br />
+                                                    </span><span>
+                                                        3150.00₺<br />
+                                                    </span><span>
+                                                        4300.00₺<br />
+                                                    </span>
+                                                </td>
+                                                <td class="product-subtotal" data-title="Single" style="width:15%;">
+                                                    <span>
+                                                        <br />
+                                                    </span> <span>
+                                                        <br />
+                                                    </span> <span>
+                                                        1710.00₺<br />
+                                                    </span><span>
+                                                        2570.00₺<br />
+                                                    </span><span>
+                                                        3430.00₺<br />
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-name" style="width:70%;">
+                                                    <a class="alt-font font-weight-600 font-extra-medium text-extra-dark-gray"
+                                                       href="https://www.classbeachotel.com/" target="_blank">
+                                                        Class Beach Hotel
+                                                        3*
+                                                    </a> <span class="variation" style="font-style:italic;">
+                                                        All Inclusive,
+                                                        Bicycle Friendly (Secure Zone)
+                                                    </span> <span class="variation font-medium "
+                                                                  style="margin-left:40px;">
+                                                        28 May 2022 - 1 Night Package + 1 Race
+                                                        Registration
+                                                    </span><span class="variation font-medium "
+                                                                 style="margin-left:40px;">
+                                                        28 - 29 May 2022 - 2 Nights Package + 1 Race
+                                                        Registration
+                                                    </span><span class="variation font-medium "
+                                                                 style="margin-left:40px;">
+                                                        27 - 29 May 2022 - 3 Nights Package + 1 Race
+                                                        Registration
+                                                    </span>
+                                                </td>
+                                                <td class="product-price" data-title="Double" style="width:15%;">
+                                                    <span>
+                                                        <br />
+                                                    </span> <span>
+                                                        <br />
+                                                    </span> <span>
+                                                        1565.00₺<br />
+                                                    </span><span>
+                                                        2280.00₺<br />
+                                                    </span><span>
+                                                        2995.00₺<br />
+                                                    </span>
+                                                </td>
+                                                <td class="product-subtotal" data-title="Single" style="width:15%;">
+                                                    <span>
+                                                        <br />
+                                                    </span> <span>
+                                                        <br />
+                                                    </span> <span>
+                                                        1380.00₺<br />
+                                                    </span><span>
+                                                        1910.00₺<br />
+                                                    </span><span>
+                                                        2440.00₺<br />
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-12 d-block d-sm-none">
+                                    <div class="margin-bottom-20px">
+                                        <a class="alt-font font-weight-600 font-large text-extra-dark-gray text-uppercase"
+                                           href="http://grandyazicihotels.com/" target="_blank">
+                                            Grand Yazıcı Club Turban 5*<br />
+                                        </a> <span style="font-style:italic;">
+                                            All Inclusive, Bicycle Friendly<br />
+                                        </span>
+                                        <div>
+                                            <span class="font-weight-500 text-dark-gray">
+                                                1 Night Stay +1 Race Registration (28 May
+                                                2022)<br />
+                                            </span> <span>Double: 2550.00₺ Single: 2210.00₺</span>
+                                        </div>
+                                        <div>
+                                            <span class="font-weight-500 text-dark-gray">2 Nights Stay + </span>1 Race
+                                            Registration<span class="font-weight-500 text-dark-gray">
+                                                (28 - 29 May 2022)<br />
+                                            </span> <span>Double: 4250.00₺ Single: 3570.00₺</span>
+                                        </div>
+                                        <div>
+                                            <span class="font-weight-500 text-dark-gray">3 Nights Stay + </span>1 Race
+                                            Registration<span class="font-weight-500 text-dark-gray">
+                                                (27 - 29 May 2022)<br />
+                                            </span> <span>Double: 5950.00₺ Single: 4930.00₺</span>
+                                        </div>
+                                    </div>
+                                    <!--div class="margin-bottom-20px"><a
+                                            class="alt-font font-weight-600 font-large text-extra-dark-gray text-uppercase"
+                                            href="https://www.greennaturehotels.com/resort/" target="_blank">Green Nature Resort
+                                            &amp;Spa 5*<br />
+                                        </a> <span style="font-style:italic;">All Inclusive, Bicycle Friendly<br />
+                                        </span>
+                                        <div><span class="font-weight-500 text-dark-gray">1 Night Stay +1 Race Registration (28 May
+                                                2022)<br />
+                                            </span> <span>Double: 2340.00₺ Single: 1970.00₺</span> </div>
+                                        <div><span class="font-weight-500 text-dark-gray">2 Nights Stay + </span>1 Race
+                                            Registration<span class="font-weight-500 text-dark-gray"> (28 - 29 May 2022)<br />
+                                            </span> <span>Double: 3830.00₺ Single: 3090.00₺</span> </div>
+                                        <div><span class="font-weight-500 text-dark-gray">3 Nights Stay + </span>1 Race
+                                            Registration<span class="font-weight-500 text-dark-gray"> (27 - 29 May 2022)<br />
+                                            </span> <span>Double: 5320.00₺ Single: 4210.00₺</span> </div>
+                                    </div-->
+                                    <div class="margin-bottom-20px">
+                                        <a class="alt-font font-weight-600 font-large text-extra-dark-gray text-uppercase"
+                                           href="https://www.lunabeachdeluxe.com" target="_blank">
+                                            Luna Beach Hotel 4*<br />
+                                        </a> <span style="font-style:italic;">
+                                            All Inclusive, Bicycle Friendly<br />
+                                        </span>
+                                        <div>
+                                            <span class="font-weight-500 text-dark-gray">1 Night Stay + </span>1 Race
+                                            Registration<span class="font-weight-500 text-dark-gray">
+                                                (28 May 2022)<br />
+                                            </span> <span>Double: 2000.00₺ Single: 1710.00₺</span>
+                                        </div>
+                                        <div>
+                                            <span class="font-weight-500 text-dark-gray">2 Nights Stay + </span>1 Race
+                                            Registration<span class="font-weight-500 text-dark-gray">
+                                                (28 - 29 May 2022)<br />
+                                            </span> <span>Double: 3150.00₺ Single: 2570.00₺</span>
+                                        </div>
+                                        <div>
+                                            <span class="font-weight-500 text-dark-gray">3 Nights Stay + </span>1 Race
+                                            Registration<span class="font-weight-500 text-dark-gray">
+                                                (27 - 29 May 2022)<br />
+                                            </span> <span>Double: 4300.00₺ Single: 3430.00₺</span>
+                                        </div>
+                                    </div>
+                                    <div class="margin-bottom-20px">
+                                        <a class="alt-font font-weight-600 font-large text-extra-dark-gray text-uppercase"
+                                           href="https://www.classbeachotel.com" target="_blank">
+                                            Class Beach Hotel 3*<br />
+                                        </a> <span style="font-style:italic;">
+                                            All Inclusive, Bicycle Friendly<br />
+                                        </span>
+                                        <div>
+                                            <span class="font-weight-500 text-dark-gray">1 Night Stay + </span>1 Race
+                                            Registration<span class="font-weight-500 text-dark-gray">
+                                                (28 May 2022)<br />
+                                            </span> <span>Double: 1565.00₺ Single: 1380.00₺</span>
+                                        </div>
+                                        <div>
+                                            <span class="font-weight-500 text-dark-gray">2 Nights Stay + </span>1 Race
+                                            Registration<span class="font-weight-500 text-dark-gray">
+                                                (28 - 29 May 2022)<br />
+                                            </span> <span>Double: 2280.00₺ Single: 1910.00₺</span>
+                                        </div>
+                                        <div>
+                                            <span class="font-weight-500 text-dark-gray">3 Nights Stay + </span>1 Race
+                                            Registration<span class="font-weight-500 text-dark-gray">
+                                                (27 - 29 May 2022)<br />
+                                            </span> <span>Double: 2995.00₺ Single: 2440.00₺</span>
+                                        </div>
+                                    </div>
+                                    <!--div class="margin-bottom-20px"><a
+                                                            class="alt-font font-weight-500 font-extra-medium text-dark-gray"
+                                                            href="https://www.classbeachotel.com/" target="_blank">Class Beach Hotel 3*<br />
+                                                        </a> <span class="variation">All Inclusive, Bicycle Friendly (Secure Zone),3 Night
+                                                            Package<br />
+                                                        </span> <span>Double Room.: &euro;193.00<br />
+                                                        </span> <span>Single Room: &euro;157.00</span> </div>
+                                                    <div class="margin-bottom-20px"><a
+                                                            class="alt-font font-weight-500 font-extra-medium text-dark-gray"
+                                                            href="https://www.greennaturehotels.com/resort/" target="_blank">Green Nature Resort
+                                                            &amp;Spa 5*<br />
+                                                        </a> <span>All Inclusive, Bicycle Friendly (Secure Zone),3 Night Package<br />
+                                                        </span> <span>Double Room.: &euro;390.00<br />
+                                                        </span> <span>Single Room: &euro;390.00</span> </div>
+                                                    <div class="margin-bottom-20px"><a
+                                                            class="alt-font font-weight-500 font-extra-medium text-dark-gray"
+                                                            href="http://www.mervehan.com/" target="_blank">Merve Han Akyaka4*<br />
+                                                        </a> <span class="variation">Bed &amp; breakfast,3 Night Package<br />
+                                                        </span> <span>Double Room.: &euro;160.00<br />
+                                                        </span> <span>Single Room: &euro;138.00</span> </div-->
+                                </div>
+                                <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 margin-10px-bottom">
+                                    <label class="margin-15px-bottom" for="contry">@Html.Raw("Race & Accomodation".Trans()) <span class="text-radical-red">*</span></label>
+                                    <select required name="dp_ProductId" id="dp_ProductId" class="small-input required">
+                                    </select>
+                                    <span class="alt-font text-extra-small text-extra-dark-gray margin-20px-bottom d-inline-block font-weight-400">@Html.Raw("Accomodation Notel".Trans())</span>
+                                </div>
+                                <div class="col-md-6  margin-10px-bottom">
+                                    <label class="margin-15px-bottom" for="contry">@Html.Raw("Course".Trans())<span class="text-radical-red">*</span></label>
+                                    <select required name="dp_Course" id="dp_Course" class="small-input bg-white margin-20px-bottom required ">
+                                        <option value="">@Html.Raw("Select the course".Trans())</option>
+                                        <option value="Long course - 2 hills (total 145km)">@Html.Raw("LongCourse".Trans())</option>
+                                        <option value="Short course - 1 hill (80km)">@Html.Raw("ShortCourse".Trans())</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-md-6  margin-10px-bottom">
+                                    <label class="margin-15px-bottom" for="contry">@Html.Raw("T-Shirt Size".Trans()) <span class="text-radical-red">*</span></label>
+                                    <select required name="dp_Size" id="dp_Size" class="small-input bg-white margin-20px-bottom required ">
+                                        <option value="">@Html.Raw("Select your t-shirt size".Trans())</option>
+                                        @if (SessionRequest.LoginUser.Gender == Gender.Male)
+                                        {
+                                            <option value="S (Male)">S (@Html.Raw("Male".Trans()))</option>
+                                            <option value="M (Male)">M (@Html.Raw("Male".Trans()))</option>
+                                            <option value="L (Male)">L (@Html.Raw("Male".Trans()))</option>
+                                            <option value="XL (Male)">XL (@Html.Raw("Male".Trans()))</option>
+                                            <option value="2XL (Male)">2XL (@Html.Raw("Male".Trans()))</option>
+                                            <option value="3XL (Male)">3XL (@Html.Raw("Male".Trans()))</option>
+                                            <option value="4XL (Male)">4XL (@Html.Raw("Male".Trans()))</option>
+                                        }
+                                        else if (SessionRequest.LoginUser.Gender == Gender.Female)
+                                        {
+                                            <option value="XS (Female)">XS (@Html.Raw("Female".Trans()))</option>
+                                            <option value="S (Female)">S (@Html.Raw("Female".Trans()))</option>
+                                            <option value="M (Female)">M (@Html.Raw("Female".Trans()))</option>
+                                            <option value="L (Female)">L (@Html.Raw("Female".Trans()))</option>
+                                            <option value="XL (Female)">XL (@Html.Raw("Female".Trans()))</option>
+                                            <option value="2XL (Female)">2XL (@Html.Raw("Female".Trans()))</option>
+
+                                        }
+                                        else
+                                        {
+                                            <option value="XS">XS</option>
+                                            <option value="S">S</option>
+                                            <option value="M">M</option>
+                                            <option value="L">L</option>
+                                            <option value="XL">XL</option>
+                                            <option value="2XL">2XL</option>
+                                            <option value="3XL">3XL</option>
+                                            <option value="4XL">4XL</option>
+                                        }
+
+                                    </select>
+                                </div>
+
+
+
+
+
+                                <div class="col-md-6  margin-10px-bottom">
+                                    <label class="margin-15px-bottom">@Html.Raw("Club".Trans()) </label>
+                                    <input class="small-input bg-white " type="text" name="Club" placeholder="@Html.Raw("Enter your Club".Trans())">
+                                </div>
+
+
+                                <div class="col-md-6  margin-10px-bottom">
+                                    <label class="margin-15px-bottom">@Html.Raw("How will you get back to Marmaris".Trans()) <span class="text-radical-red">*</span></label>
+                                    <select required name="dp_RideBack" id="dp_RideBack" class="small-input bg-white margin-20px-bottom required">
+                                        <option value="">@Html.Raw("Select the RideBack".Trans())</option>
+                                        <option value="Use shuttle">@Html.Raw("Use shuttle".Trans())</option>
+                                        <option value="Bike Back">@Html.Raw("Bike Back".Trans())</option>
+                                        <option value="Home Ride">@Html.Raw("Home Ride".Trans())</option>
+                                        <option value="Ride back with my car">@Html.Raw("Ride back with my car".Trans())</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12  margin-10px-bottom">
+                                    <label class="margin-15px-bottom">@Html.Raw("Billing Information".Trans()) </label>
+                                    <textarea class="small-input bg-white " row="3" name="BillingAdressNote" placeholder="@Html.Raw("Please enter your billing information & address".Trans())"></textarea>
+                                </div>
+
+                            </div>
+                            <!--span class="alt-font text-large text-extra-dark-gray margin-40px-bottom d-inline-block font-weight-500">@Html.Raw("Accomodation Details".Trans())</span-->
+                            <!--div class="row">
+
+                                <div class="col-md-6 margin-10px-bottom">
+                                    <label class="margin-15px-bottom">@Html.Raw("Hotel Name".Trans()) </label>
+                                    <input class="small-input bg-white " type="text" name="Hotel" placeholder="@Html.Raw("Enter your Hotel Name".Trans())">
+                                </div>
+
+
+                                <div class="col-md-6  margin-10px-bottom">
+                                    <label class="margin-15px-bottom">@Html.Raw("No of Days".Trans()) </label>
+                                    <input class="small-input bg-white " type="text" name="Accomodation" placeholder="@Html.Raw("AccomodationDays".Trans())">
+                                </div>
+
+                                <div class="col-md-12  margin-10px-bottom">
+                                    <label class="margin-15px-bottom">@Html.Raw("Billing Information".Trans()) </label>
+                                    <textarea class="small-input bg-white " row="3" name="BillingAdressNote" placeholder="@Html.Raw("Please enter your billing adress information".Trans())"></textarea>
+                                </div>
+
+
+                            </div-->
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="alt-font text-large text-extra-dark-gray margin-40px-bottom d-inline-block font-weight-500">@Html.Raw("Products".Trans())</span>
+                                <span class="alt-font text-medium text-extra-dark-gray margin-20px-bottom d-inline-block font-weight-500">@Html.Raw("ProductsNote".Trans())</span>
+                                <table id="dt_product_other" class="table cart-products margin-60px-bottom md-margin-40px-bottom sm-no-margin-bottom">
+                                    <thead>
+                                        <tr>
+
+                                            <th scope="col" class="alt-font"></th>
+                                            <th scope="col" class="alt-font">@Html.Raw("Product".Trans())</th>
+                                            <th scope="col" class="alt-font">@Html.Raw("Size".Trans())</th>
+                                            <th scope="col" class="alt-font">@Html.Raw("Quantity".Trans())</th>
+                                            <th scope="col" class="alt-font">@Html.Raw("Total".Trans())</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    }
+
+
+
+
+
+                </div>
+
+                @if (SessionRequest.raceUser)
+                {
+                    <div class="col-12 col-lg-4 col-md-6">
+                        <div class="bg-light-gray padding-45px-all lg-padding-30px-all sm-padding-20px-all">
+                            <span class="alt-font text-large text-extra-dark-gray margin-25px-bottom d-inline-block font-weight-500">@Html.Raw("Your order".Trans())</span>
+                            <table class="total-price-table checkout-total-price-table">
+                                <thead class="border-bottom border-color-medium-gray text-extra-dark-gray">
+                                    <tr>
+                                        <th class="product-name font-weight-500 w-60">@Html.Raw("Items".Trans())</th>
+                                        <th class="product-total pe-0 font-weight-500">@Html.Raw("Total".Trans())</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="div_product_other">
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <th class="font-weight-500 text-extra-dark-gray">@Html.Raw("Subtotal".Trans())</th>
+                                        <td id="p_PriceSub" class="text-extra-dark-gray"></td>
+                                    </tr>
+
+                                    <tr style="display:none;" class="div_p_Coupon">
+                                        <th class="font-weight-500 text-extra-dark-gray">@Html.Raw("Coupon Discount".Trans())</th>
+                                        <td id="p_Coupon" class="text-extra-dark-gray"></td>
+                                        <input type="hidden" id="CouponId" name="CouponId" />
+                                    </tr>
+
+                                    <tr class="total-amount">
+                                        <th class="font-weight-500 text-extra-dark-gray">@Html.Raw("Total".Trans())</th>
+                                        <td>
+                                            <h6 id="p_Total" class="d-block font-weight-500 mb-0 text-extra-dark-gray"></h6>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="row align-items-center">
+                                <div class="col-md-12 md-margin-50px-bottom sm-margin-20px-bottom">
+                                    <div class="coupon-code-panel">
+                                        <input id="CouponCode" type="text" placeholder="@Html.Raw("Coupon Code".Trans())">
+                                        <a href="#" id="btnCouponCode" class="btn apply-coupon-btn text-uppercase">@Html.Raw("Apply".Trans())</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="d-flex align-items-center">
+                                <input name="IsKVKK" id="IsKVKK" class="d-inline w-auto mb-0 margin-10px-right" type="checkbox">
+                                <span class="text-small">
+                                    @Html.Raw("AgreeMSS".Trans())
+                                    <a target="_blank" class="text-decoration-underline" href="@Html.Raw(SessionRequest.LanguageId == 1 ? "/mesafeli-satis-sozlesmesi":"/mesafelisatisen")">@Html.Raw("AgreementMSS".Trans())</a>
+                                    @Html.Raw("AgreeMSS2".Trans())<span class="text-red ms-1">*</span>
+                                </span>
+                            </p>
+                            <button type="submit" class="btn btn-fancy btn-dark-gray btn-extra-large w-100 margin-15px-top submit">@Html.Raw("Place order".Trans())</button>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12 col-lg-4 col-md-6">
+                        <div class="bg-light-gray padding-45px-all lg-padding-30px-all sm-padding-20px-all">
+                            <span class="alt-font text-large text-extra-dark-gray margin-25px-bottom d-inline-block font-weight-500">@Html.Raw("Your order".Trans())</span>
+                            <table class="total-price-table checkout-total-price-table">
+                                <thead class="border-bottom border-color-medium-gray text-extra-dark-gray">
+                                    <tr>
+                                        <th class="product-name font-weight-500 w-60">@Html.Raw("Items".Trans())</th>
+                                        <th class="product-total pe-0 font-weight-500">@Html.Raw("Total".Trans())</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="div_product_other">
+                                    <tr>
+                                        <td id="p_Name"></td>
+                                        <td price="" class="productPrice text-center" id="p_Price"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-500 ">@Html.Raw("Race Jersey - Free with Race Pack".Trans())<span id="p_Size" class="d-block w-100"></span></td>
+                                        <td class="text-center">0.00</td>
+                                    </tr>
+
+
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <th class="font-weight-500 text-extra-dark-gray">@Html.Raw("Subtotal".Trans())</th>
+                                        <td id="p_PriceSub" class="text-center text-extra-dark-gray "></td>
+                                    </tr>
+
+                                     <tr style="display:none;" class="div_p_Coupon">
+                                        <th class="font-weight-500 text-extra-dark-gray">@Html.Raw("Coupon Discount".Trans())</th>
+                                        <td id="p_Coupon" class="text-extra-dark-gray"></td>
+                                        <input type="hidden" id="CouponId" name="CouponId" />
+                                    </tr>
+
+                                    <tr class="total-amount">
+                                        <th class="font-weight-500 text-extra-dark-gray">@Html.Raw("Total".Trans())</th>
+                                        <td>
+                                            <h6 id="p_Total" class="text-center d-block font-weight-500 mb-0 text-extra-dark-gray"></h6>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                            <div class="row align-items-center">
+                                <div class="col-md-12 md-margin-50px-bottom sm-margin-20px-bottom">
+                                    <div class="coupon-code-panel">
+                                        <input id="CouponCode" type="text" placeholder="@Html.Raw("Coupon Code".Trans())">
+                                        <a href="#" id="btnCouponCode" class="btn apply-coupon-btn text-uppercase">@Html.Raw("Apply".Trans())</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="d-flex align-items-center">
+                                <input name="IsKVKK" id="IsKVKK" class="d-inline w-auto mb-0 margin-10px-right" type="checkbox">
+                                <span class="text-small">
+                                    @Html.Raw("AgreeMSS".Trans())
+                                    <a target="_blank" class="text-decoration-underline" href="@Html.Raw(SessionRequest.LanguageId == 1 ? "/mesafeli-satis-sozlesmesi":"/mesafelisatisen")">@Html.Raw("AgreementMSS".Trans())</a>
+                                    @Html.Raw("AgreeMSS2".Trans())<span class="text-red ms-1">*</span>
+                                </span>
+                            </p>
+
+
+                            @*<button type="submit" class="btn btn-fancy btn-dark-gray btn-extra-large w-100 margin-15px-top submit">@Html.Raw("Place order".Trans())</button>*@
+                        </div>
+                    </div>
+                }
+
+
+
+            </div>
+
+        </form>
+
+    </div>
+</section>
+
+<script>
+
+    function getCoupon() {
+        //if ($('#CouponCode').val().trim() == "" || $('#CouponCode').val().trim() == null)
+        //    return;
+
+        $.post('/Coupon/CouponControl', { postModel: { Name: $('#CouponCode').val().trim() } }).fail(function (err, exception) { console.error(err.responseText); })
+            .done(function (res) {
+                debugger;
+                var otherTotal = 0;
+                var Currency = "";
+                $.each($('.productPrice'), function (i, item) {
+                    otherTotal += toFloat(toFloat($(item).attr('price')));
+                    Currency = $(item).attr('Currency');
+                });
+                $('#p_PriceSub').html(Currency + otherTotal);
+
+
+                if (res != null) {
+                    $('#CouponId').val(res.Id);
+                    $('.div_p_Coupon').show();
+                    var otherTotalResult = 0;
+                    var CouponValue = toFloat(res.CouponValue);
+                    if (res.CouponTypeName == "Tutar") {//tutar
+                        otherTotalResult = toFloat(otherTotal - CouponValue).toFixed(2);
+                        $('#p_Coupon').html('-' + Currency + CouponValue);
+                    }
+                    else if (res.CouponTypeName == "Oran") {//oran
+                        otherTotalResult = (otherTotal - toFloat(otherTotal * (CouponValue / 100))).toFixed(2);
+                        $('#p_Coupon').html('-' + toFloat(otherTotal * (CouponValue / 100)).toFixed(2) + ' (%' + CouponValue + ')');
+                    }
+                    else {
+                        otherTotalResult = otherTotal;
+                    }
+                    otherTotal = otherTotalResult;
+
+                }
+                else {
+                    $('#CouponId').val('');
+                    $('#p_PriceSub').html(Currency + toFloat(otherTotal).toFixed(2));
+                    $('.div_p_Coupon').hide();
+                }
+
+                $('#p_Total').html(Currency + toFloat(otherTotal).toFixed(2));
+
+            });
+    }
+    $(function () {
+        $('#btnCouponCode').click(function (e) {
+            e.preventDefault();
+            getCoupon();
+        })
+
+    });
+</script>
+
+@if (SessionRequest.raceUser)
+{
+
+    <script>
+        $(function () {
+            var pid = 5;
+
+            function setProduct(productid) {
+                var sInt = setInterval(function () {
+                    clearInterval(sInt);
+
+                    var stock = toInt($('#dt_product_other [stock="' + productid + '"]').val());
+                    var pname = $('#dt_product_other [pdetail="' + productid + '"]').attr('pname');
+                    var price = $('#dt_product_other [pdetail="' + productid + '"]').attr('price');
+                    var Currency = $('#dt_product_other [pdetail="' + productid + '"]').attr('Currency');
+                    var dp_size = $('#dt_product_other [dp_size="' + productid + '"]').val();
+
+                    var old = $('#div_product_other [prd="' + productid + '"]');
+
+
+                    if (stock > 0 && dp_size != "" && dp_size != null) {
+
+                        var totalPrice = toFloat(toFloat(price) * stock);
+                        $('#dt_product_other [subtotal="' + productid + '"]').html(Currency + totalPrice);
+
+                        var trtd = '';
+                        trtd += '<tr>  <th class="productPrice" Currency="' + Currency + '"  prd="' + productid + '"  dp_size="' + dp_size + '" price="' + totalPrice + '" pname="' + pname + '" stock="' + stock + '" >'
+                            + stock + ' X ' + pname + ' - ' + dp_size + '</th>';
+                        trtd += '  <td prd="' + productid + '"  class="text-center">' + Currency + totalPrice + '</td></tr>';
+
+                        if (old.length > 0) {
+                            $(old).parent().html('');
+                        }
+                        $('#div_product_other').append(trtd);
+
+
+                        if (Currency != undefined && Currency != "") {
+
+                            var otherTotal = 0;
+                            $.each($('.productPrice'), function (i, item) {
+                                otherTotal += toFloat(toFloat($(item).attr('price')));
+                            });
+
+
+                            $('#p_PriceSub').html(Currency + otherTotal);
+                            $('#p_Total').html(Currency + otherTotal);
+
+                           
+                        }
+
+
+                    }
+                    else {
+                        $(old).parent().html('');
+                    }
+
+
+                    getCoupon();
+
+
+
+
+                }, 500);
+
+
+            }
+
+            GetProductOther();
+            function GetProductOther() {
+                $('#dt_product_other tbody').html();
+                $.get('/Product/GetAll?ProductType=2').fail(function (err, exception) { console.error(err.responseText); })
+                    .done(function (res) {
+                        $.each(res.ResultList, function (i, item) {
+                            var str = '';
+                            str += '     <tr pdetail="' + item.Id + '" Currency="' + item.Currency + '" price="' + item.PriceDiscount + '" pname="' + item.Name + '" >                                                                                                 ';
+                            str += '       <td class="product-thumbnail">                                                                     ';
+                            str += '           <div>                                                                                    ';
+                            str += '               <img class="cart-product-image"                                                            ';
+                            str += '                    src="' + siteConfig.BaseUrl + item.DefaultImage + '" alt="" data-no-retina="">                            ';
+                            str += '           </div>                                                                                           ';
+                            str += '       </td>                                                                                              ';
+                            str += '       <td class="product-name">                                                                          ';
+                            str += '           <span  class="text-extra-dark-gray">                                                            ';
+                            str += '              ' + item.Name + '<br><span class="alt-font text-small">                                         ';
+                            str += '                  ' + Lang_preOrder + ': ' + item.Currency + item.PriceDiscount + '                                                                         ';
+                            str += '               </span><br><span class="alt-font text-small">                                              ';
+                            str += '                   ' + Lang_AtTheExpo + ': ' + item.Currency + item.Price + '                                                                                ';
+                            str += '               </span>                                                                                    ';
+                            str += '           </span>                                                                                        ';
+                            str += '                                                                                                          ';
+                            str += '                                                                                                          ';
+                            str += '       </td>                                                                                              ';
+                            str += '       <td  class="product-size" data-title="' + Lang_Size + '">                                                        ';
+                            str += '           <select productid="' + item.Id + '" dp_size="' + item.Id + '" class="small-input bg-white " style="margin-bottom: 0px;">';
+                            str += '               <option value="">' + Lang_Size + '</option>                                                             ';
+                            str += '               <option value="S">S</option>                                                               ';
+                            str += '               <option value="M">M</option>                                                               ';
+                            str += '               <option value="L">L</option>                                                               ';
+                            str += '               <option value="XL">XL</option>                                                             ';
+                            str += '               <option value="2XL">2XL</option>                                                           ';
+                            str += '               <option value="3XL">3XL</option>                                                           ';
+                            str += '               <option value="4XL">4XL</option>                                                           ';
+                            str += '           </select>                                                                                      ';
+                            str += '       </td>                                                                                              ';
+                            str += '       <td  class="product-quantity" data-title="' + Lang_Quantity + '">                                                ';
+                            str += '           <div class="quantity">                                                                         ';
+                            str += '               <label class="screen-reader-text">' + Lang_Quantity + '</label>                                         ';
+                            str += '               <input productid="' + item.Id + '" type="button" value="-" class="addproduct qty-minus qty-btn" data-quantity="minus" data-field="quantity">                                                              ';
+                            str += '               <input stock="' + item.Id + '" class="input-text qty-text" type="number" name="quantity" value="0">                ';
+                            str += '               <input productid="' + item.Id + '" type="button" value="+" class="addproduct qty-plus qty-btn" data-quantity="plus" data-field="quantity">                                                              ';
+                            str += '           </div>                                                                                         ';
+                            str += '       </td>                                                                                              ';
+                            str += '       <td subtotal="' + item.Id + '" class="product-subtotal" data-title="Total"></td> ';
+                            str += '   </tr>                                                                                                  ';
+
+                            $('#dt_product_other tbody').append(str);
+                        });
+
+                        $('[dp_size]').change(function () {
+                            var productid = $(this).attr('productid');
+                            setProduct(productid);
+                        });
+
+                        $('.addproduct').click(function (e) {
+                            e.preventDefault();
+                            var productid = $(this).attr('productid');
+                            setProduct(productid);
+                        });
+
+
+
+
+                    });
+            }
+
+
+
+
+            var formname = '#frm_register';
+            $(formname).submit(function (e) {
+                e.preventDefault();
+
+                if ($('#IsKVKK')[0].checked == false) {
+                    alert(Lang_pleasemesafe);
+                    return;
+                }
+
+
+                var postModel = $.fn.toForm(formname);
+                postModel.OrderDetail = [];
+                $.each($('.productPrice'), function (i, item) {
+                    var postDatas = $.fn.toForm(formname);
+                    postDatas.ProductId = $(item).attr('prd');
+                    postDatas.Stock = $(item).attr('stock');
+
+                    if ($(item).attr('dp_Size') != null && $(item).attr('dp_Size') != "") {
+                        postDatas.Size = $(item).attr('dp_Size');
+                        postDatas.RaceSize = $(item).attr('dp_Size');
+                    }
+                    if (toInt(postDatas.ProductId) > 0)
+                        postModel.OrderDetail.push(postDatas);
+
+                });
+
+
+
+                if (postModel.OrderDetail.length < 1) {
+
+                    alert(Lang_nonproduct);
+                    return;
+                }
+
+                //Order
+                $(formname).LoadingOverlay("show");
+                $.ajx('/Order/InsertOrUpdate',
+                    { postModel: postModel }, function (resultData) {
+
+                        if (resultData.RType == 1) {
+                            var postModelDatas = [];
+                            $.each($('.productPrice'), function (i, item) {
+                                var postDatas = $.fn.toForm(formname);
+                                postDatas.OrderId = resultData.ResultRow.Id;
+                                postDatas.ProductId = $(item).attr('prd');
+                                postDatas.Stock = $(item).attr('stock');
+                                if ($(item).attr('dp_Size') != null && $(item).attr('dp_Size') != "") {
+                                    postDatas.Size = $(item).attr('dp_Size');
+                                    postDatas.RaceSize = $(item).attr('dp_Size');
+                                }
+                                postModelDatas.push(postDatas);
+                            });
+
+                            $(formname).LoadingOverlay("show");
+                            //OrderDetail
+                            $.ajx('/OrderDetail/InsertOrUpdate', { postModelDatas: postModelDatas }, function (resultData) {
+                                if (resultData == 'ok') {
+                                    location.href = '/registrationpurchase';
+                                }
+                                else {
+                                    alerts(resultData.MessageList);
+                                }
+
+                                $(formname).LoadingOverlay("hide");
+                            }, function () { location.reload(); });
+
+
+
+
+
+                        }
+                        else {
+
+                            alerts(resultData.MessageList);
+                        }
+
+                        $(formname).LoadingOverlay("hide");
+                    }, function () { location.reload(); });
+            });
+
+        });
+    </script>
+
+}
+else
+{
+    <script>
+        $(function () {
+            var pid = 5;
+
+            function setProduct(productid) {
+                var sInt = setInterval(function () {
+                    clearInterval(sInt);
+
+                    var stock = toInt($('#dt_product_other [stock="' + productid + '"]').val());
+                    var pname = $('#dt_product_other [pdetail="' + productid + '"]').attr('pname');
+                    var price = $('#dt_product_other [pdetail="' + productid + '"]').attr('price');
+                    var Currency = $('#dt_product_other [pdetail="' + productid + '"]').attr('Currency');
+                    var dp_size = $('#dt_product_other [dp_size="' + productid + '"]').val();
+
+                    var old = $('#div_product_other [prd="' + productid + '"]');
+
+
+                    if (stock > 0 && dp_size != "" && dp_size != null) {
+
+                        var totalPrice = toFloat(toFloat(price) * stock);
+                        $('#dt_product_other [subtotal="' + productid + '"]').html(Currency + totalPrice);
+
+                        var trtd = '';
+                        trtd += '<tr>  <th class="productPrice" Currency="' + Currency+'"  prd="' + productid + '"  dp_size="' + dp_size + '" price="' + totalPrice + '" pname="' + pname + '" stock="' + stock + '" >'
+                            + stock + ' X ' + pname + ' - ' + dp_size + '</th>';
+                        trtd += '  <td prd="' + productid + '"  class="text-center">' + Currency + totalPrice + '</td></tr>';
+
+                        if (old.length > 0) {
+                            $(old).parent().html('');
+                        }
+                        $('#div_product_other').append(trtd);
+
+                        if (Currency != undefined && Currency != "") {
+
+                            var otherTotal = 0;
+                            $.each($('.productPrice'), function (i, item) {
+                                otherTotal += toFloat(toFloat($(item).attr('price')));
+                            });
+
+                            $('#p_PriceSub').html(Currency + otherTotal);
+                            $('#p_Total').html(Currency + otherTotal);
+
+                        }
+
+                       
+
+                    }
+                    else {
+                        $(old).parent().html('');
+                    }
+
+                    getCoupon();
+
+
+
+
+                }, 500);
+
+
+            }
+
+            GetProductOther();
+            function GetProductOther() {
+                $('#dt_product_other tbody').html();
+                $.get('/Product/GetAll?ProductType=2').fail(function (err, exception) { console.error(err.responseText); })
+                    .done(function (res) {
+                        $.each(res.ResultList, function (i, item) {
+                            var str = '';
+                            str += '     <tr pdetail="' + item.Id + '" Currency="' + item.Currency + '" price="' + item.PriceDiscount + '" pname="' + item.Name + '" >                                                                                                 ';
+                            str += '       <td class="product-thumbnail">                                                                     ';
+                            str += '           <div>                                                                                    ';
+                            str += '               <img class="cart-product-image"                                                            ';
+                            str += '                    src="' + siteConfig.BaseUrl + item.DefaultImage + '" alt="" data-no-retina="">                            ';
+                            str += '           </div>                                                                                           ';
+                            str += '       </td>                                                                                              ';
+                            str += '       <td class="product-name">                                                                          ';
+                            str += '           <span  class="text-extra-dark-gray">                                                            ';
+                            str += '              ' + item.Name + '<br><span class="alt-font text-small">                                         ';
+                            str += '                  ' + Lang_preOrder + ': ' + item.Currency + item.PriceDiscount + '                                                                         ';
+                            str += '               </span><br><span class="alt-font text-small">                                              ';
+                            str += '                   ' + Lang_AtTheExpo + ': ' + item.Currency + item.Price + '                                                                                ';
+                            str += '               </span>                                                                                    ';
+                            str += '           </span>                                                                                        ';
+                            str += '                                                                                                          ';
+                            str += '                                                                                                          ';
+                            str += '       </td>                                                                                              ';
+                            str += '       <td  class="product-size" data-title="' + Lang_Size + '">                                                        ';
+                            str += '           <select productid="' + item.Id + '" dp_size="' + item.Id + '" class="small-input bg-white " style="margin-bottom: 0px;">';
+                            str += '               <option value="">' + Lang_Size + '</option>                                                             ';
+                            str += '               <option value="S">S</option>                                                               ';
+                            str += '               <option value="M">M</option>                                                               ';
+                            str += '               <option value="L">L</option>                                                               ';
+                            str += '               <option value="XL">XL</option>                                                             ';
+                            str += '               <option value="2XL">2XL</option>                                                           ';
+                            str += '               <option value="3XL">3XL</option>                                                           ';
+                            str += '               <option value="4XL">4XL</option>                                                           ';
+                            str += '           </select>                                                                                      ';
+                            str += '       </td>                                                                                              ';
+                            str += '       <td  class="product-quantity" data-title="Quantity">                                                ';
+                            str += '           <div class="quantity">                                                                         ';
+                            str += '               <label class="screen-reader-text">Quantity</label>                                         ';
+                            str += '               <input productid="' + item.Id + '" type="button" value="-" class="addproduct qty-minus qty-btn" data-quantity="minus" data-field="quantity">                                                              ';
+                            str += '               <input stock="' + item.Id + '" class="input-text qty-text" type="number" name="quantity" value="0">                ';
+                            str += '               <input productid="' + item.Id + '" type="button" value="+" class="addproduct qty-plus qty-btn" data-quantity="plus" data-field="quantity">                                                              ';
+                            str += '           </div>                                                                                         ';
+                            str += '       </td>                                                                                              ';
+                            str += '       <td subtotal="' + item.Id + '" class="product-subtotal" data-title="Total"></td> ';
+                            str += '   </tr>                                                                                                  ';
+
+                            $('#dt_product_other tbody').append(str);
+                        });
+
+                        $('[dp_size]').change(function () {
+                            var productid = $(this).attr('productid');
+                            setProduct(productid);
+                        });
+
+                        $('.addproduct').click(function (e) {
+                            e.preventDefault();
+                            var productid = $(this).attr('productid');
+                            setProduct(productid);
+                        });
+
+
+
+
+                    });
+            }
+
+
+            GetProduct();
+            function GetProduct() {
+                $.get('/Product/GetSelect?ProductType=1').fail(function (err, exception) { console.error(err.responseText); })
+                    .done(function (res) {
+                        var dp = 'dp_ProductId';
+                        $('#' + dp).append($('<option>', { selected: 'selected', value: "", text: Lang_Select + " Race" }));
+                        $.each(res, function (i, item) {
+
+                            var str = '<option value="' + item.value + '" ' + '>' + item.text + '</option>';
+                            $('#' + dp).append(str);
+                        });
+
+
+                        $('#' + dp).val(pid);
+                        GetProductRow(pid);
+
+                        $('#' + dp).change(function () {
+                            GetProductRow($(this).val());
+                        });
+                    });
+            }
+
+            function GetProductRow(pid) {
+                $.get('/Product/GetRow?id=' + pid).fail(function (err, exception) { console.error(err.responseText); })
+                    .done(function (res) {
+                        $('#p_Name').html(res.ResultRow.Name);
+                        $('#p_Price').html(res.ResultRow.Currency + res.ResultRow.PriceDiscount);
+                        $('#p_Price').attr('stock', 1);
+                        $('#p_Price').attr('price', res.ResultRow.PriceDiscount);
+                        $('#p_Price').attr('prd', res.ResultRow.Id);
+                        $('#p_Price').attr('Currency', res.ResultRow.Currency);
+                        var otherTotal = 0;
+                        $.each($('.productPrice'), function (i, item) {
+                            otherTotal += toFloat($(item).attr('price'));
+                        });
+
+                        $('#p_PriceSub').html(res.ResultRow.Currency + otherTotal);
+                        $('#p_Total').html(res.ResultRow.Currency + otherTotal);
+
+                        getCoupon();
+                    });
+            }
+
+
+            $('#dp_Size').change(function () {
+                $('#p_Size').html($(this).val());
+            });
+
+            //var formname = '#frm_register';
+            //$(formname).submit(function (e) {
+            //    e.preventDefault();
+
+            //    if ($('#IsKVKK')[0].checked == false) {
+            //        alert(Lang_pleasemesafe);
+            //        return;
+            //    }
+
+
+            //    var postModel = $.fn.toForm(formname);
+            //    postModel.OrderDetail = [];
+            //    var pRow = { ProductId: $('#dp_ProductId').val() };
+            //    postModel.OrderDetail.push(pRow);
+            //    //Order
+            //    $(formname).LoadingOverlay("show");
+            //    $.ajx('/Order/InsertOrUpdate',
+            //        { postModel: postModel }, function (resultData) {
+            //            if (resultData.RType == 1) {
+            //                var postModelDatas = [];
+            //                $.each($('.productPrice'), function (i, item) {
+            //                    var postDatas = $.fn.toForm(formname);
+            //                    postDatas.OrderId = resultData.ResultRow.Id;
+            //                    postDatas.ProductId = $(item).attr('prd');
+            //                    postDatas.Stock = $(item).attr('stock');
+            //                    if ($(item).attr('dp_Size') != null && $(item).attr('dp_Size') != "") {
+            //                        postDatas.Size = $(item).attr('dp_Size');
+            //                        postDatas.RaceSize = $(item).attr('dp_Size');
+            //                    }
+            //                    postModelDatas.push(postDatas);
+            //                });
+
+            //                $(formname).LoadingOverlay("show");
+            //                //OrderDetail
+            //                $.ajx('/OrderDetail/InsertOrUpdate', { postModelDatas: postModelDatas }, function (resultData) {
+            //                    if (resultData == 'ok') {
+            //                        location.href = '/registrationpurchase';
+            //                    }
+            //                    else {
+            //                        alerts(resultData.MessageList);
+            //                    }
+
+            //                    $(formname).LoadingOverlay("hide");
+            //                }, function () { location.reload(); });
+
+
+
+
+
+            //            }
+            //            else {
+
+            //                alerts(resultData.MessageList);
+            //            }
+
+            //            $(formname).LoadingOverlay("hide");
+            //        }, function () { location.reload(); });
+            //});
+
+        });
+    </script>
+}
+

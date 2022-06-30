@@ -1,0 +1,608 @@
+﻿@{
+    var MetaTitle = (ViewBag.MetaTitle == null || ViewBag.MetaTitle == "") ? SessionRequest.config.Title : ViewBag.MetaTitle;
+    var MetaDescription = (ViewBag.MetaDescription == null || ViewBag.MetaDescription == "") ? "" : ViewBag.MetaDescription;
+    var IsHeaderMenu = ViewBag.IsHeaderMenu as List<ContentPage>;
+    var IsFooterMenu = ViewBag.IsFooterMenu as List<ContentPage>;
+    var Slider = ViewBag.Slider as List<ContentPage>;
+    var MainPage = ViewBag.MainPage as List<ContentPage>;
+}
+
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <title>@MetaTitle</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="@MetaTitle">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1">
+
+
+    <link rel="shortcut icon" href="/images/favicon.png">
+
+    <meta name="description" content="Queenscycling Races, Welcome to the first additon of the Queens Cycling Races! 29 May 2022">
+
+    <meta property="og:site_name" content="@MetaTitle" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="en_EN" />
+    <meta property="og:title" content="Santini Queens of the Aegean" />
+    <meta property="og:description" content="Queenscycling Races, Welcome to the first additon of the Queens Cycling Races! 29 May 2022" />
+    <meta property="og:image" content="https://queenscycling.com/images/q/queens-s.jpg" />
+    <meta property="og:url" content="https://queenscycling.com">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png">
+    <!-- style sheets and font icons  -->
+    <link rel="stylesheet" type="text/css" href="/css/font-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/theme-vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/responsive.css">
+
+
+   
+
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+
+
+    <script type="text/javascript" src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+
+    <script type="text/javascript">
+        var baseUrl = '';
+        var LanguageId = @SessionRequest.LanguageId;
+        var layoutUrl = '@SessionRequest.config?.layoutUrl';
+        var siteConfig =  @Json.Serialize(SessionRequest.config);
+        var LoginUser =  @Json.Serialize(SessionRequest.LoginUser);
+        var myOrder =  @Json.Serialize(SessionRequest.myOrder);
+        var LoginUserAdress =  @Json.Serialize(SessionRequest.LoginUser?.UserAdress.FirstOrDefault(o => o.IsDefault == true));
+
+        function CloseModal() {
+            $('[data-dismiss="modal"]').click();
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        var Lang_Select = '@Html.Raw("Select".Trans())';
+        var Lang_Country = '@Html.Raw("Country".Trans())';
+        var Lang_City = '@Html.Raw("City".Trans())';
+        var Lang_Gender = '@Html.Raw("Gender".Trans())';
+        var Lang_Nationality = '@Html.Raw("Nationality".Trans())';
+
+        var Lang_Size = '@Html.Raw("Size".Trans())';
+        var Lang_Quantity = '@Html.Raw("Quantity".Trans())';
+
+
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0061FC3H06"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-0061FC3H06');
+    </script>
+
+
+
+    @Html.Raw(SessionRequest.config.HeadStyle)
+    @Html.Raw(SessionRequest.config.HeadScript)
+
+
+</head>
+
+<body data-mobile-nav-trigger-alignment="right" data-mobile-nav-style="full-screen-menu" data-mobile-nav-bg-color="#333a3a">
+
+    <header>
+        <!-- start navigation -->
+        <nav class="navbar  navbar-expand-lg @Html.Raw(Context.Request.Path.Value == "/" || Context.Request.Path.Value == "/register" ? " navbar-boxed navbar-dark bg-transparent header-light fixed-top header-reverse-scroll":
+                                                      " top-space navbar-light bg-white header-light fixed-top header-reverse-scroll navbar-boxed")">
+            <div class="container-fluid nav-header-container">
+                <div class="col-auto col-sm-6 col-lg-2 mr-auto pl-lg-0">
+
+                    @*<nav class="navbar top-space navbar-expand-lg navbar-light bg-white header-light fixed-top header-reverse-scroll navbar-boxed">*@
+
+                    <a class="navbar-brand" href="/">
+                        <img src="@Html.Raw(Context.Request.Path.Value == "/" ? "/images/q/QueensLogo-Yatay.png":"/images/q/QueensLogo2.png")" data-at2x="@Html.Raw(Context.Request.Path.Value == "/" ? "/images/q/QueensLogo-Yatay.png":"/images/q/QueensLogo2.png")" class="default-logo" alt="">
+                        <img src="/images/q/QueensLogo2.png" data-at2x="/images/q/QueensLogo2.png" class="alt-logo" alt="">
+                        <img src="/images/q/QueensLogo3.png" data-at2x="/images/q/QueensLogo3.png" class="mobile-logo" alt="">
+                    </a>
+                </div>
+                <div class="col-auto col-lg-8 menu-order px-lg-0">
+                    <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-line"></span>
+                        <span class="navbar-toggler-line"></span>
+                        <span class="navbar-toggler-line"></span>
+                        <span class="navbar-toggler-line"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                        <ul class="navbar-nav alt-font">
+
+                            @foreach (var item in IsHeaderMenu.Where(x => x.IsPublish == true && x.IsHeaderMenu == true && x.ParentId == null).OrderBy(x => x.OrderNo))
+                            {
+
+                                var subItems = item.Childs.Where(x => x.IsPublish == true && x.IsHeaderMenu == true).OrderBy(x => x.OrderNo).ToList();
+
+
+                                <li class="nav-item @Html.Raw(subItems != null && subItems.Count() > 0 ? "dropdown simple-dropdown":"")">
+
+                                    @if (string.IsNullOrEmpty(item.ExternalLink))
+                                    {
+                                        <a class="nav-link" href="@(item.IsClick == false ? "javascript:void(0)":"/"+item.Link)">@item.Name</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="nav-link" href="@item.ExternalLink" target="@(item.ExternalLink.StartsWith("http")?"_blank":"")">@item.Name</a>
+                                    }
+
+
+
+                                    @if (subItems != null && subItems.Count() > 0)
+                                    {
+                                        <i class="fa fa-angle-down dropdown-toggle" data-toggle="dropdown" aria-hidden="true"></i>
+                                        <ul class="dropdown-menu" role="menu">
+                                            @foreach (var itemSub in subItems)
+                                            {
+                                                <li class="dropdown">
+                                                    @if (string.IsNullOrEmpty(itemSub.ExternalLink))
+                                                    {
+                                                        <a href="@(itemSub.IsClick == false ? "javascript:void(0)":"/"+itemSub.Link)">
+                                                            @itemSub.Name
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="/@itemSub.ExternalLink" target="@(itemSub.ExternalLink.StartsWith("http")?"_blank":"")">@itemSub.Name</a>
+                                                    }
+                                                </li>
+                                            }
+
+                                        </ul>
+                                    }
+
+
+                                </li>
+                            }
+
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-auto text-right pr-0 font-size-0">
+
+                    <div style="padding:0px 10px 0px 10px !important;" class="header-language dropdown d-lg-inline-block">
+                        <a title="Login" href="@Html.Raw(SessionRequest.LoginUser != null ? "":"/login")" class="_divHide"><i class="icon-simple-line-user align-middle"> @Html.Raw(SessionRequest.LoginUser == null ? "" : @Html.Raw("Hi".Trans()) + " " + SessionRequest.LoginUser?.Name)</i></a>
+                        @if (SessionRequest.LoginUser != null)
+                        {
+                            <ul class="dropdown-menu alt-font">
+                                <li>
+                                    <a class="" href="/accountprofile" title="@Html.Raw("Profile".Trans())">@Html.Raw("Profile".Trans())</a>
+                                </li>
+                                @if (SessionRequest.raceUser)
+                                {
+                                    <li>
+                                        <a href="/accountraceinfo" title="@Html.Raw("Race Details".Trans())">@Html.Raw("Race Details".Trans())</a>
+                                    </li>
+                                    <li>
+                                        <a href="/accountproducts">@Html.Raw("My Purchases".Trans())</a>
+                                    </li>
+                                }
+
+                                <li>
+                                    <a class="" href="/Logout" title="@Html.Raw("Logout".Trans())">@Html.Raw("Logout".Trans()) <i class="icon-simple-line-logout" style="padding: 15px 0;"></i></a>
+                                </li>
+                            </ul>
+                        }
+                    </div>
+
+
+                    <div style="padding:10px !important;" class="header-language dropdown d-lg-inline-block">
+                        <a href="javascript:void(0);"><i class="feather icon-feather-globe"></i></a>
+                        <ul class="dropdown-menu alt-font" style=" text-align: center;padding: 0px !important;">
+                            @foreach (var item in SessionRequest.Languages.Where(x => x.Id != SessionRequest.LanguageId).OrderBy(o => o.Name))
+                            {
+                                <li>
+                                    <a class="changeLang" code="@item.Code" data-id="@item.Id" href="javascript:void(0);" title="@item.Name">
+                                        <span class="icon-country">
+                                            <img src="@item.Logo.SetImage()" alt="">
+                                        </span>
+                                        @item.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                        <script>
+                            $('.changeLang').click(function () {
+                                $.post("/Base/SetLanguage", { id: $(this).data('id'), Referer: window.location.pathname }, function (data) {
+                                    window.location.reload();
+                                }); return false;
+                            });
+                        </script>
+                    </div>
+
+                    <div class="header-cart-icon dropdown d-none">
+                        <a href="javascript:void(0);"><i class="feather icon-feather-shopping-bag"></i><span class="cart-count alt-font bg-dark-orange text-white">2</span></a>
+                        <ul class="dropdown-menu cart-item-list">
+                            <li class="cart-item align-items-center">
+                                <a href="javascript:void(0);" class="alt-font close">×</a>
+                                <div class="product-image">
+                                    <a href="single-product.html"><img src="/images/q/QUEENS-JERSEY.jpg" class="cart-thumb" alt=""></a>
+                                </div>
+                                <div class="product-detail alt-font">
+                                    <a href="single-product.html">Jersey</a>
+                                    <span class="item-ammount">$80.00</span>
+                                </div>
+                            </li>
+                            <li class="cart-item align-items-center">
+                                <a href="javascript:void(0);" class="alt-font close">×</a>
+                                <div class="product-image">
+                                    <a href="single-product.html"><img src="/images/q/QUEENS-JERSEY.jpg" class="cart-thumb" alt=""></a>
+                                </div>
+                                <div class="product-detail alt-font">
+                                    <a href="single-product.html">Santini Jersey</a>
+                                    <span class="item-ammount">$80.00</span>
+                                </div>
+                            </li>
+                            <li class="cart-item cart-total">
+                                <div class="alt-font margin-15px-bottom"><span class="w-50 d-inline-block text-medium text-uppercase">Subtotal:</span><span class="w-50 d-inline-block text-right text-medium font-weight-500">$160.99</span></div>
+                                <a href="" class="btn btn-small btn-dark-gray">view cart</a>
+                                <a href="" class="btn btn-small btn-neon-orange">checkout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </nav>
+        <!-- end navigation -->
+    </header>
+
+
+    @RenderBody()
+
+
+
+
+
+
+    @if (SessionRequest.LanguageId != 1)
+    {
+        <footer class="footer-dark cover-background" style="background-image:url('/images/home-travel-agency-footer-bg.jpg');">
+            <div class="footer-top padding-four-bottom  padding-six-top text-center text-lg-left lg-padding-eight-tb md-padding-50px-tb">
+                <div class="container">
+                    <div class="row">
+                        <!-- start footer column -->
+                        <div class="col-12 col-xl-3 col-sm-6 order-sm-1 order-xl-0 lg-margin-50px-bottom xs-margin-25px-bottom">
+                            <a href="/" class="footer-logo margin-40px-bottom d-block"><img src="/images/q/QueensLogo.png" data-at2x="/images/q/QueensLogo.png" alt="" class="max-h-inherit" width="150" height="105"></a>
+                            <span class="alt-font font-weight-300 text-extra-large line-height-36px letter-spacing-minus-1-half d-inline-block w-85">
+                                A Race of Only Epic Climbs.
+                            </span>
+
+                        </div><!-- end footer column -->
+                        <!-- start footer column -->
+                        <div class="col-12 col-xl-3 col-sm-6 order-sm-3 order-xl-0 xs-margin-25px-bottom">
+                            <ul>
+                                <li><a target="_blank" href="@Html.Raw(SessionRequest.LanguageId == 1 ? "/gizlilik-sozlesmesi":"/privacy-policy")" class="text-white-hover">@Html.Raw("Privacy Policy".Trans())</a></li>
+                                <li><a target="_blank" href="@Html.Raw(SessionRequest.LanguageId == 1 ? "/mesafeli-satis-sozlesmesi":"/mesafelisatisen")" class="text-white-hover">@Html.Raw("Sales Aggreement".Trans())</a></li>
+                                <li><a target="_blank" href="@Html.Raw(SessionRequest.LanguageId == 1 ? "/aydinlatma-metni":"/aydinlatma-metnien")" class="text-white-hover">@Html.Raw("Clarification Text".Trans())</a></li>
+                            </ul>
+
+
+
+                        </div><!-- end footer column -->
+                        <!-- start footer column -->
+                        <div class="col-12 col-lg-3 col-sm-6 xs-margin-25px-bottom">
+                            <span class="alt-font font-weight-500 d-block text-white text-uppercase letter-spacing-2px margin-20px-bottom xs-margin-15px-bottom">Get In Touch</span>
+
+
+                            <div>
+                                <em class="feather icon-feather-phone-call icon-very-small margin-10px-right text-white"></em>0 212 287 80 94
+                            </div><div>
+                                <em class="feather icon-feather-mail icon-very-small margin-10px-right text-white"></em><a href="mailto:boost@boost-sport.org">
+                                    boost@boost-sport.org
+                                </a>
+                            </div><div class="margin-20px-top">
+                                <a href="https://www.strava.com/clubs/567864" target="_blank" class="margin-30px-top">
+                                    <img src="/images/q/stravaclub.png" data-at2x="/images/q/stravaclub.png" alt="" width="111" height="46">
+                                </a>
+                            </div>
+                        </div><!-- end footer column -->
+                        <!-- start footer column -->
+                        <div class="col-12 col-xl-3 col-sm-6 order-sm-2 order-xl-0 lg-margin-50px-bottom xs-no-margin-bottom">
+                            <span class="alt-font font-weight-500 d-block text-white top margin-10px-bottom margin-10px-bottom xs-margin-10px-bottom">FOLLOW US</span>
+                            <p>Enter your email address for receiving valuable newsletters.</p>
+                            <a href="#subscribe-popup2" class="btn btn-fancy btn-medium text-white btn-transparent-white modal-popup">Subscribe<span class="bg-extra-dark-gray"></span></a>
+
+                            <div class="social-icon-style-12 margin-20px-top margin-10px-bottom">
+                                <ul class="extra-small-icon light">
+                                    <li><a class="facebook" href="https://www.facebook.com/boostcamplive/" target="_blank"><em class="fab fa-facebook-f"></em></a></li>
+                                    <li><a class="youtube" href="https://www.youtube.com/channel/UCwAVsP4MF5Ba_jAvtjsy5Jg?view_as=subscriber" target="_blank"><em class="fab fa-youtube"></em></a></li>
+                                    <li><a class="instagram" href="https://www.instagram.com/queens.cycling/" target="_blank"><em class="fab fa-instagram"></em></a></li>
+                                </ul>
+                            </div>
+                        </div><!-- end footer column -->
+                    </div>
+                </div>
+            </div>  <div class="footer-bottom padding-35px-tb border-top border-width-1px border-color-white-transparent">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-3 text-md-start text-center text-lg-left sm-margin-20px-bottom"><img src="/images/q/boostrace-logo.png" data-at2x="/images/q/boostrace-logo.png" alt="" width="240" height="60"></div>
+                        <div class="col-12 col-md-4 text-center last-paragraph-no-margin sm-margin-20px-bottom">
+                            <p>Queens of the Aegean is Powered by <a href="boost-sport-tr" class="text-decoration-line-bottom text-white">Boost Sport</a></p>
+                        </div>
+                        <div class="col-12 col-md-5 order-1 order-md-0 text-center text-lg-center sm-margin-15px-bottom">
+                            <img src="/images/q/visa.png" alt="" class="max-h-inherit" width="150" height="105">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    }
+    else
+    {
+        <footer class="footer-dark cover-background" style="background-image:url('/images/home-travel-agency-footer-bg.jpg');">
+            <div class="footer-top padding-four-bottom padding-six-top text-center text-lg-left lg-padding-eight-tb md-padding-50px-tb">
+                <div class="container">
+                    <div class="row">
+                        <!-- start footer column -->
+                        <div class="col-12 col-xl-3 col-sm-6 order-sm-1 order-xl-0 lg-margin-50px-bottom xs-margin-25px-bottom">
+                            <a href="/" class="footer-logo margin-40px-bottom d-block">
+                                <img src="/images/q/QueensLogo.png" data-at2x="/images/q/QueensLogo.png" alt=""
+                                     class="max-h-inherit" width="150" height="105" />
+                            </a>
+
+                            <span class="alt-font font-weight-300 text-extra-large line-height-36px letter-spacing-minus-1-half d-inline-block w-85">
+                                A
+                                Race of Only Epic Climbs.
+                            </span>
+                        </div><!-- end footer column -->
+                        <!-- start footer column -->
+                        <div class="col-12 col-xl-3 col-sm-6 order-sm-3 order-xl-0 xs-margin-25px-bottom">
+                            <ul>
+                                <li><a href="gizlilik-sozlesmesi" class="text-white-hover">Gizlilik Sözleşmesi</a></li>
+                                <li><a href="mesafeli-satis-sozlesmesi" class="text-white-hover">Mesafeli Satış Sözleşmesi</a></li>
+                                <li><a href="aydinlatma-metni" class="text-white-hover">Aydınlatma Metni</a></li>
+                            </ul>
+
+                        </div><!-- end footer column -->
+                        <!-- start footer column -->
+                        <div class="col-12 col-lg-3 col-sm-6 xs-margin-25px-bottom">
+                            <span class="alt-font font-weight-500 d-block text-white text-uppercase letter-spacing-2px margin-20px-bottom xs-margin-15px-bottom">
+                                İletişime
+                                Ge&ccedil;in
+                            </span>
+                            <div>
+                                <em class="feather icon-feather-phone-call icon-very-small margin-10px-right text-white"></em>0
+                                212 287 80 94
+                            </div>
+                            <div>
+                                <em class="feather icon-feather-mail icon-very-small margin-10px-right text-white"></em><a href="mailto:boost@boost-sport.org">boost@boost-sport.org</a>
+                            </div>
+                            <div class="margin-20px-top">
+                                <a href="https://www.strava.com/clubs/567864" target="_blank"
+                                   class="margin-30px-top">
+                                    <img src="/images/q/stravaclub.png"
+                                         data-at2x="/images/q/stravaclub.png" alt="" width="111" height="36" />
+                                </a>
+                            </div>
+                        </div><!-- end footer column -->
+                        <!-- start footer column -->
+                        <div class="col-12 col-xl-3 col-sm-6 order-sm-2 order-xl-0 lg-margin-50px-bottom xs-no-margin-bottom">
+                            <span class="alt-font font-weight-500 d-block text-white top margin-10px-bottom margin-10px-bottom xs-margin-10px-bottom">
+                                BİZİ
+                                TAKİP EDİN
+                            </span>
+                            <p>Bizden haberdar olmak i&ccedil;in b&uuml;ltene kayıt olun.</p>
+                            <a href="#subscribe-popup2" class="btn btn-fancy btn-medium text-white btn-transparent-white modal-popup">
+                                Eb&uuml;lten
+                                &Uuml;yelik<span class="bg-extra-dark-gray"></span>
+                            </a>
+                            <div class="social-icon-style-12 margin-20px-top margin-10px-bottom">
+                                <ul class="extra-small-icon light">
+                                    <li>
+                                        <a class="facebook" href="https://www.facebook.com/boostcamplive/" target="_blank">
+                                            <em class="fab fa-facebook-f"></em>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="youtube"
+                                           href="https://www.youtube.com/channel/UCwAVsP4MF5Ba_jAvtjsy5Jg?view_as=subscriber"
+                                           target="_blank"><em class="fab fa-youtube"></em></a>
+                                    </li>
+                                    <li>
+                                        <a class="instagram" href="https://www.instagram.com/queens.cycling/"
+                                           target="_blank"><em class="fab fa-instagram"></em></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div><!-- end footer column -->
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom padding-35px-tb border-top border-width-1px border-color-white-transparent">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-3 text-md-start text-center text-lg-left sm-margin-20px-bottom">
+                            <img src="/images/q/boostrace-logo.png" data-at2x="/images/q/boostrace-logo.png"
+                                 alt="" width="240" height="60" />
+                        </div>
+                        <div class="col-12 col-md-4 text-center last-paragraph-no-margin sm-margin-20px-bottom">
+                            <p>
+                                Queens of the Aegean is Powered by <a href="boost-sport-tr"
+                                                                      class="text-decoration-line-bottom text-white">Boost Sport</a>
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-5 order-1 order-md-0 text-center text-lg-left sm-margin-15px-bottom">
+                            <img src="/images/q/visa.png" alt="" class="max-h-inherit" width="150" height="105">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    }
+
+    @*@Html.Raw(IsFooterMenu.FirstOrDefault()?.ContentData)*@
+
+
+
+
+    <!-- start subscription popup -->
+    <div id="subscribe-popup2" class="subscribe-popup mfp-hide">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-md-10 bg-white modal-popup-main">
+                    <div class="row">
+                        <div class="col-12 col-md-7 order-2 order-sm-1 newsletter-popup padding-4-rem-all lg-padding-4-rem-all xs-padding-3-rem-all">
+                            <span class="text-extra-large font-weight-500 text-extra-dark-gray d-block margin-10px-bottom">@Html.Raw("Subscribe to newsletter".Trans())</span>
+                            <p class="margin-30px-bottom xs-margin-20px-bottom">@Html.Raw("Subscribe note".Trans())</p>
+                            <form id="frm_Mail" name="frm_Mail">
+                                <input type="hidden" id="FormTypeId" name="FormTypeId" value="1" />
+                                <div class="margin-25px-bottom xs-margin-15px-bottom">
+                                    <input class="medium-input bg-white m-0 required" name="Email" placeholder="@Html.Raw("Enter your Mail".Trans())" type="email">
+                                    <div class="container">
+
+                                        <div class="row  margin-20px-top">
+                                            <div class="col-12 col-md-8 text-left sm-margin-25px-bottom">
+                                                <p class="d-flex align-items-center mb-0">
+                                                    <input required="" type="checkbox" name="check" id="check" class="terms-condition d-inline-block align-top w-auto mb-0 margin-5px-top margin-10px-right required">
+
+                                                    <span class="text-small">
+                                                        @Html.Raw("KVKK Note".Trans())
+                                                        <a target="_blank" class="text-decoration-underline" href="@Html.Raw(SessionRequest.LanguageId == 1 ? "/aydinlatma-metni":"/aydinlatma-metnien")"> @Html.Raw("KVKK".Trans())</a> @Html.Raw("KVKK Note2".Trans())<span class="text-red ms-1">*</span>
+                                                    </span>
+
+
+                                                </p>
+                                            </div>
+                                            <div class="col-12 col-md-4 ">
+                                                <button class="btn btn-medium btn-dark-gray mb-0 submit" type="submit">@Html.Raw("Send".Trans())</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-results d-none position-absolute"></div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <div class="col-12 col-sm-5 cover-background order-1 order-sm-2 xs-h-150px" style="background-image:url('/images/q/a7.jpg');">
+                            <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+
+
+            var formname = '#frm_Mail';
+            $(formname).submit(function (e) {
+                e.preventDefault();
+                var postModel = $.fn.toForm(formname);
+                if (!$('[name="check"]')[0].checked) {
+                    alert("Please Is KVKK")
+                }
+                $(formname).LoadingOverlay("show");
+                $.ajx('/Forms/InsertOrUpdate',
+                    { postModel: postModel }, function (resultData) {
+                        if (resultData.RType == 1) {
+                            alert("Form Success");
+                            location.reload();
+                        }
+                        else {
+
+                            alerts(resultData.MessageList);
+                        }
+
+                        $(formname).LoadingOverlay("hide");
+                    }, function () { location.reload(); });
+            });
+
+        });
+    </script>
+    <!-- end subscription popup -->
+
+
+
+
+
+    <div class="modal fade row" id="ajaxSub" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div style="max-width:none !important;" class="col-md-8 d-flex justify-content-center modal-dialog" role="document">
+            <div style="border-radius: 10px !important;" class="modal-content col-md-8 d-flex justify-content-center">
+                <div class="modal-header ">
+                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img width="50" height="50" src="/content/img/loading-spinner-grey.gif" alt="" class="loading"><span> &nbsp;&nbsp;Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- start scroll to top -->
+    <a class="scroll-top-arrow" href="javascript:void(0);"><i class="feather icon-feather-arrow-up"></i></a>
+    <!-- end scroll to top -->
+    <!-- javascript -->
+
+
+    <script type="text/javascript" src="/js/theme-vendors.min.js?v=@SessionRequest.config?.version"></script>
+    <script type="text/javascript" src="/js/main.js?v=@SessionRequest.config?.version"></script>
+
+    <script src="~/content/js/bootbox.min.js" type="text/javascript"></script>
+    <script src="~/content/js/loadingoverlay.min.js" type="text/javascript"></script>
+    <script src="~/content/js/general.js?v=@SessionRequest.config?.version"></script>
+
+
+
+    <script>
+        $(function () {
+            if (location.host.indexOf('test.') != -1)
+                $('.divHide').show();
+            else
+                $('.divHide').hide();
+        })
+    </script>
+
+    <script>
+        function ayarlar() {
+
+            $('.mymodal').click(function (e) {
+                e.preventDefault();
+                $('#ajaxSub').modal('show').find('.modal-body').load($(this).attr('href'));
+            });
+
+            $('#ajaxSub').on('hidden.bs.modal', function () {
+                $('#ajaxSub .modal-content .modal-body').empty();
+            });
+
+            $("#ajaxSub").on("hide", function () {
+                $("#ajaxSub button[data-dismiss='modal']").click();
+            });
+
+            $("#ajaxSub").on("hidden", function () {
+                $("#ajaxSub").remove();
+            });
+
+        }
+        ayarlar();
+    </script>
+
+    @Html.Raw(SessionRequest.config.FooterStyle)
+    @Html.Raw(SessionRequest.config.FooterScript)
+
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

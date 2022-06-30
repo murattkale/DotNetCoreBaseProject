@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "_Layout";
+    var content = ViewBag.content as ContentPage;
+}
+@await Component.InvokeAsync("MenuView", new { type = "SubHeader" })
+<link href="~/assets-site/plugins/lightbox/css/lightgallery.css" rel="stylesheet" />
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mission-section">
+                    <div class="container text-center">
+                        <h2 class="margin-bottom-50">@Html.Raw(content.Description)</h2>
+                        <div class="content">
+                            @Html.Raw(content.ContentShort)
+                        </div>
+                    </div>
+                </div>
+                @if (content.Picture != null)
+                {
+                    <div class="row section">
+                        <div class="col-12 img"><img src="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@(content.Picture.Link)" alt="@content.Name" class="img-fluid"></div>
+                    </div>
+                }
+                <div class="section">
+                    @Html.Raw(content.ContentData)
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @if (content.Gallery != null && content.Gallery.Count > 0)
+    {
+
+
+        <div class="media-grid">
+            <div class="heading text-center">
+                @Html.Raw(content.Description)
+            </div>
+            <div class="row" id="lightgallery">
+                @foreach (var item in content.Gallery)
+                {
+                    <div class="col-6 col-lg-3 img">
+                        <a class="lb-item" href="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@item.Link"><img src="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@item.Link" alt="@item.Alt" class="img-fluid"></a>
+                    </div>
+                }
+            </div>
+        </div>
+
+
+    }
+</div>
+
+<script src="~/assets-site/plugins/lightbox/js/picturefill.min.js"></script>
+<script src="~/assets-site/plugins/lightbox/js/lightgallery-all.min.js"></script>
+<script src="~/assets-site/plugins/lightbox/lib/jquery.mousewheel.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#lightgallery').lightGallery({
+            selector: '.lb-item'
+        });
+    });
+</script>

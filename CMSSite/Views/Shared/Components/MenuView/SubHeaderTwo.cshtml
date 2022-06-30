@@ -1,0 +1,63 @@
+﻿@{
+    Layout = null;
+    var contentPages = ViewBag.contentPages as List<ContentPage>;
+    var content = ViewBag.content as ContentPage;
+    ContentPage tempContent = new ContentPage();
+    List<ContentPage> tempContentList = new List<ContentPage>();
+    var bannerImage = "default-header.jpg";
+    tempContent = content;
+
+    if (tempContent != null)
+    {
+        while (tempContent.ParentId != null)
+        {
+            tempContent = contentPages.Where(x => x.Id == tempContent.ParentId).FirstOrDefault();
+            tempContentList.Add(tempContent);
+            if ((bannerImage == "default-header.jpg" || string.IsNullOrEmpty(bannerImage)) && tempContent.BannerImage != null)
+                bannerImage = tempContent.BannerImage.Link;
+
+        }
+    }
+}
+
+<!-- Header Four -->
+<div class="section mb-2">
+    <div class="breadcrub-style-4" style="background-image: url(http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@(content.BannerImage==null?bannerImage:content.BannerImage.Link))">
+        <div class="container">
+            <div class="heading" style="background: transparent !important;">
+                @*<h2>@content.Name</h2>*@
+                <div class="breadcrub-style" style="color:#fff !important">
+                    <a href="/">Anasayfa</a>
+                    <span class="arrow"> > </span>
+                    @foreach (var item in Enumerable.Reverse(tempContentList))
+                    {
+                        <a href="@(item.IsClick == false ? "javascript:void(0)" : "/" + item.Link)">@item.Name</a>
+                        <span class="arrow"> > </span>
+                    }
+                    <a href="javascript:void(0)" class="active">@content.Name</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Header Four -->
+<!--<div class="section mb-2">
+  <div class="breadcrub-style-4"   style="background-image: url(http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@(content.BannerImage==null?bannerImage:content.BannerImage.Link))">
+    <div class="container">
+        <div class="heading">
+            <h2>@content.Name</h2>
+            <div class="breadcrub-style">
+                <a href="/">Anasayfa</a>
+                <span class="arrow"> > </span>
+                @foreach (var item in Enumerable.Reverse(tempContentList))
+                {
+                    <a href="@(item.IsClick == false ? "javascript:void(0)" : "/" + item.Link)">@item.Name</a>
+                    <span class="arrow"> > </span>
+                }
+                <a href="javascript:void(0)" class="active">@content.Name</a>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>-->

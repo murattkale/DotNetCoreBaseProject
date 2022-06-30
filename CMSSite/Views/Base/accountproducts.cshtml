@@ -1,0 +1,131 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+
+<!-- end header -->
+<!-- startanner section -->
+<section class="cover-background h-500px sm-h-300px" style="background-image: url('/images/q/routes.jpg');">
+    <div class="opacity-medium bg-gradient-dark-slate-blue-transparent"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 position-relative extra-small-screen md-h-300px sm-h-250px d-flex flex-column">
+                <h1 class="alt-font font-weight-600 text-white title-extra-large w-100 mt-auto mb-0 letter-spacing-minus-5px sm-letter-spacing-minus-1-half xs-w-100">@Html.Raw("My Account".Trans())</h1>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end banner section -->
+
+
+<section class="half-section  pt-0 wow animate__fadeIn">
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+
+            <aside class="col-12 col-lg-3 col-md-4 shopping-sidebar padding-4-rem-all d-none d-sm-block ">
+                <div class="container">
+                    <div class="row">
+                        <div class="padding-2-rem-bottom margin-1-rem-bottom wow animate__fadeIn">
+                            <a href="/accountprofile"><span class="btn btn-medium btn-transparent-black btn-rounded lg-margin-15px-bottom md-margin-auto-lr d-block margin-10px-bottom  ">@Html.Raw("Profile".Trans())</span></a>
+                            @if (SessionRequest.raceUser)
+                            {
+                                <a href="/accountraceinfo"><span class="btn btn-medium btn-transparent-black btn-rounded lg-margin-15px-bottom md-margin-auto-lr d-block margin-10px-bottom ">@Html.Raw("Race Details".Trans())</span></a>
+                                <a href="/accountproducts"><span class="btn btn-medium btn-black btn-rounded lg-margin-15px-bottom md-margin-auto-lr d-block margin-10px-bottom ">@Html.Raw("My Purchases".Trans())</span></a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+
+
+            <div class="col-12 col-lg-9 col-md-9 shopping-content padding-30px-left md-padding-15px-left">
+
+                <div class=" padding-3-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
+                    <input name="Id" id="Id" type="hidden" value="@SessionRequest.myOrder.Id" />
+                    <input name="OrderId" id="OrderId" type="hidden" value="@SessionRequest.myOrder.Id" />
+                    <span class="alt-font text-large text-extra-dark-gray margin-40px-bottom d-inline-block font-weight-500">@Html.Raw("My Purchases".Trans())</span>
+                    <div class="row">
+                        <div class="col-12">
+                            <table id="dt_product_other" class="table cart-products margin-60px-bottom md-margin-40px-bottom sm-no-margin-bottom">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="alt-font"></th>
+                                        <th scope="col" class="alt-font">@Html.Raw("Products".Trans())</th>
+                                        <th scope="col" class="alt-font">@Html.Raw("Size".Trans())</th>
+                                        <th scope="col" class="alt-font">@Html.Raw("Quantity".Trans())</th>
+                                        <th scope="col" class="alt-font">@Html.Raw("Total".Trans())</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<script>
+    $(function () {
+
+        GetAllByOrder();
+        function GetAllByOrder() {
+            $('#dt_product_other tbody').html();
+            $.get('/OrderDetail/GetAllByOrder?OrderId=' + myOrder.Id).fail(function (err, exception) { console.error(err.responseText); })
+                .done(function (res) {
+                    $.each(res.ResultList, function (i, item) {
+                        var str = '';
+                        if (item.Product.ProductType == 1)
+                            return;
+
+                        str += '     <tr pdetail="' + item.Id + '" Currency="' + item.Currency + '" price="' + item.PriceTotal + '" pname="' + item.Product.Name + '" >                                                                                                 ';
+                        str += '       <td class="product-thumbnail">                                                                     ';
+                        str += '           <a href="">                                                                                    ';
+                        str += '               <img class="cart-product-image"                                                            ';
+                        str += '                    src="' + siteConfig.BaseUrl + item.Product.DefaultImage + '" alt="" data-no-retina="">                            ';
+                        str += '           </a>                                                                                           ';
+                        str += '       </td>                                                                                              ';
+                        str += '       <td class="product-name">                                                                          ';
+                        str += '           <span  class="text-extra-dark-gray">                                                            ';
+                        str += '              ' + item.Product.Name + '<br><span class="alt-font text-small">                                         ';
+                        str += '                   Pre                                                                                    ';
+                        str += '                   Order: $' + item.PriceUnit + '                                                                         ';
+                     
+                        str += '           </span>                                                                                        ';
+                        str += '                                                                                                          ';
+                        str += '                                                                                                          ';
+                        str += '       </td>                                                                                              ';
+                        str += '       <td  class="product-size" data-title="Size">     ' + item.Size+'                                                   ';
+                       
+                        str += '       </td>                                                                                              ';
+                        str += '       <td  class="product-quantity" data-title="Quantity">                                                ';
+                        str += '           <div class="quantity">                                                                         ';
+                        str += '               <label class="screen-reader-text">Quantity</label>                                         ';
+                        str += '               <input disabled stock="' + item.Id + '" class="input-text qty-text" type="number" name="quantity" value="'+item.OrderCount+'">                ';
+                        str += '           </div>                                                                                         ';
+                        str += '       </td>                                                                                              ';
+                        str += '       <td subtotal="' + item.Id + '" class="product-subtotal" data-title="Total">' + item.PriceTotal+'</td> ';
+                        str += '   </tr>                                                                                                  ';
+
+                        $('#dt_product_other tbody').append(str);
+                    });
+
+                });
+        }
+
+
+
+    });
+</script>

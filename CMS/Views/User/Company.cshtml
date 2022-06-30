@@ -1,0 +1,103 @@
+﻿@{
+    var rowUser = ViewBag.postModel as User;
+    var EnumText = "User";
+
+    var dynamicRow = new DynamicModel()
+    {
+        model = rowUser == null || rowUser.Id < 1 ? new User() { } : rowUser,
+        controllerName = rowUser == null ? new User().GetType().Name : rowUser.GetType().Name,
+        PageType = "DynamicInput2",
+        titleName = EnumText + " " + (rowUser?.Id > 0 ? "Update" : "Create"),
+        InsertMethodName = "InsertOrUpdate",
+        labelClass = "col-md-3",
+        inputClass = "col-md-9",
+        colClass = "col-md-12",
+        nonProp = "OrderNo,ParentUserId,UserName,Pass,Name,Surname,NameSurname,Phone,IsProject,IsRead,IsUpdate,IsDelete,IsList,IsReport,IsAdmin,IsCreate,IsMainAccount,UserStatusType",
+        orderby = "",
+        addBtn = "<input type='submit' value='" + (rowUser?.Id > 0 ? "Update" : "Create") + "' " + "class='btn btn-primary btn-shadow-hover font-weight-bold mr-2' />",
+        removeBtn = $"<input dataid='{rowUser?.Id}' type='button' value='Delete' class='btnDelete btn btn-danger btn-shadow-hover font-weight-bold mr-2' />",
+        whereCase = "",
+
+    };
+
+}
+<script type="text/javascript">
+    var rowUser = @Html.Raw(Json.Serialize(rowUser));
+</script>
+
+
+
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Subheader-->
+    <div class="subheader py-5 py-lg-10 gutter-b subheader-transparent" id="kt_subheader" style="background-color: #663259; background-position: right bottom; background-size: auto 100%; background-repeat: no-repeat; background-image: url(@SessionRequest.config.layoutUrl/assets/media/svg/patterns/taieri.svg)">
+        <div class="container d-flex flex-column">
+            <!--begin::Title-->
+            <div class="d-flex align-items-sm-end flex-column flex-sm-row mb-5">
+                <h2 class="d-flex align-items-center text-white mr-5 mb-0">
+                    <!--begin::Mobile Toggle-->
+                    <button class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none" id="kt_subheader_mobile_toggle">
+                        <span></span>
+                    </button>
+                    <!--end::Mobile Toggle-->
+                    Users
+                </h2>
+                <span class="text-white opacity-60 font-weight-bold">View and Edit</span>
+            </div>
+            <!--end::Title-->
+            <!--begin::Search Bar-->
+            <!--end::Search Bar-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Profile Personal Information-->
+            <div class="d-flex flex-row">
+
+                <partial name="../User/usermenu" />
+
+                <!--begin::Content-->
+                <div class="flex-row-fluid ml-lg-8">
+                    <!--begin::Card-->
+                    <div class="card card-custom card-stretch">
+                        <!--begin::Header-->
+                        <div class="card-header py-3">
+                            <div class="card-title align-items-start flex-column">
+                                <h3 class="card-label font-weight-bolder text-dark">Company</h3>
+                                <span class="text-muted font-weight-bold font-size-sm mt-1">Company informaiton</span>
+                            </div>
+
+                        </div>
+                        <!--end::Header-->
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="form-group fv-plugins-icon-container">
+                                        <div id="dt_User_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    @await Component.InvokeAsync("DynamicInput", dynamicRow)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="fv-plugins-message-container"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Content-->
+            </div>
+            <!--end::Profile Personal Information-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>
+<!--end::Content-->
+

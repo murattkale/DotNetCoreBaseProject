@@ -1,0 +1,191 @@
+﻿@{
+    var rowUser = ViewBag.postModel as User;
+    var EnumText = "User";
+
+    var dynamicRow = new DynamicModel()
+    {
+        model = rowUser == null || rowUser.Id < 1 ? new User() { } : rowUser,
+        controllerName = rowUser == null ? new User().GetType().Name : rowUser.GetType().Name,
+        PageType = "User",
+        titleName = EnumText + " " + (rowUser?.Id > 0 ? "Update" : "Create"),
+        InsertMethodName = "InsertOrUpdate",
+        labelClass = "col-md-4",
+        inputClass = "col-md-8",
+        colClass = "col-md-6",
+        nonProp = "OrderNo",
+        orderby = "",
+        addBtn = "<input type='submit' value='" + (rowUser?.Id > 0 ? "Update" : "Create") + "' " + "class='btn btn-primary btn-shadow-hover font-weight-bold mr-2' />",
+        removeBtn = $"<input dataid='{rowUser?.Id}' type='button' value='Delete' class='btnDelete btn btn-danger btn-shadow-hover font-weight-bold mr-2' />",
+        whereCase = "",
+
+    };
+
+}
+<script type="text/javascript">
+    var rowUser = @Html.Raw(Json.Serialize(rowUser));
+</script>
+
+
+
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Subheader-->
+    <div class="subheader py-5 py-lg-10 gutter-b subheader-transparent" id="kt_subheader" style="background-color: #FBB900; background-position: right bottom; background-size: auto 100%; background-repeat: no-repeat; background-image: url(@SessionRequest.config.layoutUrl /assets/media/svg/patterns/taieri.svg)">
+        <div class="container d-flex flex-column">
+            <!--begin::Title-->
+            <div class="d-flex align-items-sm-end flex-column flex-sm-row mb-5">
+                <h2 class="d-flex align-items-center text-white mr-5 mb-0">
+                    <!--begin::Mobile Toggle-->
+                    <button class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none" id="kt_subheader_mobile_toggle">
+                        <span></span>
+                    </button>
+                    <!--end::Mobile Toggle-->
+                    Users
+                </h2>
+                <span class="text-white opacity-60 font-weight-bold">View and Edit</span>
+            </div>
+            <!--end::Title-->
+            <!--begin::Search Bar-->
+            <!--end::Search Bar-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Profile Personal Information-->
+            <div class="d-flex flex-row">
+
+                <partial name="../User/usermenu" />
+
+                <!--begin::Content-->
+                <div class="flex-row-fluid ml-lg-8">
+                    <!--begin::Card-->
+                    <div class="card card-custom card-stretch">
+                        <!--begin::Header-->
+                        <div class="card-header py-3">
+                            <div class="card-title align-items-start flex-column">
+                                <h3 class="card-label font-weight-bolder text-dark">Users</h3>
+                                <span class="text-muted font-weight-bold font-size-sm mt-1">Users informaiton</span>
+                            </div>
+
+                        </div>
+                        <!--end::Header-->
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="form-group fv-plugins-icon-container">
+                                        <div id="dt_User_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <table id="dt_User" class="table table-bordered table-hover table-checkable">
+                                                        <thead>
+                                                            <tr>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="fv-plugins-message-container"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Content-->
+            </div>
+            <!--end::Profile Personal Information-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>
+<!--end::Content-->
+
+
+
+
+<script>
+    $(function () {
+
+        getGrid();
+
+        function getGrid() {
+            var columns = [];
+            //columns.push({ "data": "Id", text: "ID" });
+            //columns.push({ "data": "UserName", text: "UserName" });
+            columns.push({ "data": "NameSurname", text: "Name Surname" });
+            columns.push({ "data": "UserStatusTypeName", text: "UserStatusTypeName" });
+            columns.push({ "data": "Detail", text: "İşlemler" });
+
+            $.each(columns, function (i, item) {
+                $('#dt_User' + ' thead tr').append('<td>' + item.text + '</td>');
+            });
+
+            var table = $('#dt_User').DataTable({
+                "ajax": {
+                    "url": '/User/GetPaging',
+                    "type": "POST",
+                    "datatype": "json",
+                    "data": function (searchModel) {
+                        $('#dt_User').LoadingOverlay("show");
+                        searchModel.selectid = myUser.Id;
+
+
+                    },
+                    "dataSrc": function (json) {
+                        return_data = new Array();
+                        var data = json.data;
+
+                        $.each(data, function (i, row) {
+                            var detail = '<a class="btn btn-sm btn-clean btn-icon btn-icon-md" href="/User/InsertOrUpdatePage?id=' + row.Id + '" title="Düzenle"><i class="la la-edit"></i></a>';
+                            return_data.push({
+                                //'Id': row.Id,
+                                //'UserName': row.UserName,
+                                'NameSurname': row.NameSurname,
+                                'UserStatusTypeName': row.UserStatusType == 1 ? '<a href="#" class="btn btn-success btn-shadow-hover font-weight-bold mr-2">Active</a>' : (row.UserStatusType == 2 ? '<a href="#" class="btn btn-warning btn-shadow-hover font-weight-bold mr-2">Passive</a>' : '<a href="#" class="btn btn-danger btn-shadow-hover font-weight-bold mr-2">Deleted</a>'),
+                                'Detail': detail,
+                            });
+
+                        });
+                        $('#dt_User').LoadingOverlay("hide");
+                        return return_data;
+                    }
+                },
+                "fnDrawCallback": function (settings, json) {
+
+
+                    $('.dt-buttons').css('float', 'right');
+                    $('.dt-buttons').css('margin-left', '20px');
+                    $('.dt-buttons').css('margin-top', '16px');
+
+                    $(table).LoadingOverlay("hide");
+                    
+                },
+                "destroy": true,
+                "caseInsensitive": true,
+                "serverSide": true,
+                "responsive": true,
+                "pageLength": 10,
+                "DisplayLength": 10,
+                "lengthMenu": [[10, 25, 100, 1000, 2500, 5000], [10, 25, 100, 1000, 2500, 5000]],
+                "lengthChange": true,
+                "processing": true,
+                "order": [[0, "desc"]],
+                "columns": columns,
+
+            });
+
+
+
+
+        }
+
+
+
+    });
+</script>

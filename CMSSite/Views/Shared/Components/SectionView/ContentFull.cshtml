@@ -1,0 +1,97 @@
+﻿
+@{
+
+    var content = ViewBag.content as ContentPage;
+    string viewType = ViewBag.viewType as string;
+    Layout = viewType == "Single" ? "_Layout" : null;
+}
+@if (viewType == "Single")
+{
+    @await Component.InvokeAsync("MenuView", new { type = "SubHeader" })
+    <!--topMenux-->
+    <div id="content">
+        <div class="container">
+
+            <div class="row">
+                @await Component.InvokeAsync("MenuView", new { type = "SideMenu" })
+                <div class="col-md-9">
+                    @if (content.Picture != null)
+                    {<div class="row"><div class="col-md-12"><img src="@content.Picture.Link" alt="@content.Name" /></div></div>}
+                    <div class="row" style="background-size: cover;">
+                        <div class="col-md-12" style="background-size: cover;">
+                            <div class="row" style="background-size: cover;">
+                                <div class="col-md-12 wow fadeInUp animated animated animated animated animated" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp; background-size: cover; opacity: 0;">
+                                    @Html.Raw(content.ContentShort)
+                                    @Html.Raw(content.Description)
+                                </div>
+                            </div>
+                        </div><div class="col-md-12" style="background-size: cover;">
+                            <div class="row" style="background-size: cover;">
+                                <div class="col-md-12 wow fadeInUp animated animated animated animated animated animated animated" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp; background-size: cover; opacity: 0;">
+                                    @Html.Raw(content.ContentData)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @if (content.Documents.Count > 0)
+                    {
+
+                        <div class="expand-group mbp-30" style="background-size: cover;">
+                            <div class="mainRep mb30" style="background-size: cover;">
+                                <section class="call-to-action bg-color text-dark pt10 pb10" data-speed="5" data-type="background" aria-label="cta">
+                                    <div class="container" style="background-size: cover;">
+                                        <div class="row" style="background-size: cover;">
+                                            <div class="col-md-12 text-center" style="background-size: cover;">
+                                                <h2 class="wow fadeInUp text-center animated animated" style="visibility: visible; animation-name: fadeInUp;">Dökümanlar</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <div style="background-size: cover;">
+                                    <div class="expand item 2020" style="background-size: cover;">
+                                        <div class="row" style="background-size: cover;">
+                                            @foreach (var docu in content.Documents)
+                                            {
+                                                <div class="col-md-6">
+                                                    <p>
+                                                        <a href="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@docu.Link">
+                                                            <i class="id-color icon-download"></i>&nbsp;@docu.Name
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else if (viewType == "List")
+{
+    <div class="row" style="background-size: cover;">
+        <div class="col-md-12" style="background-size: cover;">
+            <div class="row" style="background-size: cover;">
+                <div class="col-md-12 wow fadeInUp animated animated animated animated animated" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp; background-size: cover; opacity: 0;">
+                    @Html.Raw(content.ContentShort)
+                    @Html.Raw(content.Description)
+                </div>
+            </div>
+        </div><div class="col-md-12" style="background-size: cover;">
+            <div class="row" style="background-size: cover;">
+                <div class="col-md-12 wow fadeInUp animated animated animated animated animated animated animated" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp; background-size: cover; opacity: 0;">
+                    @Html.Raw(content.ContentData)
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+    var contentPages = ViewBag.contentPages as List<ContentPage>;
+    var content = ViewBag.content as ContentPage;
+    ContentPage tempContent = new ContentPage();
+    List<ContentPage> tempContentList = new List<ContentPage>();
+    var bannerImage = "images/blog-post-layout-02-img-01.jpg";
+    tempContent = content;
+
+    if (tempContent != null)
+    {
+        while (tempContent.ParentId != null)
+        {
+            tempContent = contentPages.Where(x => x.Id == tempContent.ParentId).FirstOrDefault();
+            tempContentList.Add(tempContent);
+            if ((bannerImage == "images/blog-post-layout-02-img-01.jpg" || string.IsNullOrEmpty(bannerImage)) && tempContent.BannerImage != null)
+                bannerImage = tempContent.BannerImage.Link;
+
+        }
+    }
+}
+<section class="h-400px sm-h-400px xs-h-300px overlap-height cover-background" style="background: url(@SessionRequest.config.ImageUrl/fileupload/UserFiles/Folders/@(content.BannerImage==null?bannerImage:content.BannerImage.Link));">
+    <h1 class="text-center alt-font font-weight-500 text-white text-shadow-extra-large d-block margin-20px-bottom sm-margin-10px-bottom">@content.Name</h1>
+</section>

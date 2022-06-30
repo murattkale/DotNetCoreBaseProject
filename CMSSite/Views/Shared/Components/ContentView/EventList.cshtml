@@ -1,0 +1,175 @@
+﻿
+@{
+    Layout = "_Layout";
+    var content = ViewBag.content as ContentPage;
+    var contents = ViewBag.contents as List<ContentPage>;
+    var filters = ViewBag.filters as List<ContentPage>;
+    var currDoc = string.IsNullOrEmpty(Context.Request.Query["p"]) ? contents.FirstOrDefault().Parent.ContentShort : Context.Request.Query["p"].ToString();
+    var classEvent = "odd-event";
+}
+@await Component.InvokeAsync("MenuView", new { type = "SubHeader" }) 
+@*
+    <!-- Page Navigation -->
+    <div class="page-nav-section section hide-md-and-down">
+        <div class="container">
+            <ul class="d-flex align-items-center">
+                <li><a href="@("/"+content.Link)" class="@(content.Link==currDoc?"active":"")">Tümü</a></li>
+                @foreach (var item in filters)
+                {
+                    <li><a href="/?p=@item.Link" class="@(content.Link==currDoc?"active":"")">@item.Name</a></li>
+                }
+                <li class="d-flex align-items-center search-input-group">
+                    <input type="text" placeholder="Arama için kelime giriniz..." />
+                    <i class="flaticon-search"></i>
+                </li>
+            </ul>
+        </div>
+    </div>*@
+<!-- Events Section -->
+<section class="events-section-style-2 section">
+    <!-- Side Icons -->
+    @*<div class="fixed-right side-form-icons">
+        <i class="fas fa-phone icon" id="open-opening-popup"></i>
+        <i class="fas fa-map-marker-alt icon" id="open-location-popup"></i>
+        <i class="fas fa-envelope icon" id="open-form-popup"></i>
+    </div>*@
+
+    <div class="container">
+
+        @foreach (var item in contents)
+        {
+
+            <div class="row row event-item-style-1 even-event @classEvent">
+                <div class="col-5 col-lg-2 date">
+                    <h1>@(string.IsNullOrEmpty(item.StartDate.ToString())?"": item.StartDate.Day.ToString())</h1>
+                    <h5>@(string.IsNullOrEmpty(item.StartDate.ToString())?"": item.StartDate.ToString("MMMM").Substring(0, 3).ToUpper()) @(string.IsNullOrEmpty(item.StartDate.ToString())?"": item.StartDate.Year.ToString())</h5>
+                </div>
+                <div class="col-7 col-md-6 col-lg-3 media">
+                    <img src="@("http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/"+(item.ThumbImage!=null?item.ThumbImage.Link:"default.jpg"))" alt="events image"
+                         class="img-fluid">
+                </div>
+                <div class="col-12 col-lg-7 details">
+                    <h3>@item.Name</h3>
+                    <p>
+                        @Html.Raw(item.ContentShort)
+                    </p>
+                    <a href="/@item.Link"><button class="main-btn">Devamı</button></a>
+                </div>
+
+            </div>
+            @if (classEvent == "odd-event")
+            {
+                classEvent = "even-event";
+            }
+            else
+            {
+                classEvent = "odd-event";
+            }
+
+        }
+
+
+    </div>
+</section>
+<!-- Pagination -->
+<!--<div class="pagination-section section d-flex justify-content-center">
+    <div class="pagination-style-2">
+        <a class="prev" role="button" data-slide="prev">
+            <i class="flaticon-back"></i>
+        </a>
+        <div class="page-num">
+            <a class="current">01</a>
+            <div class="page-indicators">
+                <div class="indicator active"></div>
+                <div class="indicator"></div>
+                <div class="indicator"></div>
+                <div class="indicator"></div>
+                <div class="indicator"></div>
+                <div class="indicator"></div>
+            </div>
+            <a class="total">06</a>
+        </div>
+        <a class="next" role="button" data-slide="next">
+            <i class="flaticon-next"></i>
+        </a>
+    </div>
+</div>-->
+
+<!-- Popup -->
+<div class="side-form-popup">
+    <div class="popup-wrapper">
+        <div class="center-popup">
+            <div class="opening-popup">
+                <div class="close-popup">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-8 media">
+                        <img src="assets/img/University/students/adolescent-adorable-alone.png" alt="media"
+                             class="img-fluid">
+                    </div>
+                    <div class="col-md-6 col-lg-4 content">
+                        <h5>Opening hours</h5>
+                        <div class="openings">
+                            <div class="opening opening-days">
+                                <p class="day">Monday</p>
+                                <div class="divider"></div>
+                                <p class="day">Friday</p>
+                            </div>
+                            <div class="opening opening-time">
+                                <p class="time">08.00 am</p>
+                                <div class="divider"></div>
+                                <p class="time">16.00 pm</p>
+                            </div>
+                        </div>
+                        <p class="num">+24 45 15 62 129</p>
+                    </div>
+                </div>
+            </div>
+            <div class="location-popup">
+                <div class="close-popup">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-8 media">
+                        <div id="location-map"></div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 content">
+                        <h5>Address</h5>
+                        <p class="address">2, Ave Manchester, Lorem ipsum St, Rio Danubin</p>
+                        <button class="main-btn">Open in Maps</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-popup">
+                <div class="close-popup">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-7 content">
+                        <h4>You have a question for us?</h4>
+                        <p>leave your message below or email us at info@eyuboglu.com.tr</p>
+                        <form class="text-left form-style-2">
+                            <div class="form-group required">
+                                <label for="email">Email address</label>
+                                <input type="email" id="email" class="form-control" name="email"
+                                       placeholder="johnLP12@gmail.com" />
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <input type="text" id="message" class="form-control" name="name"
+                                       placeholder="Hello, I wanted to know about this particular course called..." />
+                                <span class="small-text">120 characters left</span>
+                            </div>
+                            <button class="main-btn" type="submit">Send message</button>
+                        </form>
+                    </div>
+                    <div class="d-none d-lg-block col-lg-5 media">
+                        <img src="assets/img/University/Coming_soon/ambar-simpang.png"
+                             alt="media image" class="img-fluid" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

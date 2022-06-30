@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = "_Layout";
+    var content = ViewBag.content as ContentPage;
+}
+@await Component.InvokeAsync("MenuView", new { type = "SubHeader" })
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 wow animate__fadeIn margin-20px-top margin-10px-bottom">
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-6 sm-margin-30px-bottom wow animate__fadeIn" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeIn;">
+                        <img src="@SessionRequest.config.ImageUrl/fileupload/UserFiles/Folders/@(content.Picture==null?"default-blog-detail.jpg" +
+                "":content.Picture.Link)" alt="" data-no-retina="">
+                    </div>
+                    <div class="col-12 col-lg-5 offset-lg-1 col-md-6 last-paragraph-no-margin wow animate__fadeIn" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeIn;">
+                        @*<span class="text-orange-zest alt-font text-uppercase font-weight-500 margin-25px-bottom d-block xs-margin-15px-bottom">The decorative arts</span>*@
+                        <h5 class="alt-font text-extra-dark-gray margin-35px-bottom font-weight-500 xs-margin-25px-bottom">@Html.Raw(content.Description)</h5>
+                        <p>@content.ContentShort</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 wow animate__fadeIn margin-20px-top margin-10px-bottom" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeIn;">
+                <p class="">@content.ContentData</p>
+            </div>
+        </div>
+    </div>
+</section>

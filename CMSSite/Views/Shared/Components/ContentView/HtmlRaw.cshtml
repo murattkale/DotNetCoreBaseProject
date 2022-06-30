@@ -1,0 +1,13 @@
+﻿@model ContentPage
+@{
+    Layout = "_Layout";
+}
+<input type="hidden" value="@Json.Serialize(Model)" />
+@Html.Raw(Model.ContentData)
+
+
+
+@if (Model.FormType != null && Model.FormTypeId > 0)
+{
+    @:@await Component.InvokeAsync("FormView", new { _page = Model })
+}

@@ -1,0 +1,135 @@
+﻿@model ContentPage
+@{
+    Layout = null;
+}
+
+
+<!-- start section -->
+<section class="wow animate__fadeIn">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-5 col-md-6 lg-padding-30px-lr md-padding-15px-lr sm-margin-40px-bottom">
+                <h6 class="alt-font font-weight-500 text-extra-dark-gray">Login</h6>
+                <form class="bg-light-gray padding-4-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
+                    <label class="margin-15px-bottom">@Html.Raw("Username".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input class="small-input bg-white margin-20px-bottom required" type="text" name="NameSurname" placeholder="@Html.Raw("Enter your name surname".Trans())">
+                    <label class="margin-15px-bottom">@Html.Raw("Password".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input class="small-input bg-white margin-20px-bottom required" type="password" name="password" placeholder="@Html.Raw("Enter your password".Trans())">
+                    <label class="margin-25px-bottom">
+                        <input class="d-inline-block align-middle w-auto mb-0 margin-5px-right" type="checkbox" name="account">
+                        <span class="d-inline-block align-middle">@Html.Raw("Remember me".Trans())</span>
+                    </label>
+                    <button class="btn btn-medium btn-fancy btn-dark-gray w-100 submit" type="submit">@Html.Raw("Login".Trans())</button>
+                    <p class="text-end margin-20px-top mb-0"><a href="#" class="btn btn-link  btn-medium text-extra-dark-gray">@Html.Raw("Lost your password?".Trans())</a></p>
+                </form>
+            </div>
+            <div class="col-12 col-xl-5 offset-xl-1 col-md-6 lg-padding-30px-lr md-padding-15px-lr">
+                <h6 class="alt-font font-weight-500 text-extra-dark-gray">@Html.Raw("Register".Trans())</h6>
+                <form id="frm_register" name="frm_register" class="border-all border-color-medium-gray padding-4-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
+
+                    <label class="margin-15px-bottom">@Html.Raw("NameSurname".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="text" name="NameSurname" placeholder="Enter your @Html.Raw("Name surname".Trans())">
+
+                    <label class="margin-15px-bottom">@Html.Raw("Nationality".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="text" name="Nationality" placeholder="Enter your @Html.Raw("Nationality".Trans())">
+
+                    <label class="margin-15px-bottom">@Html.Raw("TCKN/Passport Number".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="text" name="TCKNPassport" placeholder="Enter your @Html.Raw("TCKN/Passport Number".Trans())">
+
+                    <label class="margin-15px-bottom">@Html.Raw("BirdhDay".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="date" name="BirdhDay" placeholder="Enter your @Html.Raw("BirdhDay".Trans())">
+
+                    <label class="margin-15px-bottom">@Html.Raw("Phone".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="text" name="Phone" placeholder="Enter your @Html.Raw("Phone".Trans())">
+
+                    <label class="margin-15px-bottom">@Html.Raw("Email".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="text" name="Email" placeholder="Enter your @Html.Raw("Email".Trans())">
+
+
+                    <label class="margin-15px-bottom">@Html.Raw("T-Shirt Size".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <select required id="TshirtSize" name="TshirtSize" class="small-input bg-white margin-20px-bottom required">
+                        <option value="">@Html.Raw("Select Size".Trans())</option>
+                        <option value="1">XS</option>
+                        <option value="2">S</option>
+                        <option value="3">M</option>
+                        <option value="4">L</option>
+                        <option value="5">XL</option>
+                        <option value="6">XXL</option>
+                        <option value="7">XXXL</option>
+                        <option value="8">XXXXL</option>
+                    </select>
+
+                    <label class="margin-15px-bottom">@Html.Raw("Gender".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <select required id="Gender" name="Gender" class="small-input bg-white margin-20px-bottom required">
+                        <option value="">@Html.Raw("Select Gender".Trans())</option>
+                        <option value="1">Male</option>
+                        <option value="2">FMale</option>
+                        <option value="3">Other</option>
+                    </select>
+
+
+                    <label class="margin-15px-bottom">@Html.Raw("Adress".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <textarea required cols="5" rows="5" class="small-input bg-white margin-20px-bottom required" type="text" name="Adress" placeholder="Enter your @Html.Raw("Adress".Trans())"></textarea>
+
+
+                    <label class="margin-15px-bottom">@Html.Raw("Club".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <select required id="Club" name="Club" class="small-input bg-white margin-20px-bottom required">
+                        <option value="">@Html.Raw("Select Club".Trans())</option>
+                        <option value="1">Boostscamps</option>
+                        <option value="2">Queens Boost</option>
+                        <option value="3">Boost Sport</option>
+                    </select>
+
+
+                    <label class="margin-15px-bottom">@Html.Raw("Contact Name".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="text" name="Contact" placeholder="Enter your @Html.Raw("Contact Name".Trans())">
+
+                    <label class="margin-15px-bottom">@Html.Raw("Contact Phone".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="text" name="ContactPhone" placeholder="Enter your @Html.Raw("ContactPhone".Trans())">
+
+                    <label class="margin-15px-bottom">@Html.Raw("Licence Number".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="text" name="LicenceNo" placeholder="Enter your @Html.Raw("Licence Number".Trans())">
+
+                    <label class="margin-15px-bottom">@Html.Raw("Hotel".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="text" name="Hotel" placeholder="Enter your @Html.Raw("Hotel".Trans())">
+
+                    <label class="margin-15px-bottom">@Html.Raw("Accomodation Day".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="number" name="AccoDay" placeholder="Enter your @Html.Raw("Accomodation Day".Trans())">
+
+
+
+                    <p class="text-small">@Html.Raw("Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our".Trans()) <a href="#" class="text-decoration-underline">privacy policy</a>.</p>
+                    <button class="btn btn-medium btn-fancy btn-dark-gray w-100 submit" type="submit">@Html.Raw("Register".Trans())</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end section -->
+
+
+<script>
+    $(function () {
+        var formname = '#frm_register';
+        $(formname).submit(function (e) {
+            e.preventDefault();
+            var postModel = $.fn.toForm(formname);
+
+            $(formname).LoadingOverlay("show");
+            $.ajx('/Forms/InsertOrUpdate',
+                { postModel: postModel }, function (resultData) {
+                    if (resultData.RType == 1) {
+                        alerts("Success");
+                        location.reload();
+                    }
+                    else {
+
+                        alerts(resultData.MessageList);
+                    }
+
+                    $(formname).LoadingOverlay("hide");
+                }, function () { location.reload(); });
+        });
+
+    });
+</script>

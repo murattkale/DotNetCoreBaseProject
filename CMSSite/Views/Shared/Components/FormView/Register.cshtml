@@ -1,0 +1,96 @@
+﻿@model ContentPage
+@{
+    Layout = null;
+}
+
+
+
+<section class="parallax xs-padding-15px-lr" data-parallax-background-ratio="0.5"
+         style="background-image:url(/images/q/fbg4.jpg);">
+    <div class="opacity-extra-medium bg-extra-dark-gray"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 bg-white overflow-hidden position-relative">
+                <div class="row">
+                    <div class="col-12 col-md-5 cover-background sm-h-350px wow animate__fadeInLeft"
+                         data-wow-delay="0.4s"
+                         style="background:url(/images/q/a7.jpg);">
+                    </div>
+                    <div class="col-12 col-md-7 padding-7-rem-all lg-padding-5-rem-all xs-padding-4-rem-all wow animate__fadeIn"
+                         data-wow-delay="0.4s">
+                        <h4 class="alt-font font-weight-500 text-extra-dark-gray letter-spacing-minus-1px margin-20px-top margin-30px-bottom"
+                            style="color:#70cfe6 !important;">
+                            @Html.Raw("Get in touch".Trans()) <span class="text-extra-dark-gray font-weight-300">@Html.Raw(" for more information on ".Trans())</span> <span class="text-extra-dark-gray font-weight-700">@Html.Raw("Boost Races & Boost Camps".Trans())</span>
+                        </h4>
+                        <form name="frm_@Model.FormType.Name" id="frm_@Model.FormType.Name" class="alt-font text-extra-dark-gray">
+                            <input type="hidden" id="FormTypeId" name="FormTypeId" value="@Model.FormTypeId" />
+                            <input class="input-border-bottom border-color-extra-dark-gray bg-transparent placeholder-dark medium-input text-extra-dark-gray px-0 margin-25px-bottom border-radius-0px required"
+                                   type="text" name="Name" placeholder="@Html.Raw("Enter your Name".Trans())" />
+                            <input class="input-border-bottom border-color-extra-dark-gray bg-transparent placeholder-dark medium-input text-extra-dark-gray px-0 margin-25px-bottom border-radius-0px required"
+                                   type="text" name="Surname" placeholder="@Html.Raw("Enter your Surname".Trans())" />
+                            <input class="input-border-bottom border-color-extra-dark-gray bg-transparent placeholder-dark medium-input text-extra-dark-gray px-0 margin-25px-bottom border-radius-0px required"
+                                   type="email" required name="Email" placeholder="@Html.Raw("Enter your Mail".Trans())" />
+                            <input class="input-border-bottom border-color-extra-dark-gray bg-transparent placeholder-dark medium-input text-extra-dark-gray px-0 margin-25px-bottom border-radius-0px"
+                                   type="tel" name="Phone" placeholder="@Html.Raw("Phone".Trans())" />
+                            <textarea class="input-border-bottom border-color-extra-dark-gray bg-transparent placeholder-dark medium-input px-0 margin-35px-bottom border-radius-0px"
+                                      name="Message" rows="3" placeholder="@Html.Raw("How can we help you".Trans())"></textarea>
+                            <input type="hidden" name="redirect" value="" />
+                            <div class="row">
+                                <div class="col-12 col-md-8 text-left sm-margin-25px-bottom">
+                                    <p class="d-flex align-items-center">
+                                        <input id="IsKVKK" name="IsKVKK" class="d-inline w-auto mb-0 margin-10px-right" type="checkbox">
+                                        <span class="text-small">
+                                            @Html.Raw("KVKK Note".Trans())
+                                            <a target="_blank" class="text-decoration-underline" href="@Html.Raw(SessionRequest.LanguageId == 1 ? "/aydinlatma-metni":"/aydinlatma-metnien")"> @Html.Raw("KVKK".Trans())</a> @Html.Raw("KVKK Note2".Trans())<span class="text-red ms-1">*</span>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-12 col-md-4 text-left sm-margin-25px-bottom">
+                                    <button class="btn btn-medium btn-dark-gray mb-0 submit" type="submit">@Html.Raw("Send".Trans())</button>
+                                </div>
+                            </div>
+                            <div class="form-results d-none"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- start section -->
+<!-- start section -->
+
+
+<script>
+        $(function () {
+            var formname = '#frm_@Model.FormType.Name';
+        $(formname).submit(function (e) {
+            e.preventDefault();
+            var postModel = $.fn.toForm(formname);
+            if (!$('[name="IsKVKK"]')[0].checked) {
+                alert("@Html.Raw("Please Is KVKK".Trans())")
+                return;
+            }
+
+            $(formname).LoadingOverlay("show");
+            $.ajx('/Forms/InsertOrUpdate',
+                { postModel: postModel }, function (resultData) {
+                    if (resultData.RType == 1) {
+
+                        resultData.ResultRow.ContentPageId = (LanguageId == 1 ? '65' : '66');
+                        $.post('/SendMailForm', { postForm: resultData.ResultRow}, function (result) {
+                            alert("Form Success");
+                            location.reload();
+                        });
+
+                    }
+                    else {
+
+                        alerts(resultData.MessageList);
+                    }
+
+                    $(formname).LoadingOverlay("hide");
+                }, function () { location.reload(); });
+        });
+
+    });
+</script>

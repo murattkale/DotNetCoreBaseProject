@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+    var content = ViewBag.content as ContentPage;
+}
+
+    <div class="container project-view">
+        <section class="wpb_row vc_row-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="wpb_column vc_column_container vc_col-sm-12">
+                        <div class="vc_column-inner ">
+                            <div class="wpb_wrapper "> 
+                                @foreach (var item in content.Gallery)
+                                {
+                                    <div class="wpb_single_image wpb_content_element"> 
+                                        <figure class="wpb_wrapper vc_figure">
+                                            <div class="vc_single_image-wrapper   vc_box_border_grey">
+                                                <img width="1024" height="678" src="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@item.Link" class="vc_single_image-img attachment-full" alt="@item.Name">
+                                            </div>
+                                        </figure>
+                                    </div>
+                                } 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>

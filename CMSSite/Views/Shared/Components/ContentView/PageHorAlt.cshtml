@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "_Layout";
+    var content = ViewBag.content as ContentPage;
+}
+@await Component.InvokeAsync("MenuView", new { type = "SubHeader" })
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 p-sm-0">
+                <div class="row align-items-center">
+                    <div class="col-12 col-lg-12 offset-lg-1 col-md-6 last-paragraph-no-margin wow animate__fadeIn" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeIn;">
+
+                        <h5 class="alt-font text-extra-dark-gray margin-35px-bottom font-weight-500 xs-margin-25px-bottom">Pottery is the process and the products of <span class="font-weight-600">forming vessels</span></h5>
+
+                    </div><div class="col-12 col-md-12 sm-margin-30px-bottom wow animate__fadeIn" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeIn;"><img src="images/blog-post-layout-02-img-02.jpg" alt="" data-no-retina=""></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 wow animate__fadeIn margin-20px-top margin-10px-bottom" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeIn;">
+                <p class="">Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has suvived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+            </div>
+        </div>
+    </div>
+</section>

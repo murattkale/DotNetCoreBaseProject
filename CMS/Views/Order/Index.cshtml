@@ -1,0 +1,193 @@
+﻿@{
+    string controllerName_Content = "Order";
+    var dt_Order = "#dt_" + controllerName_Content;
+    var selecttype_Order = Context.Request.Query["selecttype"].ToInt();
+    var selectname_Order = Context.Request.Query["selectname"].ToStr();
+    var descname = Context.Request.Query["descname"].ToStr();
+}
+
+<script type="text/javascript">
+    var controllerName_Content = "@controllerName_Content";
+    var dt_Order = "#dt_" + controllerName_Content;
+    var selecttype_Order = "@selecttype_Order";
+    var selectname_Order = "@selectname_Order";
+      var descname_Order = "@descname";
+</script>
+<style>
+    .hideMe {
+        display: none
+    }
+</style>
+
+
+<div class="subheader py-2 py-lg-6 subheader-transparent" id="kt_subheader">
+    <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <div class="d-flex align-items-center flex-wrap mr-2">
+            <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">@Html.Raw(selectname_Order + " Listesi")</h5>
+            <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
+            <span class="text-muted font-weight-bold mr-4">Sayfa Bilgisi</span>
+        </div>
+    </div>
+</div>
+<div class="d-flex flex-column-fluid">
+    <div class="container">
+
+        <div class="card card-custom">
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <div class="card-title">
+                    <h3 class="card-label">
+                        @Html.Raw(selectname_Order)
+                        <span class="text-muted pt-2 font-size-sm d-block">Sayfa Bilgisi</span>
+                    </h3>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <table id="dt_@controllerName_Content" class="table table-bordered table-hover table-checkable" style="margin-top: 13px !important">
+                    <thead>
+                        <tr>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    $(function () {
+
+
+        getGrid();
+        function getGrid() {
+            var columns = [];
+
+
+            columns.push({ "data": "Id", text: "ID" });
+            columns.push({ "data": "NameSurname", text: "Name Surname" });
+            columns.push({ "data": "Mail", text: "Mail" });
+            columns.push({ "data": "Phone", text: "Phone" });
+            columns.push({ "data": "OrderStatusName", text: "Order Status Name" });
+            columns.push({ "data": "ConfirmStatusName", text: "ConfirmStatusName" });
+            columns.push({ "data": "RegistrationDate", text: "RegistrationDate" });
+            columns.push({ "data": "PurchaseDate", text: "PurchaseDate" });
+            columns.push({ "data": "TotalAmount", text: "TotalAmount" });
+            columns.push({ "data": "ExchangeRate", text: "ExchangeRate" });
+
+            columns.push({ "data": "BillingAdressNote", text: "BillingAdressNote" });
+
+            columns.push({ "data": "ProductName", text: "ProductName" });
+            columns.push({ "data": "Course", text: "Course" });
+            columns.push({ "data": "Size", text: "Size" });
+            columns.push({ "data": "Club", text: "Club" });
+            columns.push({ "data": "Hotel", text: "Hotel" });
+            columns.push({ "data": "Accomodation", text: "Accomodation" });
+            columns.push({ "data": "RideBack", text: "RideBack" });
+
+            columns.push({ "data": "Detail", text: "Detail" });
+
+
+
+            $.each(columns, function (i, item) {
+                $(dt_Order + ' thead tr').append('<td> ' + item.text + '</td > ');
+            });
+
+            var table = $(dt_Order).DataTable({
+                "ajax": {
+                    "url": '/' + controllerName_Content + '/GetPaging',
+                    "type": "POST",
+                    "datatype": "json",
+                    "data": function (searchModel) {
+                        $(dt_Order).LoadingOverlay("show");
+                        searchModel.selectid = selecttype_Order;
+                    },
+                    "dataSrc": function (json) {
+                        return_data = new Array();
+                        var data = json.data;
+
+                        var website = siteConfig.BaseUrl;
+                        $.each(data, function (i, row) {
+
+                            var Detail = '<a class="btn btn-sm btn-clean btn-icon btn-icon-md" href="/' + controllerName_Content + '/InsertOrUpdatePage?id=' + row.Id + '&' + 'selectid=' + row.Id + '&selectname=' + selectname_Order + '&selecttype=' + row.Id + '&descname=' + descname_Order + '" title="Edit"><i class="la la-edit"></i></a>';
+
+                            Detail += '<a class="btn btn-sm btn-clean btn-icon btn-icon-md" href="/' + 'OrderDetail/Index?selectid=' + row.Id + '&selectname=' + selectname_Order + '&selecttype=' + row.Id + '&descname=' + descname_Order + '" title="Edit"><i class="la la-plus"></i></a>';
+
+                          var   orderDetail ;
+                            $.each(row.OrderDetail, function (i, od) {
+                                if (od.Product.ProductType == 1) {
+                                    orderDetail = od;
+                                    return;
+                                }
+                            });
+
+                            debugger;
+                            return_data.push({
+                                'Id': row.Id,
+                                'NameSurname': toStr(row.User.NameSurname),
+                                'Mail': toStr(row.User.Mail),
+                                'Phone': toStr(row.User.Phone),
+                                'OrderStatusName': toStr(row.OrderStatusName),
+                                'ConfirmStatusName': toStr(row.ConfirmStatusName),
+                                'RegistrationDate': toStr(row.RegistrationDate),
+                                'PurchaseDate': toStr(row.PurchaseDate),
+                                'TotalAmount': toStr(row.Currency) + " " + toStr(row.TotalAmount),
+                                'ExchangeRate': toStr(row.ExchangeRate),
+                                'BillingAdressNote': toStr(row.BillingAdressNote),
+
+
+                                'ProductName': toStr(orderDetail?.Product?.Name),
+                                'Course': toStr(orderDetail?.Course),
+                                'Size': toStr(orderDetail?.Size),
+                                'Club': toStr(orderDetail?.Club),
+                                'Hotel': toStr(orderDetail?.Hotel),
+                                'Accomodation': toStr(orderDetail?.Accomodation),
+                                'RideBack': toStr(orderDetail?.RideBack),
+
+                                'Detail': Detail,
+
+
+                            });
+
+                        });
+                        $(dt_Order).LoadingOverlay("hide");
+                        return return_data;
+                    }
+                },
+                "fnDrawCallback": function (settings, json) {
+
+                    //$('.dt-buttons').css('float', 'right');
+                    //$('.dt-buttons').css('margin-left', '20px');
+                    //$('.dt-buttons').css('margin-top', '16px');
+
+                    $(dt_Order).LoadingOverlay("hide");
+
+                },
+                "destroy": true,
+                "caseInsensitive": true,
+                "responsive": true,
+                "pageLength": 100,
+                "DisplayLength": 5,
+                "lengthMenu": [[100, 25, 100, 1000, 2500, 5000], [100, 25, 100, 1000, 2500, 5000]],
+                "lengthChange": true,
+                "processing": true,
+                "columns": columns,
+                "order": [],
+                dom: 'Bfrtip',
+                //"dom": "<'row'<'col-sm-12 col-md-10'l><'col-sm-12 col-md-2'f>><'row'><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-10'i><'col-sm-12 col-md-2'p>>",
+                "buttons": ['copy', 'csv', 'excel', 'pdf'],
+
+            });
+
+
+
+        }
+    });
+</script>
+
+
+
+

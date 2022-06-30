@@ -1,0 +1,71 @@
+﻿
+@{
+     
+    var content = ViewBag.content as ContentPage;
+    string viewType = ViewBag.viewType as string;
+    Layout = viewType == "Single" ? "_Layout" : null;
+}
+@if (viewType == "Single")
+{
+    @await Component.InvokeAsync("MenuView", new { type = "SubHeader" });
+    <div id="content" class="no-top no-bottom">
+        <section id="section-about-us-2" class="side-bg no-padding">
+            <div class="image-container col-md-5 pull-left" data-delay="0"></div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="inner-padding">
+                        <div class="col-md-6 offset-md-6 " data-animation="fadeInRight" data-delay="200">
+                            <h2>Award Winning Interior Design</h2>
+
+                            <p class="intro">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </p>
+
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                            culpa qui officia deserunt mollit anim id est laborum.
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+}
+else if (viewType == "List")
+{
+
+    <section id="section-about-us-2" class="side-bg no-padding">
+        <div class="image-container col-md-5 pull-left" data-delay="0"></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="inner-padding">
+                    <div class="col-md-6 offset-md-6 " data-animation="fadeInRight" data-delay="200">
+                        <h2>Award Winning Interior Design</h2>
+
+                        <p class="intro">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}

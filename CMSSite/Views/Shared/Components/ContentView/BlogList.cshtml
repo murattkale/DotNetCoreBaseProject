@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = "_Layout";
+    var content = ViewBag.content as ContentPage;
+    var contents = ViewBag.contents as List<ContentPage>;
+
+}
+
+
+<!-- start page title -->
+<section class="half-section bg-light-gray parallax" data-parallax-background-ratio="0.5" style="background-image:url('/images/blogbg.jpg');    padding: 60px 0px;">
+    <div class="container">
+        <div class="row align-items-stretch justify-content-center extra-small-screen">
+            <div class="col-12 col-xl-6 col-lg-7 col-md-8 page-title-extra-small text-center d-flex justify-content-center flex-column">
+                <h1 class="
+						alt-font font-weight-500 text-white text-extra-medium d-block margin-20px-bottom sm-margin-10px-bottom">
+                    Bizden Haberler
+                </h1>
+                <h2 class="text-white alt-font font-weight-500 letter-spacing-minus-1px line-height-50 sm-line-height-45 xs-line-height-30 no-margin-bottom">Güncel Haberler, Gelişmeler...</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end page title -->
+<!-- start section -->
+<section class="bg-light-gray pt-0 padding-eleven-lr xl-padding-two-lr xs-no-padding-lr">
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <div class="row col-12 blog-content sm-no-padding-lr margin-top-25 blogList boxedHeight">
+              
+                    @foreach (var item in contents.OrderBy(o => o.OrderNo))
+                    {
+
+                            <div class="blog-post col-md-3">
+                                <div class="blog-post-image margin-40px-bottom md-margin-35px-bottom xs-margin-25px-bottom">
+                                    <a href="/@item.Link" title="@item.Name"><img  src="@SessionRequest.config.ImageUrl/fileupload/UserFiles/Folders/@(item.ThumbImage!=null?item.ThumbImage.Link:"")" alt="@item.Name"></a>
+                                </div>
+                                <div class="post-details margin-30px-bottom md-margin-10px-bottom xs-no-margin-bottom">
+                                    <a href="/@item.Link" class="alt-font font-weight-500 text-extra-medium text-extra-dark-gray d-block margin-20px-bottom xs-margin-10px-bottom">@item.Description</a>
+                                    <p class="w-95">@item.ContentShort</p>
+                                    <span class="separator bg-green"></span><a href="/@item.Link" class="alt-font font-weight-500 text-extra-small text-uppercase text-green">Daha fazlası</a>
+                                </div>
+                            </div>
+                       
+                    }
+
+           
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end section -->

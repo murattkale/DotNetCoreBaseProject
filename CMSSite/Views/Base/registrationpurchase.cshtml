@@ -1,0 +1,636 @@
+﻿@model PaymentViewModel
+@{
+    Layout = "_Layout";
+    //var Order = SessionRequest.myOrder;
+    //var OrderDetail = Order.OrderDetail.FirstOrDefault();
+}
+@*<script>
+        var pid = '@OrderDetail.ProductId';
+        var oid = '@Order.Id';
+        var TotalAmount = '@Order.TotalAmount';
+    </script>*@
+
+<!-- end header -->
+<!-- start banner section -->
+<!-- start banner section -->
+@if (SessionRequest.raceUser)
+{
+    <section class="cover-background h-500px sm-h-300px" style="background-image:url('@SessionRequest.config.BaseUrl/images/q/Shop-imaj2.jpg');">
+        <div class="opacity-medium bg-gradient-dark-slate-blue-transparent"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 position-relative extra-small-screen md-h-300px sm-h-250px d-flex flex-column">
+                    <h1 class="alt-font font-weight-600 text-white title-extra-large w-90 mt-auto mb-0 letter-spacing-minus-5px sm-letter-spacing-minus-1-half xs-w-70">@Html.Raw("SHOP".Trans())</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{<section class="cover-background h-500px sm-h-300px" style="background-image: url('@SessionRequest.config.BaseUrl/images/q/routes.jpg');">
+    <div class="opacity-medium bg-gradient-dark-slate-blue-transparent"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 position-relative extra-small-screen md-h-300px sm-h-250px d-flex flex-column">
+
+                <h1 class="alt-font font-weight-600 text-white title-extra-large w-100 mt-auto mb-0 letter-spacing-minus-5px sm-letter-spacing-minus-1-half xs-w-100">@Html.Raw("REGISTRATION".Trans())</h1>
+
+            </div>
+        </div>
+    </div>
+</section>
+}
+<!-- end banner section -->
+<!-- end banner section -->
+<!-- start section -->
+@if (SessionRequest.raceUser)
+{
+    <section class="half-section  wow animate__fadeIn">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-lg-3 row-cols-sm-2 justify-content-center">
+
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03   wow animate__fadeIn d-none d-sm-block" data-wow-delay="0.2s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon">
+                                <a href="/registrationpraceinfo">
+                                    <span class="process-step-number text-extra-dark-gray font-weight-500">
+                                        <span class="process-step-number-bfr bg-gradient-orange-pink"></span>1<span class="process-step-number-afr  bg-white box-shadow-small  "></span>
+                                    </span>
+                                </a>
+                            </div>
+
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink letter-spacing-1px  margin-10px-bottom">@Html.Raw("PRODUCTS".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03   justify-content-center wow animate__fadeIn" data-wow-delay="0.4s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon d-none d-sm-block">
+                                <span class="process-step-number text-extra-dark-gray font-weight-500 text-white ">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink "></span>2<span class="process-step-number-afr bg-white box-shadow-small text-white bg-gradient-orange-pink"></span>
+                                </span>
+                            </div>
+                            <div class="process-step-icon d-lg-none">
+                                <span class="process-step-number text-extra-dark-gray font-weight-500 text-white ">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink "></span>2/3<span class="process-step-number-afr bg-white box-shadow-small text-white bg-gradient-orange-pink"></span>
+                                </span>
+                            </div>
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink  letter-spacing-1px  margin-10px-bottom">@Html.Raw("PURCHASE".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03  wow animate__fadeIn d-none d-sm-block" data-wow-delay="0.8s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon">
+                                <span class="process-step-number text-extra-dark-gray font-weight-500">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink "></span>3<span class="process-step-number-afr bg-white box-shadow-small"></span>
+                                </span>
+                            </div>
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink  letter-spacing-1px  margin-10px-bottom">@Html.Raw("CONFIRMATION".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+            </div>
+        </div>
+    </section>
+
+}
+else
+{
+    <section class="half-section  wow animate__fadeIn">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-lg-4 row-cols-sm-2 justify-content-center">
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03   wow animate__fadeIn d-none d-sm-block" data-wow-delay="0.1s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon">
+                                <a href="/registrationpersonalinfo">
+                                    <span class="process-step-number text-extra-dark-gray font-weight-500">
+                                        <span class="process-step-number-bfr bg-gradient-orange-pink "></span>1<span class="process-step-number-afr bg-white box-shadow-small"></span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink  letter-spacing-1px  margin-10px-bottom">@Html.Raw("PROFILE INFO".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03   wow animate__fadeIn d-none d-sm-block" data-wow-delay="0.2s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon">
+                                <a href="/registrationpraceinfo">
+                                    <span class="process-step-number text-extra-dark-gray font-weight-500">
+                                        <span class="process-step-number-bfr bg-gradient-orange-pink"></span>2<span class="process-step-number-afr  bg-white box-shadow-small  "></span>
+                                    </span>
+                                </a>
+                            </div>
+
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink letter-spacing-1px  margin-10px-bottom">@Html.Raw("RACE INFO".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03  d-flex justify-content-center wow animate__fadeIn" data-wow-delay="0.4s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon d-none d-sm-block">
+                                <span class="process-step-number text-extra-dark-gray font-weight-500 text-white ">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink "></span>3<span class="process-step-number-afr bg-white box-shadow-small text-white bg-gradient-orange-pink"></span>
+                                </span>
+                            </div>
+                            <div class="process-step-icon d-lg-none">
+                                <span class="process-step-number text-extra-dark-gray font-weight-500 text-white ">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink "></span>3/4<span class="process-step-number-afr bg-white box-shadow-small text-white bg-gradient-orange-pink"></span>
+                                </span>
+                            </div>
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink  letter-spacing-1px  margin-10px-bottom">@Html.Raw("PURCHASE".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+                <!-- start process step item -->
+                <div class="col-10 text-center process-step-style-03  wow animate__fadeIn d-none d-sm-block" data-wow-delay="0.8s">
+                    <div class="process-step-item">
+                        <div class="process-step-item-box">
+                            <span class="process-step-item-box-bfr bg-medium-gray"></span>
+                            <div class="process-step-icon">
+                                <span class="process-step-number text-extra-dark-gray font-weight-500">
+                                    <span class="process-step-number-bfr bg-gradient-orange-pink "></span>4<span class="process-step-number-afr bg-white box-shadow-small"></span>
+                                </span>
+                            </div>
+                            <div class="process-content last-paragraph-no-margin">
+                                <h6 class="alt-font d-inline-block font-weight-600 text-gradient-orange-pink  letter-spacing-1px  margin-10px-bottom">@Html.Raw("CONFIRMATION".Trans())</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end process step item -->
+            </div>
+        </div>
+    </section>
+}
+
+
+<!-- end section -->
+
+
+<section class="pt-0 wow animate__fadeIn">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12 col-lg-8 padding-70px-right lg-padding-40px-right md-padding-15px-right">
+
+                <span class="alt-font text-large text-extra-dark-gray margin-40px-bottom d-inline-block font-weight-500">@Html.Raw("PURCHASE".Trans())</span>
+                <div class="row">
+
+                    <link rel="stylesheet" href="/payment/css/site.css" asp-append-version="true" />
+
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="payment-form">
+                                <input type="hidden" asp-for="@SessionRequest.myOrder.Id" />
+
+                                <input type="hidden" id="OrderNumber" name="OrderNumber" value="@SessionRequest.myOrder.Id" />
+                                <input type="hidden" id="BankId" name="BankId" value="@Model.BankId" />
+                                <input type="hidden" id="TotalAmount" name="TotalAmount" value="@Model.TotalAmount" />
+                                <div class="row">
+                                    <div class="col col-lg-6">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="card-wrapper"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <div class="credit-card-form card-js">
+                                                    <input class="form-control name" asp-for="CardHolderName" />
+                                                    <input class="form-control card-number" asp-for="CardNumber" />
+                                                    <input class="form-control expiry-month" asp-for="ExpireMonth" />
+                                                    <input class="form-control expiry-year" asp-for="ExpireYear" />
+                                                    <input class="form-control cvc" asp-for="CvvCode" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end mt-3">
+                                            <div>
+                                                <button type="submit" class="btn btn-primary">@Html.Raw("Pay".Trans())</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-lg-6">
+                                        <div class="row d-none">
+                                            <div class="col-12">
+                                                <table class="table table-bordered install-table" id="Installment-options">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>@Html.Raw("Installment".Trans())</th>
+                                                            <th>@Html.Raw("Monthly".Trans())</th>
+                                                            <th>@Html.Raw("Total".Trans())</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                                <div class="text-danger install-warning">
+                                                    @Html.Raw("InstallmentNote".Trans())
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="bank-logo"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- payment modal -->
+                    <div class="modal fade" id="payment-modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <iframe style="width:100%;height:500px;border:none" frameborder="0"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <script src="/payment/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+                    <script src="/payment/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+                    <script src="/payment/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+                    <script src="/payment/js/site.js" asp-append-version="true"></script>
+
+
+                    <link href="/payment/css/card-js.css" rel="stylesheet" />
+
+
+                    <script src="/payment/js/card-js.js"></script>
+                    <script src="/payment/js/jquery.card.js"></script>
+                    <script>
+                        var card = new Card({
+                            form: document.getElementById('payment-form'),
+                            container: '.card-wrapper',
+                            formatting: true,
+
+                            formSelectors: {
+
+                                numberInput: 'input.card-number',
+                                expiryInput: 'input.expiry',
+                                cvcInput: 'input.cvc',
+                                nameInput: 'input.name'
+                            },
+                            messages: {
+                                validDate: 'expire\ndate',
+                                monthYear: 'mm/yy',
+
+                            }
+                        });
+
+
+
+
+                        //get Installment by bin number
+                        $('#CardNumber').keyup(function (e) {
+                            //credit card prefix
+                            var prefix = $(this).val().replaceAll("-", "").replaceAll(" ", "");
+                            //when entered card number length is 6 digits
+                            if (prefix.length == 6 || prefix.length == 16 || prefix.length == 16) {
+                                //get total amount
+                                var totalAmount = parseFloat($("#TotalAmount").val().replace(",", "."));
+
+                                $.LoadingOverlay("show");
+                                //get installments
+                                fetch('/Payment/GetInstallments', {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify({ prefix: prefix.substr(0, 6), totalAmount: totalAmount })
+                                })
+                                    .then(function (response) { return response.json() })
+                                    .then(function (response) {
+                                        
+                                        console.log(JSON.stringify(response))
+                                        $.LoadingOverlay("hide");
+                                        $(".bank-logo").empty();
+                                        if (response.RType != 1) {
+                                            //show bank not found error
+                                            e.preventDefault();
+                                            alert(response.Message);
+                                        } else {
+                                            response = response.ResultRow;
+
+                                            if (response.BankId > 0) {
+
+                                                //set manufacturer card flag
+                                                $("#ManufacturerCard").val(response.ManufacturerCard);
+                                                /**/
+                                                $("#BankId").val(response.BankId);
+                                                /**/
+                                                $(".bank-logo").empty().append(`<img src="${response.BankLogo}" alt="${response.BankName}" title="${response.BankName}" />`);
+                                                $(".install-warning").hide();
+
+                                                $("#Installment-options tbody").empty();
+                                                //for (var i = 0; i < response.InstallmentRates.length; i++) {
+                                                //    var installmentRate = response.InstallmentRates[i];
+
+                                                //    var row = `<tr data-amount=${installmentRate.TotalAmountValue} ${installmentRate.Installment == 1 ? 'style="background-color: rgb(238, 238, 238)"' : ''}>
+                                                //                                                                                <td class="text-center"><input type="radio" name="Installment" value="${installmentRate.Installment}" ${installmentRate.Installment == 1 ? 'checked' : ''}/></td>
+                                                //                                                                                <td>${installmentRate.Text}</td>
+                                                //                                                                                <td>${installmentRate.Amount}</td>
+                                                //                                                                                <td>${installmentRate.TotalAmount}</td>
+                                                //                                                                            </tr>`;
+
+                                                //    $("#Installment-options tbody").append(row);
+                                                //}
+                                            }
+
+
+                                        }
+                                    });
+                            } else if (prefix.length < 6) {
+                                $(".bank-logo").empty();
+                                $("#Installment-options tbody tr:gt(0)").remove();
+                                $("#Installment-options tbody tr:first input:radio").prop("checked", true);
+                                $("#Installment-options tbody tr:first").css("background-color", "#eee");
+                            }
+                        });
+
+
+
+
+
+                    </script>
+
+                    <script>
+                        /* Installment */
+                        $(document).on("click", "#Installment-options tbody tr", function () {
+                            $(this).parents("table").find("tbody tr").removeAttr("style");
+
+                            $(this).find("input:radio").prop("checked", true);
+                            $(this).css("background-color", "#eee");
+                            var totalAmount = parseFloat($(this).attr("data-amount").replace(",", "."));
+                            /**/
+                            $("#TotalAmount").val(totalAmount);
+                            /**/
+
+                        });
+
+                        /* submit payment form */
+                        $(document).on("submit", "form", function (e) {
+                            e.preventDefault();
+
+                            var postData = new URLSearchParams(new FormData(document.getElementById("payment-form")));
+                            var rows = [];
+                            for (var pair of postData.entries()) {
+                                rows.push(pair[0] + ', ' + pair[1]);
+                            }
+                            console.log(JSON.stringify(rows));
+
+                            $.LoadingOverlay("show");
+                            //submit payment form params
+                            fetch('/payment/Index', {
+                                body: postData,
+                                headers: {
+                                    "Content-Type": "application/x-www-form-urlencoded"
+                                },
+                                method: "POST"
+                            })
+                                .then(function (response) { return response.json() })
+                                .then(function (response) {
+                                    var res = response;
+                                    console.log(JSON.stringify(response));
+                                    $.LoadingOverlay("hide");
+                                    response = response.ResultRow;
+                                    if (res) {
+
+                                        if (res.error != undefined) {
+                                            alert(res.error);
+                                        }
+                                        else {
+                                            $("#payment-modal iframe").attr("src", '/Payment/Confirm/' + response.OrderNumber);
+                                            $("#payment-modal").modal("show");
+                                        }
+
+                                    } else {
+                                        //alert(response.errorMessage);
+                                    }
+                                })
+                                .catch(function (error) {
+                                    //alert(JSON.stringify(error));
+                                });
+                        });
+
+                        $(window).on("message", function (e) {
+                            debugger;
+                            var data = e.originalEvent.data;
+                            console.log(JSON.stringify(data));
+                            
+                            if (data) {
+                                if (data.Success == true) {
+                                    window.location = `/Payment/Completed/${data.OrderNumber}`;
+                                } else {
+                                    console.log(data.ErrorMessage);
+                                    //location.reload();
+                                }
+                            }
+                            else {
+                                //location.reload();
+                                //alert(JSON.stringify(data));
+                            }
+
+                            $("#payment-modal iframe").attr("src", "");
+                            $("#payment-modal").modal("hide");
+                        });
+                    </script>
+
+
+
+
+
+
+
+
+
+                    <!-- end tab content -->
+                </div>
+
+
+            </div>
+            <div class="col-12 col-lg-4 col-md-6">
+                <div class="bg-light-gray padding-45px-all lg-padding-30px-all sm-padding-20px-all">
+                    <span class="alt-font text-large text-extra-dark-gray margin-25px-bottom d-inline-block font-weight-500">@Html.Raw("Your order".Trans())</span>
+                    <table class="total-price-table checkout-total-price-table">
+                        <thead class="border-bottom border-color-medium-gray text-extra-dark-gray">
+                            <tr>
+                                <th class="product-name font-weight-500 w-60">@Html.Raw("Items".Trans())</th>
+                                <th class="product-total pe-0 font-weight-500">@Html.Raw("Total".Trans())</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (SessionRequest.raceUser)
+                            {
+
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>@Html.Raw(SessionRequest.myOrder.OrderDetail.FirstOrDefault(o => o.Product.ProductType == ProductType.Event)?.Product?.Name)</td>
+                                    <td class="productPrice"
+                                        Currency="@Html.Raw(SessionRequest.myOrder.Currency)"
+                                        price="@Html.Raw(SessionRequest.myOrder.OrderDetail.FirstOrDefault(o => o.Product.ProductType == ProductType.Event)?.Product?.PriceDiscount)">
+                                        @Html.Raw(SessionRequest.myOrder.Currency +
+                                       SessionRequest.myOrder.OrderDetail.FirstOrDefault(o => o.Product.ProductType == ProductType.Event)?.Product?.PriceDiscount)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.Raw("Race Jersey - Free with Race Pack".Trans())<span id="p_Size" class="d-block w-100"></span></td>
+                                    <td>0.00</td>
+                                </tr>
+
+                            }
+
+                            @foreach (var item in SessionRequest.myOrder.OrderDetail.Where(o => o.Product.ProductType == ProductType.Product))
+                            {
+                                <tr>
+                                    <th class="">@Html.Raw(item.Product.Name + " - " + item.Size)</th>
+                                    <td Currency="@item.Currency" price="@item.PriceTotal" class="productPrice">@Html.Raw(item.Currency + item.PriceTotal)</td>
+                                </tr>
+                            }
+                            <tr>
+                                <th class="font-weight-500 text-extra-dark-gray">@Html.Raw("Subtotal".Trans())</th>
+                                <td id="p_PriceSub" class="text-extra-dark-gray">
+                                    @Html.Raw(SessionRequest.myOrder?.Currency + SessionRequest.myOrder.OrderDetail.Sum(o => o.PriceTotal))
+                                </td>
+                            </tr>
+
+                            <tr  class="div_p_Coupon">
+                                <th class="font-weight-500 text-extra-dark-gray">@Html.Raw("Coupon Discount".Trans())</th>
+                                <td id="p_Coupon" class="text-extra-dark-gray"></td>
+                                <input type="hidden" id="CouponCode" name="CouponCode" value="@SessionRequest.myOrder.Coupon?.Name" />
+                            </tr>
+                            <script>
+
+                                $(function () {
+                                    getCoupon();
+                                    function getCoupon() {
+                                        if ($('#CouponCode').val().trim() == "" || $('#CouponCode').val().trim() == null)
+                                            return;
+
+                                        $.post('/Coupon/CouponControl', { postModel: { Name: $('#CouponCode').val().trim() } }).fail(function (err, exception) { console.error(err.responseText); })
+                                            .done(function (res) {
+                                                debugger;
+                                                var otherTotal = 0;
+                                                var Currency = "";
+                                                $.each($('.productPrice'), function (i, item) {
+                                                    otherTotal += toFloat(toFloat($(item).attr('price')));
+                                                    Currency = $(item).attr('Currency');
+                                                });
+                                                $('#p_PriceSub').html(Currency + otherTotal);
+
+
+                                                if (res != null) {
+                                                  
+                                                    $('.div_p_Coupon').show();
+                                                    var otherTotalResult = 0;
+                                                    var CouponValue = toFloat(res.CouponValue);
+                                                    if (res.CouponTypeName == "Tutar") {//tutar
+                                                        otherTotalResult = toFloat(otherTotal - CouponValue);
+                                                        $('#p_Coupon').html('-' + Currency + CouponValue);
+                                                    }
+                                                    else if (res.CouponTypeName == "Oran") {//oran
+                                                        otherTotalResult = otherTotal - toFloat(otherTotal * (CouponValue / 100));
+                                                        $('#p_Coupon').html('-' + toFloat(otherTotal * (CouponValue / 100)) + ' (%' + CouponValue + ')');
+                                                    }
+                                                    else {
+                                                        otherTotalResult = otherTotal;
+                                                    }
+                                                    otherTotal = otherTotalResult;
+
+                                                }
+                                                else {
+                                                   
+                                                    $('#p_PriceSub').html(Currency + otherTotal);
+                                                    $('.div_p_Coupon').hide();
+                                                }
+
+                                                $('#p_Total').html(Currency + otherTotal);
+                                                $('#p_Total_t').html(Currency + otherTotal);
+
+
+                                            });
+                                    }
+
+                                });
+                            </script>
+
+                            <tr class="total-amount">
+                                <th class="font-weight-500 text-extra-dark-gray">@Html.Raw("Total".Trans())</th>
+                                <td>
+                                    <h6 id="p_Total" class="d-block font-weight-500 mb-0 text-extra-dark-gray">
+                                        @Html.Raw(SessionRequest.myOrder?.Currency + SessionRequest.myOrder.OrderDetail.Sum(o => o.PriceTotal))
+                                    </h6>
+                                </td>
+                            </tr>
+
+                            <tr class="total-amount">
+                                <th class="font-weight-500 text-extra-dark-gray">@Html.Raw("TL Total".Trans())</th>
+                                <td>
+                                    <h6 style="font-size: 1.1rem !important;" id="p_Total_t" class="d-block font-weight-500 mb-0 text-extra-dark-gray">
+                                        @Html.Raw(Helpers.ToKur(SessionRequest.myOrder.OrderDetail.Sum(o => o.PriceTotal), "euro").ToDouble().toFixed(2) + "₺")
+                                    </h6>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="d-flex align-items-center">
+
+                        <span class="text-small">
+                            @Html.Raw("Conversion".Trans())
+                        </span>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

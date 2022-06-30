@@ -1,0 +1,25 @@
+﻿@model ContentPage
+@{
+    Layout = "_Layout";
+}
+
+
+<section class="cover-background h-500px sm-h-300px" style="background-image:url('@Html.Raw(Model.BannerImage?.Link?.SetImage())');">
+    <div class="opacity-medium bg-gradient-dark-slate-blue-transparent"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 position-relative extra-small-screen md-h-300px sm-h-250px d-flex flex-column">
+                <h1 class="alt-font font-weight-600 text-white title-extra-large w-80 mt-auto mb-0 letter-spacing-minus-5px sm-letter-spacing-minus-1-half xs-w-70">
+                    @Html.Raw(Model.Description)
+                </h1>
+            </div>
+        </div>
+    </div>
+</section><!-- end banner section -->
+
+
+
+
+@Html.Raw(Model.ContentShort)
+
+@Html.Raw(Model.ContentData)

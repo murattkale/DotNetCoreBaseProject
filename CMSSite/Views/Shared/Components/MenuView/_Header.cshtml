@@ -1,0 +1,119 @@
+﻿@{
+    var contentPages = ViewBag.contentPages as List<ContentPage>;
+
+}
+
+<!-- start header -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-boxed navbar-light bg-transparent fixed-top navbar-boxed navbar-static-overlay">
+        <div class="container-fluid h-100px md-h-70px">
+            <div class="col-5 col-lg-2 mr-auto mr-auto pl-lg-0">
+                <a class="navbar-brand" href="index.html">
+                    <img src="/images/logo.png" data-at2x="/images/logo.png" class="default-logo" alt="">
+                    <img src="/images/logo.png" data-at2x="/images/logo.png" class="alt-logo" alt="">
+                    <img src="/images/logo.png" data-at2x="/images/logo.png" class="mobile-logo" alt="">
+                </a>
+            </div>
+            <div class="col-auto text-right">
+                <a href="mailto:test@domain.com" class="alt-font font-weight-500 text-extra-medium text-extra-dark-gray text-extra-dark-gray-hover align-middle d-none d-sm-inline-block">Keşfet</a>
+                <div class="header-push-button">
+                    <a href="javascript:void(0);" class="push-button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- start hamburger popup -->
+    <div class="hamburger-menu hamburger-menu-half bg-extra-dark-gray lg-w-60 md-w-60 sm-w-100">
+        <a href="javascript:void(0);" class="close-menu text-white"><i class="fas fa-times"></i></a>
+        <div class="d-flex flex-column align-items-center justify-content-center h-100 padding-6-rem-all md-padding-2-rem-lr xs-no-padding-lr">
+            <a href="index.html" class="d-none d-lg-inline-block"><img src="images/logo.png" alt="" class="md-w-160px"></a>
+            <div class="col-12 col-xl-9 col-lg-8 col-md-9 col-sm-7 menu-list-wrapper margin-3-rem-tb" data-scroll-options='{ "theme": "light" }'>
+                <!-- start menu -->
+                <ul class="menu-list alt-font w-70 xl-w-100 margin-auto-lr">
+                    <!-- start menu item -->
+
+                    @foreach (var item in contentPages.Where(x => x.IsHeaderMenu == true && x.ParentId == null).OrderBy(x => x.OrderNo))
+                    {
+                        <li class="menu-list-item">
+
+                            @if (string.IsNullOrEmpty(item.ExternalLink))
+                            {
+                                <a href="@(item.IsClick == false ? "javascript:void(0)":item.Link)">@item.Name</a>
+                            }
+                            else
+                            {
+                                <a href="@item.ExternalLink" target="@(item.ExternalLink.StartsWith("http")?"_blank":"")">@item.Name</a>
+                            }
+                            @{
+                                var subItems = contentPages.Where(x => x.ParentId == item.Id && x.IsHeaderMenu == true).OrderBy(x => x.OrderNo);
+                            }
+
+                            @if (subItems != null && subItems.Count() > 0)
+                            {
+                                <ul class="sub-menu-item">
+                                    @foreach (var itemSub in subItems)
+                                    {
+                                        <li class="menu-list-item">
+                                            @if (string.IsNullOrEmpty(itemSub.ExternalLink))
+                                            {
+                                                <a href="/@itemSub.Link">
+                                                    @itemSub.Name
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@itemSub.ExternalLink" target="@(itemSub.ExternalLink.StartsWith("http")?"_blank":"")">@itemSub.Name</a>
+                                            }
+                                        </li>
+                                    }
+
+                                </ul>
+                            }
+
+
+                        </li>
+                    }
+
+
+                </ul>
+                <!-- end menu -->
+            </div>
+            <div class="text-center elements-social social-icon-style-12 d-none d-md-inline-block">
+                <ul class="small-icon light">
+                    @if (!string.IsNullOrEmpty(SessionRequest.config.Facebook))
+                    {
+                        <li><a class="facebook" href="@SessionRequest.config.Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                    }
+                    @if (!string.IsNullOrEmpty(SessionRequest.config.Linkedin))
+                    {
+                        <li><a class="facebook" href="@SessionRequest.config.Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                    }
+                    @if (!string.IsNullOrEmpty(SessionRequest.config.Instagram))
+                    {
+                        <li><a class="facebook" href="@SessionRequest.config.Instagram" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                    }
+                    @if (!string.IsNullOrEmpty(SessionRequest.config.Twitter))
+                    {
+                        <li><a class="facebook" href="@SessionRequest.config.Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                    }
+                    @if (!string.IsNullOrEmpty(SessionRequest.config.Pinterest))
+                    {
+                        <li><a class="facebook" href="@SessionRequest.config.Pinterest" target="_blank"><i class="fab fa-pinterest-p"></i></a></li>
+                    }
+                    @if (!string.IsNullOrEmpty(SessionRequest.config.Youtube))
+                    {
+                        <li><a class="facebook" href="@SessionRequest.config.Youtube" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                    }
+                   
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- end hamburger popup -->
+</header>
+<!-- end header -->

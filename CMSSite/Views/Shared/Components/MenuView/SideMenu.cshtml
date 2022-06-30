@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+    var SideMenu = ViewBag.SideMenu as List<ContentPage>;
+    var content = ViewBag.content as ContentPage;
+    List<int> childRemove = new List<int>();
+}
+
+
+<div class="accordion-wrapper2">
+    <div id="accordion">
+        @foreach (var item in SideMenu)
+        {
+
+            if (!childRemove.Contains(item.Id))
+            {
+
+                @if (item.Childs.Count > 0 && SideMenu.Any(a => item.Childs.Select(d => d.Id).Contains(a.Id)))
+                {
+
+                    <div class="card @(content.Id==item.Id?"active":"")">
+                        <div class="card-header" id="heading@(item.Id)">
+                            <h5 class="mb-0">
+                                @if (item.IsClick == true)
+                                {
+                                    @if (string.IsNullOrEmpty(item.ExternalLink))
+                                    {
+                                        <a class="col-md-12  large-btn m-0" @(item.Link == content.Link ? "class=active" : "") href="@item.Link">@item.Name</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="col-md-12  large-btn m-0" href="@item.ExternalLink" target="@(item.ExternalLink.StartsWith("http") ? "_blank" : "_self")">@item.Name</a>
+                                    }
+                                    
+                                }
+                                else
+                                {
+                                    <a href="javascript:void(0)">
+                                        @item.Name
+                                    </a>
+
+                                }
+
+                            </h5>
+                        </div>
+                        <div id="collapse@(item.Id)" class="@(SideMenu.Any(x => x.ParentId == item.Id && x.Link == content.Link) ? "collapse" : "collapsed")" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                @foreach (var itemC in SideMenu.Where(x => x.ParentId == item.Id))
+                                {
+                                    <div class="card-header" id="heading@(item.Id)">
+                                        <h5 class="mb-0">
+                                            @if (string.IsNullOrEmpty(itemC.ExternalLink))
+                                            {
+                                                <a @(itemC.Link == content.Link ? "class=active" : "") href="@itemC.Link">@itemC.Name</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@itemC.ExternalLink" target="@(itemC.ExternalLink.StartsWith("http") ? "_blank" : "_self")">@itemC.Name</a>
+                                            }
+                                        </h5>
+                                    </div>
+                                    childRemove.Add(itemC.Id);
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+                else
+                {
+
+                    <div class="card2">
+                        <div class="card-header2" id="heading@(item.Id)">
+                            <h5 class="mb-0">
+                                <a href="/@item.Link" class="col-md-12 large-btn text-center @(item.Link == content.Link ? "active" : "")">
+                                    @item.Name
+                                </a>
+
+                            </h5>
+                        </div>
+                    </div>
+
+                }
+
+            }
+        }
+
+    </div>
+</div>

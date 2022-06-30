@@ -1,0 +1,126 @@
+﻿@{
+    Layout = "_Layout";
+    var content = ViewBag.content as ContentPage;
+    var contents = ViewBag.contents as List<ContentPage>;
+}
+@await Component.InvokeAsync("MenuView", new { type = "SubHeader" })
+<link href="~/assets-site/plugins/lightbox/css/lightgallery.css" rel="stylesheet" />
+<section class="section margin-top-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                @await Component.InvokeAsync("MenuView", new { type = "SideMenu" })
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mission-section">
+                            <div class="container text-center">
+                                <h2 class="margin-bottom-30">@Html.Raw(content.Description)</h2>
+                                <div class="content">
+                                    @Html.Raw(content.ContentShort)
+                                </div>
+                            </div>
+                        </div>
+                        @if (content.Picture != null)
+                        {
+                            <div class="row section">
+                                <div class="col-12 img"><img src="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@(content.Picture.Link)" alt="@content.Name" class="img-fluid"></div>
+                            </div>
+                        }
+                        <div class="section">
+                            @Html.Raw(content.ContentData)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @if (content.Gallery != null && content.Gallery.Count > 0)
+    {
+
+
+        <div class="media-grid">
+            <div class="heading text-center">
+                @Html.Raw(content.Description)
+            </div>
+            <div class="row" id="lightgallery">
+                @foreach (var item in content.Gallery)
+                {
+                    <div class="col-6 col-lg-3 img">
+                        <a class="lb-item" href="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@item.Link"><img src="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@item.Link" alt="@item.Alt" class="img-fluid"></a>
+                    </div>
+                }
+            </div>
+        </div>
+
+
+    }
+</section>
+
+
+<script src="~/assets-site/plugins/lightbox/js/picturefill.min.js"></script>
+<script src="~/assets-site/plugins/lightbox/js/lightgallery-all.min.js"></script>
+<script src="~/assets-site/plugins/lightbox/lib/jquery.mousewheel.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#lightgallery').lightGallery({
+            selector: '.lb-item'
+        });
+    });
+</script>
+<!-- Free Trial -->
+@*if (content.Gallery != null && content.Gallery.Count > 0)
+    {
+
+        <!-- Reviews Section -->
+        <section class="section testimonials-style-3">
+            <div class="container">
+
+                <div class="testimonial">
+                    <div class="testimonial-slider-wrapper">
+
+                        @foreach (var galleryItem in content.Gallery)
+                        {
+
+                            <div class="testimonial-slider" style="background-image: url(http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@(galleryItem.Link))">
+                                <div class="overlay"></div>
+
+                            </div>
+
+                        }
+
+
+                    </div>
+                </div>
+                <h1 class="lg-text">Galeri</h1>
+                <div class="carousel-controlar">
+                    <svg class="icon prev" version="1.1" id="Layer_3" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 7.7 61.19"
+                         style="enable-background:new 0 0 7.7 61.19;" xml:space="preserve">
+                    <polygon points="7,5.9 4,1.4 1,5.9 3.5,5.9 3.5,60.15 4.5,60.15 4.5,5.9 " />
+            </svg>
+
+                    <svg class="icon next" version="1.1" id="Layer_4" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 7.7 61.19"
+                         style="enable-background:new 0 0 7.7 61.19;" xml:space="preserve">
+                    <polygon points="1,55.65 4,60.15 7,55.65 4.5,55.65 4.5,1.4 3.5,1.4 3.5,55.65 " />
+            </svg>
+                </div>
+                <div class="pegination-wrapper d-none d-xl-block">
+                    <div class="pagination-style-3">
+                        <h1 class="current">01</h1>
+                        <h5 class="total"></h5>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+    }
+
+*@

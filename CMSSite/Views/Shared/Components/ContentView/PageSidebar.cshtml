@@ -1,0 +1,174 @@
+﻿@{
+    Layout = "_Layout";
+    var content = ViewBag.content as ContentPage;
+}
+@await Component.InvokeAsync("MenuView", new { type = "SubHeader" })
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 col-md-4">
+                    <div class="accordion-wrapper">
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <a role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                           aria-controls="collapseOne">
+                                            Learn at your own pace
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+                                        in velit odio. Morbi sodales nisi nec tortor commodo
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapseTwo"
+                                           aria-expanded="false" aria-controls="collapseTwo">
+                                            Online instructors easily accessible
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Sit itaque, blanditiis animi dignissimos distinctio
+                                        temporibus?
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h5 class="mb-0">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapseThree"
+                                           aria-expanded="false" aria-controls="collapseThree">
+                                            Get certified awards
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Sit itaque, blanditiis animi dignissimos distinctio
+                                        temporibus?
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingFour">
+                                    <h5 class="mb-0">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapseFour"
+                                           aria-expanded="false" aria-controls="collapseFour">
+                                            More than 300+ courses available
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Sit itaque, blanditiis animi dignissimos distinctio
+                                        temporibus?
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header" id="headingFive">
+                                    <h5 class="mb-0">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapseFive"
+                                           aria-expanded="false" aria-controls="collapseFive">
+                                            Certified lecturers
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Sit itaque, blanditiis animi dignissimos distinctio
+                                        temporibus?
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingSix">
+                                    <h5 class="mb-0">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapseSix"
+                                           aria-expanded="false" aria-controls="collapseSix">
+                                            Online instructors easily accessible
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Sit itaque, blanditiis animi dignissimos distinctio
+                                        temporibus?
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    @Html.Raw(content.Description)
+                    @Html.Raw(content.ContentData)
+
+                    <div id="gallery" class="gallery grid_gallery full-gallery de-gallery folio-style2">
+
+                        @foreach (var galleryItem in content.Gallery)
+                        {
+                            <div class=" col-md-4 mb30 item @content.Id">
+                                <div class="picframe">
+                                    <a class="image-popup-gallery" title="@content.Name" href="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@galleryItem.Link">
+                                        <span class="overlay">
+                                            <span class="pf_text">
+                                                <span class="project-name"><i class="fa fa-search"></i></span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                    <img src="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@(galleryItem.Link!=""?galleryItem.Link:"default.jpg")" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @if (content.Gallery != null)
+        {
+            <div class="container">
+                <div class="row">
+                    <div id="gallery" class="gallery grid_gallery full-gallery de-gallery folio-style2">
+
+                        @foreach (var galleryItem in content.Gallery)
+                        {
+                            <div class=" col-md-4 mb30 item @content.Id">
+                                <div class="picframe">
+                                    <a class="image-popup-gallery" title="@content.Name" href="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@galleryItem.Link">
+                                        <span class="overlay">
+                                            <span class="pf_text">
+                                                <span class="project-name"><i class="fa fa-search"></i></span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                    <img src="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@(galleryItem.Link!=""?galleryItem.Link:"default.jpg")" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+
+                </div>
+            </div>
+
+        }
+        @if (content.Documents != null)
+        {
+        } 
+    </div>

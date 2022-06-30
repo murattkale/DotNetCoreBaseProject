@@ -1,0 +1,164 @@
+﻿@{
+    Layout = "_Layout";
+
+}
+
+
+<!-- start page title -->
+<section class="wow animate__fadeIn  padding-25px-tb page-title-small" style="background-color:rgb(5, 32, 71)">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+           <div class="col-12 col-lg-6 col-md-6  md-margin-25px-bottom text-center  wow animate__fadeIn" data-wow-delay="0.4s">
+               <h5 class="alt-font font-weight-600 d-block mb-0 padding-2-half-rem-right letter-spacing-minus-1px lg-no-padding-right" style="color:#70cfe6 !important;">@Html.Raw("Queens Member Zone".Trans())</h5>
+               <h6 class="alt-font font-weight-500 d-block mb-0 text-white padding-2-half-rem-right letter-spacing-minus-1px lg-no-padding-right" style="">@Html.Raw("Sign in for member only access".Trans())</h6></div>
+           
+        </div>
+    </div>
+</section>
+
+
+<!-- start section -->
+<section class="wow animate__fadeIn">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-5 col-md-5 offset-1 lg-padding-30px-lr md-padding-15px-lr sm-margin-40px-bottom">
+                <h6 class="alt-font font-weight-500 text-extra-dark-gray">@Html.Raw("Login".Trans())</h6>
+                <form id="frm_login" class="bg-light-gray padding-4-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
+
+                    <label class="margin-15px-bottom">@Html.Raw("Mail".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="email" name="Mail" placeholder="@Html.Raw("Enter your Mail".Trans())">
+
+
+                    <label class="margin-15px-bottom">@Html.Raw("Password".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="password" name="Pass" placeholder="@Html.Raw("Enter your password".Trans())">
+
+
+                    <label class="margin-25px-bottom">
+                        <input class="d-inline-block align-middle w-auto mb-0 margin-5px-right" type="checkbox" name="account">
+                        <span class="d-inline-block align-middle">@Html.Raw("Remember me".Trans())</span>
+                    </label>
+
+                    <button id="btnLogin" class="btn btn-medium btn-fancy btn-dark-gray w-100 submit" type="submit">@Html.Raw("Login".Trans())</button>
+                      <p class="text-end margin-20px-top mb-0"><a href="/lostyourpass" class="btn btn-link  btn-medium text-extra-dark-gray">@Html.Raw("Lost password".Trans())</a></p>
+
+                </form>
+            </div>
+
+            <div class="col-12 col-xl-5 offset-xl-1 col-md-6 lg-padding-30px-lr md-padding-15px-lr">
+                <h6 class="alt-font font-weight-500 text-extra-dark-gray">@Html.Raw("Sign Up".Trans())</h6>
+                <form id="frm_register" name="frm_register" class="border-all border-color-medium-gray padding-4-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
+                    <input name="UserStatusType" value="2" type="hidden" />
+
+                    <label class="margin-15px-bottom">@Html.Raw("Mail".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="email" name="Mail" placeholder="@Html.Raw("Enter your Mail".Trans())">
+
+                    <label class="margin-15px-bottom">@Html.Raw("Name".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="text" name="Name" placeholder="@Html.Raw("Enter your Name".Trans())">
+
+                    <label class="margin-15px-bottom">@Html.Raw("Surname".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="text" name="Surname" placeholder="@Html.Raw("Enter your Surname".Trans())">
+
+                    <label class="margin-15px-bottom">@Html.Raw("Password".Trans()) <span class="required-error text-radical-red">*</span></label>
+                    <input required class="small-input bg-white margin-20px-bottom required" type="password" name="Pass" placeholder="@Html.Raw("Enter your password".Trans())">
+
+
+             
+                    <p class="d-flex align-items-center">
+                        <input id="IsKVKK" name="IsKVKK" class="d-inline w-auto mb-0 margin-10px-right" type="checkbox">
+                        <span class="text-small">
+                             @Html.Raw("KVKK Note".Trans())
+                       <a target="_blank" class="text-decoration-underline" href="@Html.Raw(SessionRequest.LanguageId == 1 ? "/aydinlatma-metni":"/aydinlatma-metnien")"> @Html.Raw("KVKK".Trans())</a><span class="text-red ms-1">*</span>
+                        </span>
+                    </p>
+
+                    <button class="btn btn-medium btn-fancy btn-dark-gray w-100 submit" type="submit">@Html.Raw("Register".Trans())</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end section -->
+
+
+<a id="btnLoginPopup" class="btn btn-medium btn-round-edge btn-fast-blue modal-popup d-none" href="#modal-popup"></a>
+<div id="modal-popup" class="col-11 col-xl-3 col-lg-6 col-md-8 col-sm-9 mx-auto bg-white text-center modal-popup-main padding-4-half-rem-all mfp-hide border-radius-6px sm-padding-2-half-rem-lr" style="background-image: url('/images/q/theq8.png');background-position: left top 110px;background-size: initial;background-repeat: no-repeat;background-attachment: initial;background-origin: initial;background-clip: initial;background-color: rgb(204 218 232) !important;">
+    <span class="text-extra-dark-gray text-uppercase alt-font text-extra-large font-weight-600 margin-15px-bottom d-block"> @Html.Raw("What Next".Trans())</span>
+    <p class="text-extra-dark-gray">@Html.Raw("Login Modal Text".Trans())</p>
+    <div class="btn-dual d-inline-block xs-padding-2-rem-lr">
+        <a href="/" class="btn btn-fancy btn-very-small text-extra-dark-gray btn-transparent-gradient-queens">@Html.Raw("Explore".Trans())</a>
+        <a href="/registration" class="btn btn-fancy btn-very-small btn-gradient-queens margin-25px-right">@Html.Raw("Register".Trans())</a>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+
+        //$('[name="IsKVKK"]').change(function () {
+        //    
+        //    $('#btnIsKVKK').click();
+        //});
+
+        var formname = '#frm_register';
+        $(formname).submit(function (e) {
+            e.preventDefault();
+            var postModel = $.fn.toForm(formname);
+
+
+            if ($('#IsKVKK')[0].checked == false) {
+                alert('@Html.Raw("Please Is KVKK".Trans())');
+                return;
+            }
+
+
+            $(formname).LoadingOverlay("show");
+            $.ajx('/User/InsertOrUpdate',
+                { postModel: postModel }, function (resultData) {
+                    $(formname).LoadingOverlay("hide");
+                    if (resultData == "duplicate") {
+                        alert('@Html.Raw("Duplicate user".Trans())');
+                        return;
+                    }
+                    if (resultData.RType == 1) {
+
+                        $.ajx('/SendMail?ContentPageId=' + (LanguageId == 1 ? '56' : '55'), function (result) {
+                            $('#btnLoginPopup').click();
+                        });
+
+                      
+
+                    }
+                    else {
+
+                        alerts(resultData.MessageList);
+                    }
+
+                  
+                }, function () { location.reload(); });
+        });
+
+        var frm_login = '#frm_login';
+        $(frm_login).submit(function (e) {
+            e.preventDefault();
+            var postModel = $.fn.toForm(frm_login);
+            $(frm_login).LoadingOverlay("show");
+            $.ajx('/user/ValidateMail', { Mail: postModel.Mail, Pass: postModel.Pass }, function (result) {
+
+                if (result && result.ResultRow != null && result.ResultRow.Id > 0) {
+
+                    location.href = '/';
+                }
+                else {
+                    alerts('@Html.Raw("Errors Detected".Trans())')
+                }
+
+
+                $(frm_login).LoadingOverlay("hide");
+            }, function () { location.reload(); });
+        });
+
+
+
+    });
+</script>

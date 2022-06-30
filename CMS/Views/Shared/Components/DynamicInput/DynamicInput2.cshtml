@@ -1,0 +1,689 @@
+﻿@model DynamicModel
+
+@{
+    Type t = Model.model.GetType();
+    Model.controllerName = string.IsNullOrEmpty(Model.controllerName) ? t.Name : Model.controllerName;
+
+
+    var formname = "frm_" + t.Name;
+
+    var props = t.GetProperties().ToList();
+
+    var baseType = new BaseModel().GetType().GetProperties().Where(o => o.Name != "ModDate" && o.Name != "CreaDate" && o.Name != "OrderNo").ToList();
+    props = props.AsQueryable().Where(d => d.Name != "ModDate" && d.Name != "CreaDate" && !Helpers.GetPropertyAttributes(d).Keys.Any(oo => oo == "NotMapped")).ToList();
+
+    var IdValue = Model.model.GetPropValue("Id");
+    var idval = IdValue.ToInt();
+
+    <script type="text/javascript">
+        var TName = "@t.Name";
+        var formname = "@formname";
+        var IdValue = "@IdValue";
+        var idval = "@idval";
+        var controllerName = "@Model.controllerName";
+        var InsertMethodName = "@Model.InsertMethodName";
+        var BackUrl = "@Model.BackUrl";
+    </script>
+
+    <div formdata="@Model.model.GetType().Name" class="container">
+        <form name="@formname" id="frm_@t.Name">
+            <div class="form-group row">
+                @foreach (var prp in baseType)
+                {
+                    if (prp.PropertyType.Name != "DateTime")
+                    {
+                        <input id="@prp.Name" name="@prp.Name" value="@Model.model.GetPropValue(prp.Name)" type="hidden">
+                    }
+                    else
+                    {
+                        <input id="@prp.Name" name="@prp.Name" value="@Model.model.GetPropValue(prp.Name)?.ToDateTime().Value.ToShortDateString()" type="hidden">
+                    }
+                    props = props.AsQueryable().Where(d => d.Name != prp.Name).ToList();
+                }
+
+
+
+
+                @if (!string.IsNullOrEmpty(Model.nonProp))
+                {
+                    Model.nonProp.Split(",").ToList().ForEach(o =>
+                    {
+                        props = props.AsQueryable().Where(d => d.Name != o.Trim()).ToList();
+                    });
+
+
+                    @foreach (var prp in Model.nonProp.Split(","))
+                    {
+                        if (!prp.Contains("Date"))
+                        {
+                            <input id="@prp" name="@prp" value="@Model.model.GetPropValue(prp)" type="hidden">
+                        }
+                        else
+                        {
+                            <input id="@prp" name="@prp" value="@Model.model.GetPropValue(prp)?.ToDateTime().Value.ToShortDateString()" type="hidden">
+                        }
+                    }
+                }
+
+
+                @{
+                    var disabledList = Model.disabledProp?.Split(",").ToList();
+                    var hideClass = Model.hideClass?.Split(",").ToList();
+                    var orderbyProps = props.AsQueryable().OrderByDescending(oo => "" == "");
+                }
+
+                @if (!string.IsNullOrEmpty(Model.orderby))
+                    Model.orderby.Split(",").ToList().ForEach(o =>
+                    {
+                        if (!string.IsNullOrEmpty(o))
+                            props = orderbyProps.OrderByDescending(oo => oo.Name == o.Trim()).ThenBy(oo => oo.Name == o.Trim()).ToList();
+                    });
+
+
+
+
+
+                @foreach (var prp in props)
+                {
+                    var prpName = prp.Name;
+                    if (prp.Name == "UserType")
+                    {
+
+                    }
+
+                    object value = null;
+                    switch (Type.GetTypeCode(prp.PropertyType))
+                    {
+                        case TypeCode.Boolean:
+                        case TypeCode.Char:
+                        case TypeCode.SByte:
+                        case TypeCode.Byte:
+                        case TypeCode.Int16:
+                        case TypeCode.UInt16:
+                        case TypeCode.Int32:
+                        case TypeCode.UInt32:
+                        case TypeCode.Int64:
+                        case TypeCode.UInt64:
+                        case TypeCode.Single:
+                        case TypeCode.Double:
+                        case TypeCode.Decimal:
+                        case TypeCode.DateTime:
+                        case TypeCode.String:
+                        case TypeCode.Object:
+                            {
+                                value = Model.model.GetPropValue(prp.Name);
+                                break;
+                            }
+                    }
+
+
+                    var dName = Helpers.GetPropertyAttributes(prp);
+
+                    var DisplayName = "";
+                    if (dName.Count > 0 && dName.Any(o => o.Key == "DisplayName"))
+                        DisplayName = dName.FirstOrDefault(o => o.Key == "DisplayName").Value.ToStr();
+                    else
+                        DisplayName = prp.Name;
+
+
+                    var placeholder = "";
+                    placeholder = DisplayName;
+
+                    var Required = "";
+                    var strReq = "";
+                    if (dName.Count > 0 && dName.Any(o => o.Key == "Required"))
+                    {
+                        Required = dName.FirstOrDefault(o => o.Key == "Required").Value.ToStr();
+                        strReq = " <span style='color:red;' class='required'> * </span>";
+                        DisplayName += strReq;
+                    }
+
+
+                    var pModel = new whereCaseModel();
+                    var whereCase = Model.whereCase.ToStr().Split('=');
+                    if (whereCase.Count() > 0 && prp.Name == Model.whereCase.ToStr().Split('=')[0])
+                    {
+                        pModel = new whereCaseModel
+                        {
+                            name = Model.whereCase.ToStr().Split('=')[0],
+                            whereCase = Model.whereCase.ToStr().Split('=')[1]
+                        };
+                    }
+                    else
+                    {
+                        pModel = new whereCaseModel
+                        {
+                            name = "",
+                            whereCase = ""
+                        };
+                    }
+
+
+                    var disabledPropName = disabledList != null && disabledList.Any(o => o == prpName) ? "disabled='disabeld'" : "";
+                    var hideClassPropName = hideClass != null && hideClass.Any(o => o == prpName) ? "d-none" : "";
+
+                    var SingleDocument = dName.FirstOrDefault(o => o.Key == "DataType");
+
+                    if (SingleDocument.Value != null && SingleDocument.Value.ToStr() == "SingleDocument")
+                    {
+                        var imageLink = SessionRequest.config.ImageUrl + "/fileupload/UserFiles/Folders/" + (value == null ? "/assets/media/users/blank.png" : value);
+                        <style>
+                            .containCustom {
+                                background-size: cover !important;
+                                background-repeat: no-repeat !important;
+                            }
+                        </style>
+
+                        <div class="card card-custom gutter-b example example-compact col-md-3">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <h3 class="card-label">@Html.Raw(DisplayName)</h3>
+                                </div>
+                            </div>
+                            <!--begin::Form-->
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+
+                                        <style>
+                                                .imgBack{
+                                                    background-image: url(@imageLink)
+                                                }
+                                        </style>
+
+                                        <div class="file_image_@prp.Name image-input image-input-outline imgBack">
+                                            <div class="containCustom image-input-wrapper" name="file_image_@prp.Name" id="file_image_@prp.Name"></div>
+                                            <a href="/FileManagerData/FileManager?id=@idval&name=@prpName&cont=SingleDocument" class="mymodal btn-bg-success">
+                                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change"
+                                                       data-toggle="tooltip" title="" data-original-title="@Html.Raw(DisplayName) Add/Update">
+                                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                                </label>
+                                            </a>
+
+                                            @if (value != null)
+                                            {
+                                                <span dataid="@idval" class="btnImageDelete_@prp.Name btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="" data-original-title="@Html.Raw(DisplayName) Delete">
+                                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                </span>
+                                                <script type="text/javascript">
+                                                        $(function () {
+                                                            $('#@formname .btnImageDelete_' + "@prp.Name").click(function () {
+                                                                $('#@formname #file_link_@prp.Name').val('');
+                                                                $('#@formname .file_image_@prp.Name').removeClass('imgBack');
+                                                            });
+                                                        });
+                                                </script>
+                                            }
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input disabled type="text" id="file_link_@prp.Name" name="file_link_@prp.Name" value="@value" class="d-none form-control form-control-solid form-control-lg" />
+                                    </div>
+
+                                </div>
+                                <!--begin::Code-->
+                                <!--end::Code-->
+                            </div>
+                        </div>
+
+
+                        continue;
+                    }
+
+
+
+
+
+
+                    switch (Type.GetTypeCode(prp.PropertyType))
+                    {
+                        case TypeCode.Int16:
+                        case TypeCode.UInt16:
+                        case TypeCode.UInt32:
+                        case TypeCode.Int64:
+                        case TypeCode.UInt64:
+                        case TypeCode.Object:
+                            {
+                                if (IdValue.ToInt() > 0 && (prp.PropertyType.Name == "ICollection`1" || prp.PropertyType.FullName.Contains("Entity")))
+                                {
+
+                                }
+                                else if (IdValue.ToInt() > 0 && (prp.PropertyType.Name == "Documents" || prp.PropertyType.Name == "Gallery"))
+                                {
+
+                                }
+                                else
+                                {
+                                    var relation = props.FirstOrDefault(o => prp.Name.Substring(prp.Name.Length - 2, 2) == "Id" && o.Name == prp.Name.Replace("Id", ""));
+                                    if (relation != null || prp.Name.Substring(prp.Name.Length - 2, 2) == "Id")
+                                    {
+                                        var methodName = prp.Name.Replace("Id", "");
+                                        if (relation != null)
+                                            methodName = relation.PropertyType.Name;
+
+                                        <div class="@Model.colClass @hideClassPropName">
+                                            <div class="form-group">
+                                                <label>@Html.Raw(DisplayName)</label>
+                                                <select @disabledPropName @Required id="dp_@prp.Name" name="dp_@prp.Name" class="form-control form-control-solid form-control-lg"></select>
+                                            </div>
+                                        </div>
+
+
+                                        <script type="text/javascript">
+                                                     $(function () {
+                                                         $("#@formname #dp_@prp.Name").addOptionAjax("/@methodName/GetSelect",
+                                                             {
+                                                                     name:"@pModel.name",
+                                                                     whereCase:"@pModel.whereCase.ToStr()",
+                                                             }
+                                                             , "value", "text", null, null, "@value", "", "@Html.Raw(placeholder) Select");
+
+                                                     });
+                                        </script>
+
+                                    }
+                                    else
+                                    {
+                                        if (prp.PropertyType.GenericTypeArguments.Any(o => o.Name == "Boolean"))
+                                        {
+                                            var boolCount = 12 / props.Count(o => o.PropertyType.GenericTypeArguments.Any(o => o.Name == "Boolean"));
+
+                                            <div class="@hideClassPropName">
+                                                <label style="margin-bottom: 0 !important;" class="col-md-12">@Html.Raw(DisplayName)</label>
+                                                <div class="col-3">
+                                                    <span class="switch">
+                                                        <label>
+                                                            <input @(value.ToBoolean() == true ? " checked='checked' " : " ") type="checkbox" @Required id="@prp.Name" name="@prp.Name">
+                                                            <span></span>
+                                                        </label>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        }
+                                        if (prp.PropertyType.GenericTypeArguments.Any(o => o.Name == "Int32"))
+                                        {
+                                            <div class="@Model.colClass @hideClassPropName">
+                                                <div class="form-group">
+                                                    <label>@Html.Raw(DisplayName)</label>
+                                                    <input @disabledPropName @Required id="@prp.Name" name="@prp.Name" placeholder="@Html.Raw(placeholder)" value="@value" class="form-control form-control-solid form-control-lg" type="number">
+                                                </div>
+                                            </div>
+                                        }
+
+                                    }
+
+                                }
+                                break;
+                            }
+                        case TypeCode.Single:
+                        case TypeCode.Double:
+                        case TypeCode.Decimal:
+                            {
+                                <div class="@Model.colClass @hideClassPropName">
+                                    <div class="form-group">
+                                        <label>@Html.Raw(DisplayName)</label>
+                                        <input @disabledPropName @Required id="@prp.Name" name="@prp.Name" placeholder="@Html.Raw(placeholder)" value="@value" class="form-control form-control-solid form-control-lg" type="text">
+                                    </div>
+                                </div>
+                                break;
+                            }
+                        case TypeCode.Boolean:
+                            {
+                                //var boolCount = 12 /
+                                //    (props.Count(o => o.PropertyType.GenericTypeArguments.Any(o => o.Name == "Boolean")) <=0  ?
+                                //    props.Count(o => o.PropertyType.Name == "Boolean")
+                                //    : 1) ;
+
+                                <div class="@hideClassPropName">
+                                    <label style="margin-bottom: 0 !important;" class="col-md-12">@Html.Raw(DisplayName)</label>
+                                    <div class="col-3">
+                                        <span class="switch">
+                                            <label>
+                                                <input @(value.ToBoolean() == true ? " checked='checked' " : " ") type="checkbox" @Required id="@prp.Name" name="@prp.Name">
+                                                <span></span>
+                                            </label>
+                                        </span>
+                                    </div>
+                                </div>
+                            }
+                            break;
+                        case TypeCode.Int32:
+                            {
+
+                                if (dName.Count > 0 && dName.Any(o => o.Key == "DataType") && dName.FirstOrDefault(o => o.Key == "DataType").Value.ToStr() == "number")
+                                {
+                                    <div class="@Model.colClass @hideClassPropName">
+                                        <div class="form-group">
+                                            <label>@Html.Raw(DisplayName)</label>
+                                            <input @disabledPropName @Required id="@prp.Name" name="@prp.Name" placeholder="@Html.Raw(placeholder)" value="@value" class="form-control form-control-solid form-control-lg" type="number">
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+
+                                    if (prp.PropertyType.IsEnum)
+                                    {
+                                        <div class="@Model.colClass @hideClassPropName">
+                                            <div class="form-group">
+                                                <label>@Html.Raw(DisplayName)</label>
+                                                <select @disabledPropName @Required id="dp_@prp.Name" name="dp_@prp.Name" class="form-control form-control-solid form-control-lg">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <script type="text/javascript">
+                                            $(function () {
+                                                $("#@formname #dp_@prp.Name").addOptionAjax("/" + TName +"/Get" + "@prp.Name", null, "value", "text", function () { }, function () { }, "@(value == null ? "" : ((int)value).ToStr())", "", "Select");
+                                            });
+                                        </script>
+                                    }
+                                    else
+                                    {
+                                        var relation = props.FirstOrDefault(o => prp.Name.Substring(prp.Name.Length - 2, 2) == "Id" && o.Name == prp.Name.Replace("Id", ""));
+                                        if (relation != null || prp.Name.Substring(prp.Name.Length - 2, 2) == "Id")
+                                        {
+                                            var methodName = prp.Name.Replace("Id", "");
+                                            if (relation != null)
+                                                methodName = relation.PropertyType.Name;
+
+                                            <div class="@Model.colClass @hideClassPropName">
+                                                <div class="form-group">
+                                                    <label>@Html.Raw(DisplayName)</label>
+                                                    <select @disabledPropName @Required id="dp_@prp.Name" name="dp_@prp.Name" class="form-control form-control-solid form-control-lg">
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+
+                                            <script type="text/javascript">
+                                                     $(function () {
+                                                         $("#@formname #dp_@prp.Name").addOptionAjax("/@methodName/GetSelect",
+                                                             {
+                                                                     name:"@pModel.name",
+                                                                     whereCase:"@pModel.whereCase.ToStr()",
+                                                             }
+                                                             , "value", "text", null, null, "@value", "", "@Html.Raw(placeholder) Select");
+
+                                                     });
+                                            </script>
+
+                                        }
+                                        else
+                                        {
+                                            if (prp.PropertyType.GenericTypeArguments.Any(o => o.Name == "Boolean"))
+                                            {
+                                                <div class="@hideClassPropName">
+                                                    <label style="margin-bottom: 0 !important;" class="col-md-12">@Html.Raw(DisplayName)</label>
+                                                    <div class="col-3">
+                                                        <span class="switch">
+                                                            <label>
+                                                                <input @disabledPropName @Required @(value.ToBoolean() == true ? " checked='checked' " : " ") type="checkbox" id="@prp.Name" name="@prp.Name">
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            }
+                                            if (prp.PropertyType.GenericTypeArguments.Any(o => o.Name == "Int32"))
+                                            {
+                                                <div class="@Model.colClass @hideClassPropName">
+                                                    <div class="form-group">
+                                                        <label>@Html.Raw(DisplayName)</label>
+                                                        <input @disabledPropName @Required id="@prp.Name" name="@prp.Name" placeholder="@Html.Raw(placeholder)" value="@value" class="form-control form-control-solid form-control-lg" type="number">
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+
+                                }
+
+                                break;
+                            }
+                        case TypeCode.DateTime:
+                            {
+                                <div class="@Model.colClass @hideClassPropName">
+                                    <div class="row form-group">
+                                        <div class="@Model.labelClass">
+                                            <label class="control-label" for="@prp.Name">@Html.Raw(DisplayName)</label>
+                                        </div>
+                                        <div class="input-group-append input-group date @Model.inputClass">
+                                            <input @disabledPropName @Required
+                                                   placeholder="@(placeholder + " Select")"
+                                                   autocomplete="off"
+                                                   id="@prp.Name"
+                                                   name="@prp.Name"
+                                                   value="(@(value.ToDateTime().Value.Year < 1900 ? " " : value?.ToDateTime().Value.ToShortDateString()))"
+                                                   class="form-control form-control-solid form-control-lg"
+                                                   type="datetime">
+
+                                            <span class="input-group-text"><i class="la la-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script type="text/javascript">
+                                        $(function () {
+                                            $("#@formname #@prp.Name").datepicker({ format: "dd/mm/yyyy", language: "tr", todayBtn: "linked", clearBtn: !0, todayHighlight: !0 });
+                                        });
+                                </script>
+
+                                break;
+                            }
+                        case TypeCode.String:
+                            {
+                                var textName = "";
+                                if (dName.Count > 0 && dName.Any(o => o.Key == "DataType"))
+                                    textName = dName.FirstOrDefault(o => o.Key == "DataType").Value.ToStr();
+
+                                if (textName != "")
+                                {
+                                    if (textName == "text")
+                                    {
+                                        <style>
+                                            .hlError {
+                                                background-color: #fea;
+                                                color: #f33;
+                                            }
+
+                                            .hlOK {
+                                                background-color: #aef;
+                                                color: #060;
+                                            }
+
+                                            .inlineCode {
+                                                font: bold 12px monospace;
+                                            }
+                                        </style>
+                                        <div class="form-group">
+                                            <label>@Html.Raw(DisplayName)</label>
+                                            @(Html.Kendo().Editor()
+                                                          .Name(prp.Name)
+                                                          .HtmlAttributes(new { style = "width: 100%; height:200px", aria_label = "editor" })
+                                                          .Tools(tools => tools
+                                                            .Clear()
+                                                            .Bold().Italic().Underline()
+                                                            .JustifyLeft().JustifyCenter().JustifyRight()
+                                                            .InsertUnorderedList().InsertOrderedList()
+                                                            .Outdent().Indent()
+                                                            .CreateLink().Unlink()
+                                                            .InsertImage()
+                                                            .TableEditing()
+                                                            .FontName()
+                                                            .FontSize()
+                                                            .FontColor().BackColor()
+                                                          )
+                                                          .ImageBrowser(imageBrowser =>
+                                                          {
+                                                              imageBrowser.Image("~/fileupload/UserFiles/Folders/{0}");
+                                                              imageBrowser.Read("Read", "FileManagerData");
+                                                              imageBrowser.Create("Create", "FileManagerData");
+                                                              imageBrowser.Destroy("Destroy", "FileManagerData");
+                                                              imageBrowser.Upload("Upload", "FileManagerData");
+                                                              //imageBrowser.Thumbnail("Thumbnail", "FileManagerData");
+                                                          }
+                                                      )
+                                                      .Value(value.ToStr())
+                                        )
+
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="@Model.colClass @hideClassPropName">
+                                        <div class="form-group">
+                                            <label>@Html.Raw(DisplayName)</label>
+                                            <input class="form-control form-control-solid form-control-lg"
+                                                   @disabledPropName @Required
+                                                   id="@prp.Name"
+                                                   name="@prp.Name"
+                                                   placeholder="@Html.Raw(placeholder)"
+                                                   value="@System.Uri.UnescapeDataString(value.ToStr())"
+                                                   type="@(prp.Name == "Pass" || prp.Name == "Password" || prp.Name == "Sifre" ? "password" : "text")">
+                                        </div>
+                                    </div>
+
+                                }
+                                break;
+                            }
+                    }
+
+
+                }
+
+            </div>
+            <div class="float-right">
+                @Html.Raw(idval < 1 ? "" : Model.removeBtn)
+                @Html.Raw(Model.addBtn)
+            </div>
+        </form>
+    </div>
+    <script>
+        function getQuery(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+        $(function () {
+            //var langInt = setInterval(function () {
+            //    $("#dp_LangId").val(1);
+            //    $("#dp_LangId").change();
+            //    $("#dp_LangId").parent().parent().hide();
+            //    clearInterval(langInt);
+            //}, 2000);
+
+            //$("#" + formname + " textarea").each(function () {
+
+            //});
+
+            try {
+                $("#@formname #Name").ceo({ target: "#Link" });
+            } catch (e) { }
+            try {
+                $("#@formname #Name").ceo({ target: "#MetaKeywords" });
+            } catch (e) { }
+            try {
+                $("#@formname #Name").dup({ target: "#MetaDescription" });
+            } catch (e) { }
+
+            $("#@formname .btnDelete").click(function () {
+                var dataid = $(this).attr("dataid");
+                alerts("Silinsin mi ?", "yesno", function (result) {
+                    if (result == true) {
+                        $.LoadingOverlay("show");
+
+                        $.get('/' + TName + '/Delete?id=' + dataid).fail(function (err, exception) { console.error(err.responseText); })
+                            .done(function (resultData) {
+
+                                if (resultData.RType == 1) {
+                                    var selectid = getQuery('selectid');
+                                    var selecttype = getQuery('selecttype');
+                                    var selectname = getQuery('selectname');
+                                    var descname = getQuery('descname');
+
+                                    location.href = "/" + controllerName + '/Index?' +
+                                        (selectid > 0 ? '&selectid=' + selectid : '')
+                                        + (selecttype > 0 ? '&selecttype=' + selecttype : '')
+                                        + (selectname != null ? '&selectname=' + selectname : '')
+                                        + (descname != null ? '&descname=' + descname : '');
+
+                                }
+                                else {
+                                    alerts(resultData.MessageList);
+                                }
+
+                                $.LoadingOverlay("hide");
+                            });
+
+
+
+                    }
+                });
+            });
+
+
+            $("#" + formname).submit(function (e) {
+                e.preventDefault();
+                var postModel = $.fn.toForm("#" + formname);
+
+                try { postModel.Level = parseInt(postModel.Level); } catch (ex) { }
+                $.LoadingOverlay("show");
+                $.ajx("/" + controllerName + "/" + InsertMethodName,
+                    { postModel: postModel }, function (resultData) {
+                        if (resultData.RType == 1) {
+
+                            if (BackUrl != null) {
+                                location.href = BackUrl;
+                                return;
+                            }
+                            var selectid = getQuery('selectid');
+                            var selecttype = getQuery('selecttype');
+                            var selectname = getQuery('selectname');
+                            var descname = getQuery('descname');
+
+                            location.href = "/" + controllerName + '/Index?' +
+                                (selectid > 0 ? '&selectid=' + selectid : '')
+                                + (selecttype > 0 ? '&selecttype=' + selecttype : '')
+                                + (selectname != null ? '&selectname=' + selectname : '')
+                                + (descname != null ? '&descname=' + descname : '');
+
+
+
+                        }
+                        else {
+
+                            alerts(resultData.MessageList);
+                        }
+
+                        $.LoadingOverlay("hide");
+                    }, function () { location.reload(); });
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+
+            @*var langInt = setInterval(function () {
+                $("#@formname #dp_LangId").val(1);
+                $("#@formname #dp_LangId").change();
+                $("#@formname #dp_LangId").parent().parent().hide();
+
+
+                $("#@formname #dp_OrjId").parent().parent().hide();
+
+
+                clearInterval(langInt);
+            }, 2000);*@
+        });
+    </script>
+
+}

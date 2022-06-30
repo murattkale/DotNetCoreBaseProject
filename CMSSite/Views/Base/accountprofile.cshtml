@@ -1,0 +1,392 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+
+
+<!-- start banner section -->
+<section class="cover-background h-500px sm-h-300px" style="background-image: url('/images/q/routes.jpg');">
+    <div class="opacity-medium bg-gradient-dark-slate-blue-transparent"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 position-relative extra-small-screen md-h-300px sm-h-250px d-flex flex-column">
+                <h1 class="alt-font font-weight-600 text-white title-extra-large w-100 mt-auto mb-0 letter-spacing-minus-5px sm-letter-spacing-minus-1-half xs-w-100">@Html.Raw("My Account".Trans())</h1>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end banner section -->
+<!-- start section -->
+
+
+
+<section class="half-section  pt-0">
+    <div class="container">
+        <div class="row justify-content-center">
+
+
+            <aside class="col-12 col-lg-3 col-md-4 shopping-sidebar padding-3-rem-all d-none d-sm-block ">
+                <div class="container">
+                    <div class="row">
+                        <div class="padding-2-rem-bottom margin-1-rem-bottom wow animate__fadeIn">
+                            <a href="/accountprofile"><span class="btn btn-medium btn-black btn-rounded lg-margin-15px-bottom md-margin-auto-lr d-block margin-10px-bottom  ">@Html.Raw("Profile".Trans())</span></a>
+                            @if (SessionRequest.raceUser)
+                            {
+                                <a href="/accountraceinfo"><span class="btn btn-medium btn-transparent-black btn-rounded lg-margin-15px-bottom md-margin-auto-lr d-block margin-10px-bottom ">@Html.Raw("Race Details".Trans())</span></a>
+                                <a href="/accountproducts"><span class="btn btn-medium btn-transparent-black btn-rounded lg-margin-15px-bottom md-margin-auto-lr d-block margin-10px-bottom ">@Html.Raw("My Purchases".Trans())</span></a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+
+            <div class="col-12 col-lg-9 col-md-8 shopping-content padding-30px-left md-padding-15px-left ">
+                <form id="frm_register" name="frm_register" class=" padding-3-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
+
+                    @{
+                        var props = SessionRequest.LoginUser.GetType().GetProperties().ToList();
+                        "Name,Surname,Mail,Phone,DateofBirth,NationalityId,TCKNPassport,ContactEmergency,ContactPhone,LicenceNo,HealtReportUrl".Split(",").ToList().ForEach(o => { props = props.AsQueryable().Where(d => d.Name != o.Trim()).ToList(); });
+                        foreach (var prp in props)
+                        {
+                            <input id="@prp.Name" name="@prp.Name" value="@SessionRequest.LoginUser.GetPropValue(prp.Name)?.ToStr()" type="hidden">
+                        }
+                    }
+
+
+                    <h6 class="div_profile alt-font font-weight-500 text-extra-dark-gray">@Html.Raw("User Info".Trans())</h6>
+                    <div class="div_profile container">
+                        <div class="row justify-content-center">
+
+
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom">@Html.Raw("Name".Trans()) <span class="required-error text-radical-red">*</span></label>
+                                <input required value="@SessionRequest.LoginUser?.Name" class="small-input bg-white margin-20px-bottom required" type="text" name="Name" placeholder="@Html.Raw("Enter your Name".Trans())">
+                            </div>
+                            <div class="col-md-6 margin-10px-bottom">
+
+                                <label class="margin-15px-bottom">@Html.Raw("Surname".Trans()) <span class="required-error text-radical-red">*</span></label>
+                                <input required value="@SessionRequest.LoginUser?.Surname" class="small-input bg-white margin-20px-bottom required" type="text" name="Surname" placeholder="@Html.Raw("Enter your Surname".Trans())">
+
+                            </div>
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom">@Html.Raw("Mail".Trans()) <span class="required-error text-radical-red">*</span></label>
+                                <input disabled required value="@SessionRequest.LoginUser?.Mail" class="small-input bg-white margin-20px-bottom required" type="email" name="Mail" placeholder="@Html.Raw("Enter your Mail".Trans())">
+                            </div>
+                            <div class="col-md-6 margin-10px-bottom">
+
+                                <label class="margin-15px-bottom">@Html.Raw("Phone".Trans()) <span class="required-error text-radical-red">*</span></label>
+                                <input min="10" required value="@SessionRequest.LoginUser?.Phone" class="small-input bg-white margin-20px-bottom required" type="text" name="Phone" placeholder="" @Html.Raw("Enter your Phone".Trans()) "">
+
+                            </div>
+
+
+                            <div class="col-md-6 margin-10px-bottom">
+
+                                <label class="margin-15px-bottom">@Html.Raw("Date Of Birth".Trans()) <span class="required-error text-radical-red">*</span></label>
+                                <input required value="@SessionRequest.LoginUser?.DateofBirth?.ToString("dd.MM.yyyy")" class="small-input bg-white margin-20px-bottom required" type="text" id="DateofBirth" name="DateofBirth" placeholder="@Html.Raw("Enter your Birthdate".Trans())" />
+                            </div>
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom">@Html.Raw("Gender".Trans()) <span class="required-error text-radical-red">*</span></label>
+                                <select required id="dp_Gender" name="dp_Gender" class="small-input bg-white margin-20px-bottom required"></select>
+                            </div>
+
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom">@Html.Raw("Nationality".Trans())<span class="required-error text-radical-red">*</span></label>
+                                <select id="dp_NationalityId" name="dp_NationalityId" class="small-input bg-white margin-20px-bottom "></select>
+                            </div>
+
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom">@Html.Raw("PassNumber".Trans()) <span class="required-error text-radical-red">*</span></label>
+                                <input required value="@SessionRequest.LoginUser?.TCKNPassport" class="small-input bg-white margin-20px-bottom required" type="text" name="TCKNPassport" id="TCKNPassport" placeholder="@Html.Raw("EnterTCKN".Trans())">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h6 class="alt-font font-weight-500 text-extra-dark-gray">@Html.Raw("Health Profile".Trans())</h6>
+                    <div class="container">
+                        <div class="row ">
+
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom">@Html.Raw("Emergency Contact Name".Trans()) <span class="required-error text-radical-red">*</span></label>
+                                <input required value="@SessionRequest.LoginUser?.ContactEmergency" class="small-input bg-white margin-20px-bottom required" type="text" name="ContactEmergency" placeholder="@Html.Raw("Enter your Emergency Contact Name".Trans())">
+                            </div>
+
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom">@Html.Raw("Emergency Contact Phone".Trans()) <span class="required-error text-radical-red">*</span></label>
+                                <input min="10" required value="@SessionRequest.LoginUser?.ContactPhone" class="small-input bg-white margin-20px-bottom required" type="text" name="ContactPhone" placeholder="@Html.Raw("Enter Emergency Contact Phone No".Trans()) ">
+                            </div>
+
+                            <div class="col-md-6 margin-10px-bottom">
+
+                                <label class="margin-15px-bottom">@Html.Raw("License No".Trans()) </label>
+                                <input value="@SessionRequest.LoginUser?.LicenceNo" class="small-input bg-white margin-20px-bottom required" type="text" name="LicenceNo" placeholder="@Html.Raw("Enter your License No".Trans())">
+                            </div>
+
+
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom">@Html.Raw("License Doc".Trans()) @SessionRequest.LoginUser?.HealtReportUrl </label>
+                                <input onchange="uploadFiles('files');" class="small-input bg-white margin-20px-bottom required" type="file" id="files" name="files" placeholder="@Html.Raw("Enter License Doc".Trans())">
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <h6 class="div_adress alt-font font-weight-500 text-extra-dark-gray">@Html.Raw("Address Profile".Trans())</h6>
+                    <div class="div_adress container">
+                        <div class="row ">
+
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom" for="shipping-contry">@Html.Raw("Country".Trans()) <span class="required-error text-radical-red">*</span></label>
+                                <select required name="dp_CountryId" id="dp_CountryId" class="small-input"></select>
+                            </div>
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom">@Html.Raw("City".Trans())</label>
+                                <select name="dp_CityId" id="dp_CityId" class="small-input"></select>
+                            </div>
+
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom">@Html.Raw("Town".Trans())</label>
+                                @*  <select name="dp_Town" id="dp_Town" class="small-input"></select>*@
+                                <input dataid="@SessionRequest.LoginUser?.UserAdress?.FirstOrDefault(o=>o.IsDefault==true)?.Id" value="@SessionRequest.LoginUser?.UserAdress?.FirstOrDefault(o=>o.IsDefault==true)?.Town" class="small-input bg-white margin-20px-bottom" type="text" name="Town" id="Town" placeholder="@Html.Raw("EnterTown".Trans())">
+                            </div>
+
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom">@Html.Raw("District".Trans())</label>
+                                @*  <select name="dp_Town" id="dp_Town" class="small-input"></select>*@
+                                <input dataid="@SessionRequest.LoginUser?.UserAdress?.FirstOrDefault(o=>o.IsDefault==true)?.Id" value="@SessionRequest.LoginUser?.UserAdress?.FirstOrDefault(o=>o.IsDefault==true)?.District" class="small-input bg-white margin-20px-bottom" type="text" name="District" id="District" placeholder="@Html.Raw("EnterDistrict".Trans())">
+                            </div>
+
+                            <div class="col-md-6 margin-10px-bottom">
+                                <label class="margin-15px-bottom">@Html.Raw("Full Address".Trans())</label>
+                                <input dataid="@SessionRequest.LoginUser?.UserAdress?.FirstOrDefault(o=>o.IsDefault==true)?.Id" value="@SessionRequest.LoginUser?.UserAdress?.FirstOrDefault(o=>o.IsDefault==true)?.Adress" class="small-input bg-white margin-20px-bottom required" type="text" name="Adress" id="Adress" placeholder="@Html.Raw("Enter your full Adress".Trans())">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row justify-content-right">
+                            <div class="col-12 col-3 offset-xl-9 col-md-3 lg-padding-30px-lr md-padding-15px-lr">
+                                <button class="btn btn-medium btn-fancy btn-dark-gray w-100 submit" type="submit">@Html.Raw("Update".Trans())</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- start section -->
+<!-- start section -->
+<!-- end section -->
+
+<script>
+    function uploadFiles(inputId) {
+
+        var input = document.getElementById(inputId);
+        var files = input.files;
+        var formData = new FormData();
+
+        for (var i = 0; i != files.length; i++) {
+            formData.append("files", files[i]);
+        }
+
+        $.ajax(
+            {
+                url: "/User/Upload",
+                data: formData,
+                processData: false,
+                contentType: false,
+                type: "POST",
+                success: function (data) {
+                    alert('@Html.Raw("Files Uploaded".Trans())');
+                }
+            }
+        );
+    }
+    $(function () {
+
+        $('[name="ContactPhone"]').numberControl(10);
+        $('[name="Phone"]').numberControl(10);
+        $('[name="ContactPhone"]').keyup(function (e) {
+            $(this).numberControl(10);
+        });
+        $('[name="Phone"]').keyup(function (e) {
+            $(this).numberControl(10);
+        });
+
+        $('#DateofBirth').mask("00/00/0000", { placeholder: "DD/MM/YYYY" });
+
+
+        //$("[name='DateofBirth2']").datepicker({
+        //    maxDate: new Date(new Date().getFullYear() - 18, new Date().getMonth(), new Date().getDay()),
+        //    format: "dd.MM.yyyy",
+        //    language: "tr",
+        //    //todayBtn: "linked", clearBtn: !0, todayHighlight: !0, icons: { time: 'far fa-clock' },
+        //    changeMonth: true,
+        //    changeYear: true,
+        //    showButtonPanel: true,
+        //    buttonImageOnly: true,
+        //    inline: true,
+        //});
+
+
+
+        $('#TCKNPassport').keyup(function (e) {
+            if ($('#TCKNPassport').val().length == 11)
+                TcControlNationality();
+        });
+
+        function TcControlNationality() {
+            if ($('#dp_NationalityId option:selected').text() == 'Turkish' && $('#TCKNPassport').val().length > 0) {
+                if (!tcControl($('#TCKNPassport').val())) {
+                    alert('@Html.Raw("Please enter 11 digit TC Identity Number".Trans())')
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
+
+        GetNationality();
+        function GetNationality() {
+            $.get('/Nationality/GetSelect').fail(function (err, exception) { console.error(err.responseText); })
+                .done(function (res) {
+                    var dp = 'dp_NationalityId';
+                    $('#' + dp).append($('<option>', { selected: 'selected', value: "", text: Lang_Select + " " + Lang_Nationality }));
+                    $.each(res, function (i, item) {
+                        var str = '<option ' + (toInt(LoginUser.NationalityId) == toInt(item.value) ? 'selected' : '') + '  value="' + item.value + '" ' + '>' + item.text + '</option>';
+                        $('#' + dp).append(str);
+                    });
+
+                    TcControlNationality();
+                    $('#dp_NationalityId option:selected').change(function () {
+
+                        TcControlNationality();
+                    });
+
+                });
+        }
+
+
+        GetGender();
+        function GetGender() {
+            $.get('/User/GetGender').fail(function (err, exception) { console.error(err.responseText); })
+                .done(function (res) {
+                    var dp = 'dp_Gender';
+                    $('#' + dp).append($('<option>', { selected: 'selected', value: "", text: Lang_Select + " " + Lang_Gender }));
+                    $.each(res, function (i, item) {
+                        var str = '<option ' + (toInt(LoginUser.Gender) == toInt(item.value) ? 'selected' : '') + '  value="' + item.value + '" ' + '>' + item.text + '</option>';
+                        $('#' + dp).append(str);
+                    });
+                });
+        }
+
+
+        GetCountry();
+        function GetCountry() {
+            $.get('/Country/GetSelect').fail(function (err, exception) { console.error(err.responseText); })
+                .done(function (res) {
+                    var dp = 'dp_CountryId';
+                    $('#' + dp).append($('<option>', { selected: 'selected', value: "", text: Lang_Select + " " + Lang_Country }));
+                    $.each(res, function (i, item) {
+                        var str = '<option ' + (toInt(LoginUserAdress?.CountryId) == toInt(item.value) ? 'selected' : '') + '  value="' + item.value + '" ' + '>' + item.text + '</option>';
+                        $('#' + dp).append(str);
+                    });
+                    $('#' + dp).change(function () { GetCity(); });
+                    GetCity();
+                });
+        }
+
+
+        function GetCity() {
+            $('#' + 'dp_CityId').html('');
+            $.get('/City/GetSelect?CountryId=' + $('#dp_CountryId').val()).fail(function (err, exception) { console.error(err.responseText); })
+                .done(function (res) {
+                    var dp = 'dp_CityId';
+                    $('#' + dp).append($('<option>', { selected: 'selected', value: "", text: Lang_Select + " " + Lang_City }));
+                    $.each(res, function (i, item) {
+                        var str = '<option ' + (toInt(LoginUserAdress?.CityId) == toInt(item.value) ? 'selected' : '') + '  value="' + item.value + '" ' + '>' + item.text + '</option>';
+                        $('#' + dp).append(str);
+                    });
+
+                    //$(dp).change(function () { GetTown(); });
+                    //GetTown();
+
+                });
+        }
+
+
+
+
+
+        var formname = '#frm_register';
+        $(formname).submit(function (e) {
+            e.preventDefault();
+             var postModel = $.fn.toForm(formname);
+            if (!$('[name="Phone"]').numberControl(10,'error')) {
+                alerts('@Html.Raw("Please check phone".Trans())');
+                return;
+            }
+
+             if (!$('[name="ContactPhone"]').numberControl(10,'error')) {
+                alerts('@Html.Raw("Please check contact phone".Trans())');
+                return;
+            }
+              if (!TcControlNationality()) {
+
+                return;
+            }
+
+
+            var dateb = toInt($('#DateofBirth').val().split('/')[2]);
+            if (dateb> (new Date().getFullYear() - 18)) {
+                alerts('@Html.Raw("You have to be older then 18".Trans())');
+                return;
+            }
+
+            //User
+            $(formname).LoadingOverlay("show");
+
+            $.ajx('/User/InsertOrUpdate',
+                { postModel: postModel }, function (resultData) {
+                    if (resultData.RType == 1) {
+                        $(formname).LoadingOverlay("show");
+                        //User Adress
+                        $.ajx('/UserAdress/InsertOrUpdate', {
+                            postModel: { Id: $('#Town').attr('dataid'), IsDefault: true, UserId: resultData.ResultRow.Id, CountryId: $('#dp_CountryId').val(), CityId: $('#dp_CityId').val(), Town: $('#Town').val(), District: $('#District').val(), Adress: $('#Adress').val() }
+                        }, function (resultData) {
+                            if (resultData.RType == 1) {
+                                alert('@Html.Raw("Data Updated".Trans())')
+                            }
+                            else {
+                                alerts(resultData.MessageList);
+                            }
+                            $(formname).LoadingOverlay("hide");
+                        }, function () { location.reload(); });
+                    }
+                    else {
+                        alerts(resultData.MessageList);
+                    }
+
+                    $(formname).LoadingOverlay("hide");
+                }, function () {
+                    location.reload();
+                });
+
+        });
+
+    });
+
+
+</script>

@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = "_Layout";
+    var content = ViewBag.content as ContentPage;
+    var contents = ViewBag.contents as List<ContentPage>;
+
+}
+@await Component.InvokeAsync("MenuView", new { type = "SubHeader" })
+ 
+
+<!-- Event Detail -->
+<div class="event-detail margin-top-70 margin-bottom-50">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="d-none d-md-block col-5 ">
+                <!-- Event cover goes here -->
+                <img class="img-fluid" alt="@content.Name" src="http://eyuboglucms.hybro.systems/fileupload/UserFiles/Folders/@(content.ThumbImage == null ? "" : content.ThumbImage.Link)" />
+            </div>
+            <div class="col-12 col-md-7 col-lg-5 content">
+                <h2 class="margin-bottom-30"> @Html.Raw(content.Description)</h2>
+                <p class="my-5">
+                    @Html.Raw(content.ContentShort)
+                </p>
+                @Html.Raw(content.ContentData)
+                <div class="date">
+                    <div class="divider"></div>
+                    <h1>@(string.IsNullOrEmpty(content.StartDate.ToString())?"": content.StartDate.Day.ToString()) </h1>
+                    <h5>@(string.IsNullOrEmpty(content.StartDate.ToString())?"": content.StartDate.ToString("MMMM").Substring(0, 3).ToUpper()) @(string.IsNullOrEmpty(content.StartDate.ToString())?"": content.StartDate.Year.ToString()) </h5>
+                </div>
+                @*<div class="d-flex align-items-center event-infos">
+            <div class="info">
+                <i class="fas fa-clock"></i>
+                <span>All Day</span>
+            </div>
+            <div class="info">
+                <i class="fas fa-users"></i>
+                <span>207</span>
+            </div>
+            <div class="info">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Port Louis, Mauritius</span>
+            </div>
+        </div>*@
+                @await Component.InvokeAsync("SectionView", new { type = "Forms" })
+
+            </div>
+        </div>
+    </div>
+</div>
